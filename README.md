@@ -1,7 +1,7 @@
 # E-Commerce Behavior Analytics
 
 > **285 million real behavioral events. One question: what separates a browser from a buyer?**
-> This project builds a full behavioral analytics stack on the REES46 multi-category store dataset in Google BigQuery — funnel analysis, cohort retention, RFM segmentation, anomaly detection, and a COVID-onset quasi-experiment.
+> Most visitors view products and leave. Only ~6% actually purchase. This project identifies the behavioral signals that predict who converts — and what drives the gap — through funnel analysis, cohort retention, RFM segmentation, anomaly detection, and a COVID-onset quasi-experiment on real e-commerce data in Google BigQuery.
 
 ![BigQuery](https://img.shields.io/badge/BigQuery-Sandbox-4285F4?logo=googlecloud&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)
@@ -124,7 +124,8 @@ See `workflows/01_bigquery_setup.md` for setup and loading instructions.
 | SQL | BigQuery SQL | CTEs, Window Functions, UNNEST, partitioning |
 | Python | pandas, SciPy, matplotlib | RFM scoring, cohort matrix, statistical tests |
 | Notebook | Jupyter / Google Colab | Reproducible analysis |
-| BI | Power BI or Looker Studio | Dashboard (Looker Studio pairs natively with BigQuery) |
+| BI | Power BI Desktop + Service | Report (.pbix) + live-alert Dashboard; Looker Studio optional |
+| Reporting | Excel (openpyxl) | Stakeholder-facing workbook — same KPIs as Power BI, no tooling required |
 
 ---
 
@@ -136,7 +137,7 @@ See `workflows/01_bigquery_setup.md` for setup and loading instructions.
 2. Read `workflows/02_analytics_plan.md` — what to build, in what order, with what SQL patterns
 3. Tools will be built during execution and stored in `tools/`
 
-**Current state:** Project initialized. BigQuery not yet set up. Dataset not yet loaded. Ready to kick off.
+**Current state:** Project initialized. Workflows written. BigQuery not yet set up. Dataset not yet loaded. Ready to kick off.
 
 ---
 

@@ -1,11 +1,11 @@
 # Workflow: Analytics Plan
 
 ## Objective
-Build all analytical deliverables from the REES46 dataset in BigQuery, in the correct sequence. Each module produces SQL queries (saved in `sql/`), Python analysis (saved in `notebooks/`), and feeds the final dashboard.
+Build all analytical deliverables from the REES46 dataset in BigQuery, in the correct sequence. Each module produces SQL queries (saved in `sql/`), Python analysis (saved in `notebooks/`), and feeds the final dashboard and Excel report.
 
 ## Prerequisites
 - BigQuery table loaded and verified (see `workflows/01_bigquery_setup.md`)
-- Python environment with pandas, scipy, matplotlib, seaborn
+- Python environment with dependencies from `requirements.txt`
 
 ---
 
@@ -73,7 +73,6 @@ LIMIT 20;
 
 **Cart abandonment:**
 ```sql
--- Sessions that added to cart but never purchased
 SELECT
   COUNT(DISTINCT cart_sessions.user_session) AS abandoned_carts,
   COUNT(DISTINCT purchase_sessions.user_session) AS converted_carts,
@@ -116,7 +115,6 @@ GROUP BY user_session
 
 **SQL pattern — session depth before purchase:**
 ```sql
--- For converting sessions only: how many events before the purchase?
 WITH session_events AS (
   SELECT
     user_session,
@@ -201,7 +199,7 @@ SELECT
 FROM rfm_scored;
 ```
 
-Save this result as a BigQuery table: `rees46.rfm_segments` — used in Module 4.
+Save this result as a BigQuery table: `rees46.rfm_segments` — **required by Module 4**.
 
 **Output:** Save SQL to `sql/03_rfm_segmentation.sql`. Python notebook: segment distribution pie chart, monetary value by segment box plot.
 
@@ -210,6 +208,8 @@ Save this result as a BigQuery table: `rees46.rfm_segments` — used in Module 4
 ## Module 4: Cohort Retention
 
 **Business question:** Do customers come back month after month?
+
+**Prerequisite:** `rees46.rfm_segments` table must exist (created in Module 3).
 
 **SQL pattern — monthly cohort retention:**
 ```sql
@@ -290,7 +290,7 @@ ORDER BY total_revenue DESC;
 
 **Business question:** What purchase patterns look unusual?
 
-**SQL pattern — price outliers by category:**
+**SQL pattern — price outliers by category (IQR method):**
 ```sql
 WITH category_stats AS (
   SELECT
@@ -390,7 +390,7 @@ print(f"Significant at α=0.05: {p_value < 0.05}")
 ```
 
 **Also measure:**
-- AOV (average order value) pre vs during COVID
+- AOV (average order value) pre vs. during COVID
 - Category mix shift (which categories grew/fell)
 - Session frequency change (are users browsing more or less?)
 
@@ -419,22 +419,42 @@ notebooks/
   07_covid_experiment.ipynb      (Python: z-test + charts)
 
 dashboards/
-  [Power BI or Looker Studio report]
+  ecommerce_analytics.pbix       (Power BI Report — 5 pages)
+  ecommerce_analytics.xlsx       (Excel equivalent — same KPIs, static)
 ```
 
 ---
 
 ## Dashboard Plan
 
-**Recommended tool:** Looker Studio (free, connects natively to BigQuery)
+### Power BI Report (`.pbix` — built in Power BI Desktop)
 
-**Pages:**
+Connect to BigQuery using Import mode (data embedded in the file — works offline and survives the 60-day sandbox table expiry).
+
+**5 pages:**
+
 1. **Overview** — total events, purchase count, total revenue, conversion rate KPIs
 2. **Funnel** — funnel chart (view → cart → purchase), abandonment rate, funnel by category
 3. **Customer Segments** — RFM tier distribution, revenue by segment, cohort retention heatmap
 4. **Category & Brand** — revenue ranking, view-to-purchase ratio, brand performance
 5. **COVID Impact** — before/after conversion rate, AOV trend, category mix shift
 
-**Looker Studio BigQuery connection:**
-- In Looker Studio: Create → Data Source → BigQuery → select project → select table
-- All BigQuery tables are immediately available, no export needed
+### Power BI Service Dashboard (live alerts)
+
+After publishing the Report to Power BI Service, pin selected KPI cards to a **Dashboard** (separate from the Report — this is a canvas of tiles in the browser). Set Data Alerts on each tile so Power BI sends email notifications when values cross thresholds.
+
+**7 alert KPIs to pin and configure:**
+
+| KPI | Alert Condition | Stakeholder |
+|-----|-----------------|-------------|
+| Overall conversion rate | Falls below floor threshold | Product / CRO team |
+| Cart abandonment rate | Rises above upper bound | UX / checkout team |
+| Daily revenue | Deviates >2σ from rolling average | Revenue ops / leadership |
+| Top-category conversion | Drops >20% week-over-week | Category management |
+| Price outlier count | Exceeds historical baseline | Data quality / pricing |
+| Bot session count | Sessions >500 events exceed baseline | Security / fraud team |
+| Month-1 cohort retention | Latest cohort falls below historical P25 | Growth / retention |
+
+### Excel Workbook (`ecommerce_analytics.xlsx`)
+
+One sheet per module — same KPIs and key findings as the Power BI report, presented as static tables and charts. Generated programmatically via `tools/generate_excel_report.py` after all BigQuery result sets are exported. For stakeholders who do not have Power BI.
