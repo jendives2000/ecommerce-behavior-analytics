@@ -1,10 +1,22 @@
 # Secrets — never commit
 .env
+.env.*
 credentials.json
 token.json
+service_account*.json
+*_key.json
+*_credentials.json
+kaggle.json
+*.pem
+*.key
+*.p12
 
 # Temporary processing files — regenerated as needed
 .tmp/
+
+# Claude Code — internal agent instructions, not for public repos
+CLAUDE.md
+.claude/
 
 # Python
 __pycache__/
