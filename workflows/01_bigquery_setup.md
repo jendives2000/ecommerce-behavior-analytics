@@ -7,7 +7,7 @@ Get the REES46 dataset (285M events, 7 monthly CSV files) into Google BigQuery s
 - Google account (Gmail)
 - ~40 GB local disk space for CSV downloads
 - Python installed (for gzip compression step)
-- Google Cloud SDK installed (for `gsutil` and `bq` CLI commands)
+- Google Cloud SDK installed (for the `bq` CLI command)
 
 ---
 
@@ -73,34 +73,19 @@ This reads from `.tmp/raw_csvs/` and writes compressed files to `.tmp/gz_csvs/`.
 
 ## Step 4: Configure Your Environment
 
-Copy the `.env` file values for your project. Open `.env` and fill in:
+Open `.env` and fill in:
 
 ```bash
 GCP_PROJECT_ID=ecommerce-behavior-analytics
 BQ_DATASET=rees46
 BQ_TABLE=events
-GCS_BUCKET=rees46-staging-<your-initials>
-GCS_REGION=us-central1
 ```
-
-The `GCS_BUCKET` name must be globally unique across all of Google Cloud — add your initials or a short unique suffix.
 
 ---
 
-## Step 5: Create a GCS Bucket (Staging Area)
+## Step 5: ~~Create a GCS Bucket~~ — SKIPPED
 
-BigQuery loads large files via GCS, not direct upload. Create the bucket using the CLI:
-
-```bash
-gsutil mb -l us-central1 gs://rees46-staging-<your-initials>/
-```
-
-Replace `<your-initials>` with the value you set in `.env`.
-
-**Free tier:** 5 GB free storage in US region. Since each gz file is ~1 GB, load one file at a time and delete from GCS after loading into BigQuery to stay in the free tier.
-
-**Alternative (BigQuery Console UI):**
-Cloud Storage → Buckets → Create → name → region `us-central1` → Standard → Create
+GCS requires billing to be enabled even for the free tier. Since the GCP free trial has ended and billing is off, we skip GCS entirely and load directly from local gz files in Step 7. No bucket needed.
 
 ---
 
