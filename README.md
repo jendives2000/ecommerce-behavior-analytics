@@ -30,7 +30,9 @@ The key portfolio signal: **event-level behavioral data in BigQuery**. GA4, Ampl
 
 **Source:** [eCommerce Behavior Data from Multi Category Store](https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store) — Kaggle / REES46 Open CDP
 
-**Nature:** Real behavioral event data from a large live e-commerce platform. Collected by REES46 Marketing Platform. Attribution required when using.
+**Nature:** Real behavioral clickstream telemetry from a large live e-commerce platform. REES46 is a B2B SaaS Customer Data Platform — it does not operate a store. This data comes from an anonymous retail client that integrated REES46's tracking script. The client's identity is not publicly disclosed; domain research identifies the market as Kazakhstan / CIS based on brand inventory (Artel, Cordiant, Redmond, Vitek, Polaris, ARG).
+
+**Category note:** Category codes are machine-translated from Russian retail schemas. `construction` = DIY & Home Improvement; `country_yard` = Garden & Dacha (outdoor/seasonal). This context is required to correctly interpret conversion rates by category.
 
 **Scale:** 411 million events across 7 months (October 2019 – April 2020)
 
@@ -48,7 +50,7 @@ The key portfolio signal: **event-level behavioral data in BigQuery**. GA4, Ampl
 | `user_id` | INTEGER | Persistent user identifier |
 | `user_session` | STRING | Session UUID (resets per browsing session) |
 
-**Time span significance:** Oct 2019 – Feb 2020 = pre-COVID baseline. Mar–Apr 2020 = COVID-onset period. Natural quasi-experiment baked into the data.
+**Time span significance:** Oct 2019 – Feb 2020 = pre-COVID baseline. Mar–Apr 2020 = COVID-onset period. Kazakhstan's first confirmed case was March 13, 2020; national lockdown began March 16. The dataset captures the behavioral shock from the exact week the country shut down — a unusually clean natural experiment.
 
 **Files on Kaggle:** One CSV per month (Oct 2019, Nov 2019, Dec 2019, Jan 2020, Feb 2020, Mar 2020, Apr 2020). Each file ~5–6 GB uncompressed.
 
