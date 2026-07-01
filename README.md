@@ -1,6 +1,7 @@
 # E-Commerce Behavior Analytics
 
-> **285 million real behavioral events. One question: what separates a browser from a buyer?**
+> **411 million real behavioral events.**   
+**One question: what separates a browser from a buyer?**  
 > Most visitors view products and leave. Only ~6% actually purchase. This project identifies the behavioral signals that predict who converts — and what drives the gap — through funnel analysis, cohort retention, RFM segmentation, anomaly detection, and a COVID-onset quasi-experiment on real e-commerce data in Google BigQuery.
 
 ![BigQuery](https://img.shields.io/badge/BigQuery-Sandbox-4285F4?logo=googlecloud&logoColor=white)
@@ -17,7 +18,7 @@ This is the second portfolio project in a two-project strategy:
 | Project | Dataset | Domain | What it covers |
 |---------|---------|--------|----------------|
 | [Project 1 — TechFlow](../project1_saas_analytics/) | IBM Telco (7,043 records) | SaaS subscription | Churn, LTV, A/B test, Excel automation |
-| **Project 2 — This project** | REES46 (285M events) | E-commerce behavior | Funnel, retention cohorts, RFM, anomaly detection |
+| **Project 2 — This project** | REES46 (411M events) | E-commerce behavior | Funnel, retention cohorts, RFM, anomaly detection |
 
 Project 1 speaks to fintech/B2B SaaS roles. This project speaks to product analytics, gaming, e-commerce, and modern data stack roles — specifically the gap companies like Moon Active, Ashley Digital, and Nespresso represent in the Israeli job market.
 
@@ -31,7 +32,7 @@ The key portfolio signal: **event-level behavioral data in BigQuery**. GA4, Ampl
 
 **Nature:** Real behavioral event data from a large live e-commerce platform. Collected by REES46 Marketing Platform. Attribution required when using.
 
-**Scale:** 285 million events across 7 months (October 2019 – April 2020)
+**Scale:** 411 million events across 7 months (October 2019 – April 2020)
 
 **Schema (flat, one row = one event):**
 
@@ -119,8 +120,8 @@ See `workflows/01_bigquery_setup.md` for setup and loading instructions.
 
 | Layer | Tool | Purpose |
 |-------|------|---------|
-| Data warehouse | Google BigQuery | Primary query engine, 285M rows |
-| Data loading | GCS → BigQuery | Monthly CSV files staged via Cloud Storage |
+| Data warehouse | Google BigQuery | Primary query engine, 411M rows |
+| Data loading | local CSV.gz → BigQuery | Monthly files loaded directly from local disk via `bq.cmd` |
 | SQL | BigQuery SQL | CTEs, Window Functions, UNNEST, partitioning |
 | Python | pandas, SciPy, matplotlib | RFM scoring, cohort matrix, statistical tests |
 | Notebook | Jupyter / Google Colab | Reproducible analysis |
@@ -137,7 +138,7 @@ See `workflows/01_bigquery_setup.md` for setup and loading instructions.
 2. Read `workflows/02_analytics_plan.md` — what to build, in what order, with what SQL patterns
 3. Tools will be built during execution and stored in `tools/`
 
-**Current state:** Project initialized. Workflows written. BigQuery not yet set up. Dataset not yet loaded. Ready to kick off.
+**Current state:** BigQuery loaded and verified — 411,709,736 events across 7 months. Workflows complete. Module 1 (Funnel Analysis) in progress.
 
 ---
 
@@ -153,4 +154,4 @@ This project is designed to speak to roles that TechFlow cannot:
 | Fintech / fraud detection (Checkout.com) | Anomaly detection, behavioral risk signals |
 | Any modern data stack company | BigQuery fluency, event table querying, cloud SQL |
 
-Resume headline: *"Queried 285 million behavioral events in Google BigQuery — funnel analysis, cohort retention, RFM segmentation, and COVID-onset quasi-experiment on real e-commerce data."*
+Resume headline: *"Queried 411 million behavioral events in Google BigQuery — funnel analysis, cohort retention, RFM segmentation, and COVID-onset quasi-experiment on real e-commerce data."*

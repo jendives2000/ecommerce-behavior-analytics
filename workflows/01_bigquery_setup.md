@@ -1,35 +1,38 @@
 # Workflow: BigQuery Setup & Dataset Loading
 
 ## Objective
-Get the REES46 dataset (285M events, 7 monthly CSV files) into Google BigQuery sandbox so SQL queries can run against the full dataset. No credit card required.
+Get the REES46 dataset (7 monthly CSV files, ~411M events) into Google BigQuery so SQL queries can run against the full dataset.
 
 ## Prerequisites
 - Google account (Gmail)
-- ~40 GB local disk space for CSV downloads
+- ~50 GB local disk space for CSV downloads and gz files
 - Python installed (for gzip compression step)
-- Google Cloud SDK installed (for the `bq` CLI command)
+- Google Cloud SDK installed (`bq.cmd` CLI on Windows)
+- **Billing enabled on the GCP project** (see Step 1 — this is required, not optional)
 
 ---
 
-## Step 1: Create BigQuery Sandbox Project
+## Step 1: Create a GCP Project with Billing Enabled
 
 1. Go to [console.cloud.google.com](https://console.cloud.google.com)
 2. Sign in with your Google account
-3. Click "Select a project" → "New Project"
-4. Name it: `ecommerce-behavior-analytics` (or any name — just keep it consistent with your `.env`)
-5. In the left sidebar: BigQuery → Enable the API if prompted
-6. You are now in BigQuery Sandbox mode — no billing account, no credit card
+3. Click "Select a project" → "New Project" → name it anything consistent
+4. Enable the BigQuery API if prompted
+5. Go to Billing → Create a billing account → link it to the project
 
-**Verify:** You should see the BigQuery Studio interface with a query editor. The project appears in the Explorer panel on the left.
+**Why billing is required (not optional):**
+BigQuery Sandbox automatically bakes a 60-day partition expiration (`expirationMs: 5184000000`) into every partitioned table, even if you don't ask for it. Since the REES46 dataset contains data from 2019–2020, every partition is already 5+ years past its 60-day window. BigQuery accepts the load jobs (exit code 0, status DONE) but immediately treats all rows as expired — `COUNT(*)` returns 0. The only fix is to remove the expiration with `bq update --time_partitioning_expiration 0`, which requires billing to be enabled.
+
+**Cost:** ~$0.54–$1.08/month for storage (~54 GB billed after 10 GB free tier). Queries stay within the 1 TB/month free tier for normal portfolio use. Set a budget alert at $3/month in Billing → Budgets & Alerts.
 
 ---
 
 ## Step 2: Download the Dataset from Kaggle
 
-**Preferred path: Kaggle CLI (faster, resumable, no size limits)**
+**Preferred path: Kaggle CLI**
 
 1. Sign up / log in at [kaggle.com](https://www.kaggle.com)
-2. Go to Account → Create New API Token → downloads `kaggle.json`
+2. Account → Create New API Token → downloads `kaggle.json`
 3. Place `kaggle.json` in `~/.kaggle/kaggle.json` (already gitignored)
 4. Run:
 
@@ -38,36 +41,30 @@ pip install kaggle
 kaggle datasets download -d mkechinov/ecommerce-behavior-data-from-multi-category-store --unzip -p .tmp/raw_csvs/
 ```
 
-This downloads and unzips all 7 monthly CSV files directly into `.tmp/raw_csvs/`. Total download: ~35–40 GB.
+Downloads and unzips all 7 monthly CSV files into `.tmp/raw_csvs/`. Total: ~35–40 GB.
 
 **Fallback: browser download**
 
-Dataset URL: https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store
+Dataset: [ecommerce-behavior-data-from-multi-category-store](https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store)
 
-Download all 7 monthly files manually and place them in `.tmp/raw_csvs/`:
-- `2019-Oct.csv`
-- `2019-Nov.csv`
-- `2019-Dec.csv`
-- `2020-Jan.csv`
-- `2020-Feb.csv`
-- `2020-Mar.csv`
-- `2020-Apr.csv`
+Download all 7 files and place in `.tmp/raw_csvs/`:
 
-> **Note:** `.tmp/` is gitignored. These files never touch the repo and are your permanent local source of truth. Do not delete them until the entire project is exported and wrapped.
+- `2019-Oct.csv`, `2019-Nov.csv`, `2019-Dec.csv`
+- `2020-Jan.csv`, `2020-Feb.csv`, `2020-Mar.csv`, `2020-Apr.csv`
+
+> `.tmp/` is gitignored. These files are your permanent local source of truth. Do not delete them until the project is fully exported and wrapped.
 
 ---
 
 ## Step 3: Gzip the CSV Files
 
-BigQuery accepts `.csv.gz` natively. Gzipping reduces file size ~5x (5 GB → ~1 GB per file), which speeds up GCS upload and reduces storage cost.
-
-Run the dedicated tool:
+BigQuery accepts `.csv.gz` natively. Gzipping reduces file size ~5x and speeds up loading.
 
 ```bash
 python tools/gzip_csvs.py
 ```
 
-This reads from `.tmp/raw_csvs/` and writes compressed files to `.tmp/gz_csvs/`. Already-compressed files are skipped automatically.
+Reads from `.tmp/raw_csvs/`, writes compressed files to `.tmp/gz_csvs/`. Already-compressed files are skipped.
 
 ---
 
@@ -76,145 +73,173 @@ This reads from `.tmp/raw_csvs/` and writes compressed files to `.tmp/gz_csvs/`.
 Open `.env` and fill in:
 
 ```bash
-GCP_PROJECT_ID=ecommerce-behavior-analytics
+GCP_PROJECT_ID=your-project-id
 BQ_DATASET=rees46
 BQ_TABLE=events
 ```
 
 ---
 
-## Step 5: ~~Create a GCS Bucket~~ — SKIPPED
+## Step 5: Create the BigQuery Dataset and Table
 
-GCS requires billing to be enabled even for the free tier. Since the GCP free trial has ended and billing is off, we skip GCS entirely and load directly from local gz files in Step 7. No bucket needed.
+Run in Cloud Shell or locally with `bq.cmd` (Windows):
 
----
-
-## Step 6: Create the BigQuery Dataset and Table Schema
-
-In BigQuery Studio, run this DDL once to create the target table:
-
-```sql
-CREATE OR REPLACE TABLE `ecommerce-behavior-analytics.rees46.events`
-(
-  event_time    TIMESTAMP,
-  event_type    STRING,
-  product_id    INT64,
-  category_id   INT64,
-  category_code STRING,
-  brand         STRING,
-  price         FLOAT64,
-  user_id       INT64,
-  user_session  STRING
-)
-PARTITION BY DATE(event_time)
-CLUSTER BY event_type;
+**Create dataset:**
+```bash
+bq --location=US mk instant-form-500912-n7:rees46
 ```
 
-**Why partition + cluster:**
-- `PARTITION BY DATE(event_time)` — queries filtered by date scan only relevant partitions, saving TB quota
-- `CLUSTER BY event_type` — queries filtered on `event_type = 'purchase'` are faster
-- Both reduce bytes scanned = stay within the 1 TB/month free tier
-
----
-
-## Step 7: Load Each Monthly File (CLI — Primary Path)
-
-Repeat for each of the 7 months. Load one file at a time to stay within GCS free tier.
-
-**Upload gz file to GCS:**
+**Create table — partitioned by event_time, clustered by event_type:**
 ```bash
-gsutil cp .tmp/gz_csvs/2019-Oct.csv.gz gs://rees46-staging-<your-initials>/
-```
-
-**Load from GCS into BigQuery:**
-```bash
-bq load \
-  --source_format=CSV \
-  --skip_leading_rows=1 \
-  --allow_quoted_newlines \
+bq mk --table \
+  --schema 'event_time:TIMESTAMP,event_type:STRING,product_id:INTEGER,category_id:INTEGER,category_code:STRING,brand:STRING,price:FLOAT,user_id:INTEGER,user_session:STRING' \
+  --time_partitioning_type=DAY \
   --time_partitioning_field=event_time \
-  ecommerce-behavior-analytics:rees46.events \
-  gs://rees46-staging-<your-initials>/2019-Oct.csv.gz \
-  event_time:TIMESTAMP,event_type:STRING,product_id:INTEGER,category_id:INTEGER,category_code:STRING,brand:STRING,price:FLOAT,user_id:INTEGER,user_session:STRING
+  --clustering_fields=event_type \
+  instant-form-500912-n7:rees46.events
 ```
 
-**After successful load — delete from GCS to free storage:**
+**⚠️ Critical — remove the Sandbox partition expiration immediately after table creation:**
 ```bash
-gsutil rm gs://rees46-staging-<your-initials>/2019-Oct.csv.gz
+bq update --time_partitioning_expiration 0 instant-form-500912-n7:rees46.events
 ```
 
-Repeat for all 7 files in order.
+This must be done before any data is loaded. If you skip this step, all loads appear to succeed but `COUNT(*)` returns 0 because every 2019–2020 partition is already past the 60-day expiry window.
 
-**Fallback: BigQuery UI load**
-- Open the `rees46.events` table in BigQuery Studio
-- Click "+" → Upload → Select file from GCS
-- Format: CSV, skip 1 header row, partition field: event_time
+**Verify the table is clean before loading:**
+
+```bash
+bq show --format=prettyjson instant-form-500912-n7:rees46.events
+```
+
+Check that `timePartitioning` has NO `expirationMs` field, and `event_time` type is `TIMESTAMP`.
 
 ---
 
-## Step 8: Verify the Load
+## Step 6: Load All Monthly Files
 
-Run these verification queries after loading all files:
+Load directly from local `.csv.gz` files — no GCS bucket needed.
+
+**Windows PowerShell script** (save as `bq_load_all.ps1`):
+
+```powershell
+$sdkBin = "C:\Users\<you>\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin"
+$env:PATH = "$sdkBin;" + $env:PATH
+$dataDir = "<project-root>\.tmp\gz_csvs"
+$table = "instant-form-500912-n7:rees46.events"
+
+$months = @(
+    @{ label = "October 2019";   file = "2019-Oct.csv.gz" },
+    @{ label = "November 2019";  file = "2019-Nov.csv.gz" },
+    @{ label = "December 2019";  file = "2019-Dec.csv.gz" },
+    @{ label = "January 2020";   file = "2020-Jan.csv.gz" },
+    @{ label = "February 2020";  file = "2020-Feb.csv.gz" },
+    @{ label = "March 2020";     file = "2020-Mar.csv.gz" },
+    @{ label = "April 2020";     file = "2020-Apr.csv.gz" }
+)
+
+foreach ($month in $months) {
+    $filePath = "$dataDir\$($month.file)"
+    Write-Output "=== Loading $($month.label) ==="
+    Write-Output "Start: $(Get-Date -Format 'HH:mm:ss')"
+
+    & "$sdkBin\bq.cmd" load `
+        --location=US `
+        --source_format=CSV `
+        --skip_leading_rows=1 `
+        --allow_quoted_newlines `
+        $table `
+        $filePath 2>&1
+
+    if ($LASTEXITCODE -eq 0) {
+        Write-Output "$($month.label) - SUCCESS at $(Get-Date -Format 'HH:mm:ss')"
+    } else {
+        Write-Output "$($month.label) - FAILED (exit $LASTEXITCODE). Stopping."
+        exit 1
+    }
+}
+```
+
+**Key rules for `bq load`:**
+
+- Use `bq.cmd` on Windows, not `bq` (the bare command silently exits 0 without doing anything)
+- Always pass `--location=US`
+- Do NOT pass a schema argument — when the table already exists, passing schema causes "Cannot replace a table with a different partitioning spec" error
+- Do NOT pass `--replace` — each load appends to the existing table
+- Each month takes ~25–30 minutes
+
+---
+
+## Step 7: Verify the Load
+
+Run in BigQuery Studio:
 
 ```sql
--- Row count by month (should be ~285M total across 7 months)
+-- Row count by month
 SELECT
   FORMAT_DATE('%Y-%m', DATE(event_time)) AS month,
-  COUNT(*) AS event_count
-FROM `ecommerce-behavior-analytics.rees46.events`
+  COUNT(*) AS cnt
+FROM `instant-form-500912-n7.rees46.events`
 GROUP BY month
 ORDER BY month;
+```
 
+**Expected output (actual verified counts):**
+
+| month       | cnt             |
+|-------------|-----------------|
+| 2019-10     | 42,448,764      |
+| 2019-11     | 67,501,979      |
+| 2019-12     | 67,542,878      |
+| 2020-01     | 55,967,041      |
+| 2020-02     | 55,318,565      |
+| 2020-03     | 56,341,241      |
+| 2020-04     | 66,589,268      |
+| **Total**   | **411,709,736** |
+
+If `COUNT(*)` returns 0 despite successful load jobs, the partition expiration was not removed. Fix: run `bq update --time_partitioning_expiration 0 instant-form-500912-n7:rees46.events` — no reload needed, rows become visible immediately.
+
+```sql
 -- Event type distribution
 SELECT
   event_type,
-  COUNT(*) AS count,
+  COUNT(*) AS cnt,
   ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 2) AS pct
-FROM `ecommerce-behavior-analytics.rees46.events`
-GROUP BY event_type;
-
--- Sample rows
-SELECT * FROM `ecommerce-behavior-analytics.rees46.events` LIMIT 10;
+FROM `instant-form-500912-n7.rees46.events`
+GROUP BY event_type
+ORDER BY cnt DESC;
 ```
-
-**Expected approximate distribution:**
-- `view`: ~75–80% of events
-- `cart`: ~15–18% of events
-- `purchase`: ~5–7% of events
 
 ---
 
-## Step 9: Cost-Conscious Query Habits
+## Step 8: Cost-Conscious Query Habits
 
-BigQuery charges by bytes scanned. The 1 TB/month free tier is generous but not infinite.
+BigQuery charges by bytes scanned. The 1 TB/month free tier covers normal portfolio use comfortably.
 
-**Always do:**
+**Use partition + cluster pruning:**
 ```sql
--- SELECT only the columns you need, and filter on partitioned/clustered columns
 SELECT event_type, user_id, price
-FROM `ecommerce-behavior-analytics.rees46.events`
+FROM `instant-form-500912-n7.rees46.events`
 WHERE DATE(event_time) BETWEEN '2019-10-01' AND '2019-10-31'  -- partition pruning
   AND event_type = 'purchase'                                   -- cluster pruning
 ```
 
-**Never do (unless you need to):**
-```sql
-SELECT * FROM `ecommerce-behavior-analytics.rees46.events`  -- scans all columns, all partitions
-```
-
-**Check bytes before running:** BigQuery shows estimated bytes scanned before execution. If it looks high, add more `WHERE` filters.
+**Avoid full table scans:** Check estimated bytes in BigQuery Studio before running. A full scan of all 411M rows costs ~46 GB against your 1 TB quota.
 
 ---
 
 ## Known Issues / Gotchas
 
-- `category_code` contains NULLs for some products — handle with `COALESCE(category_code, 'unknown')` in queries
-- Some `price` values are 0.0 — likely internal events or data quality issues, filter with `WHERE price > 0` for revenue analysis
-- `user_session` is a UUID string — for session-level analysis, group by `user_session`, not by `user_id`
-- **Sandbox tables expire after 60 days of inactivity** — if a table is deleted, re-load from your local gz files (they are the source of truth). Your portfolio artifacts (SQL files, notebooks with saved outputs, Excel workbook, Power BI .pbix in Import mode) are not affected by table expiry — they are self-contained.
+- **Sandbox partition expiration:** If you recreate the table while still in Sandbox mode, the 60-day expiration returns. Always run `bq update --time_partitioning_expiration 0` after any `bq mk --table` on a partitioned table.
+- **`bq` vs `bq.cmd` on Windows:** The bare `bq` command in PowerShell silently exits 0 without executing. Always use the full path to `bq.cmd`.
+- **Schema argument on existing tables:** Passing a schema string to `bq load` when the table already exists triggers "Cannot replace a table with a different partitioning spec". Omit the schema — BigQuery uses the existing table schema.
+- **`category_code` NULLs:** Handle with `COALESCE(category_code, 'unknown')` in queries.
+- **`price = 0.0`:** Filter with `WHERE price > 0` for revenue analysis.
+- **`user_session` is UUID:** Group by `user_session`, not `user_id`, for session-level analysis.
+- **60-day table expiry in Sandbox (project-level):** With billing enabled this no longer applies. If you ever revert to Sandbox, tables expire 60 days after last use — re-load from local gz files if needed.
 
 ---
 
 ## Next Step
 
-Once all 7 files are loaded and verified → read `workflows/02_analytics_plan.md`
+All 7 months loaded and verified → read `workflows/02_analytics_plan.md` and begin Module 1: Funnel Analysis.

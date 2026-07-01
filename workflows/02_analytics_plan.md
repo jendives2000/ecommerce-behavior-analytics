@@ -1,11 +1,29 @@
 # Workflow: Analytics Plan
 
 ## Objective
+
 Build all analytical deliverables from the REES46 dataset in BigQuery, in the correct sequence. Each module produces SQL queries (saved in `sql/`), Python analysis (saved in `notebooks/`), and feeds the final dashboard and Excel report.
 
 ## Prerequisites
+
 - BigQuery table loaded and verified (see `workflows/01_bigquery_setup.md`)
 - Python environment with dependencies from `requirements.txt`
+
+---
+
+## BigQuery Studio Features — Decisions
+
+BigQuery Studio exposes several features beyond the standard query editor. Decisions on what to use:
+
+| Feature | Decision | Reason |
+| ------- | -------- | ------ |
+| **Data Canvas** | Reference artifact only | Used for quick EDA; visualization nodes have a partial-snapshot limitation. Screenshot saved to `dashboards/`. Not a formal module. |
+| **Notebooks (BQ Studio)** | Use for modules 1, 2, 5 | Cloud-native Python, connected to BQ. No local env needed. |
+| **Notebooks (local Jupyter)** | Use for modules 3, 4, 7 | Matplotlib/seaborn charting is more capable than BQ Studio for complex visuals (cohort heatmap, box plots, z-test charts). |
+| **Conversations / Agents** | Skip | AI-assisted querying hides analytical thinking — wrong signal for portfolio. |
+| **Data preparations** | Skip | Project uses ELT pattern (clean in SQL). Dataprep would duplicate this transparently. |
+| **Pipelines** | Skip | Adds significant scope. Flag for Project 3 instead. |
+| **Connections** | Skip | Not needed — single source (rees46 table in same project). |
 
 ---
 
@@ -13,8 +31,8 @@ Build all analytical deliverables from the REES46 dataset in BigQuery, in the co
 
 Build in this sequence. Each module builds on the previous.
 
-```
-Module 1: Funnel Analysis        ← start here, validates the data works
+```text
+Module 1: Funnel Analysis        ← start here, validates the data works end-to-end
 Module 2: Session Analytics      ← depends on session-level understanding from M1
 Module 3: RFM Segmentation       ← depends on purchase-only subset from M1
 Module 4: Cohort Retention       ← depends on RFM user table from M3
@@ -22,6 +40,19 @@ Module 5: Category & Brand Perf  ← independent, can run anytime after M1
 Module 6: Anomaly Detection      ← depends on price/volume baseline from M5
 Module 7: COVID Quasi-Experiment ← depends on all prior modules for context
 ```
+
+---
+
+## Data Canvas EDA (Reference Artifact — Not a Module)
+
+BigQuery Studio's Data Canvas was used for a quick visual exploration before Module 1. Two charts were produced:
+
+- **Event type split** — views (~375M) vs carts (~25M) vs purchases (~10M). Confirms the extreme funnel drop-off that drives the central project question.
+- **Top categories by volume** — electronics and appliances dominate; "unknown" reflects NULL `category_code` rows handled via `COALESCE`.
+
+**Canvas limitation encountered:** Visualization nodes snapshot partial query results into their Vega-Lite JSON spec rather than dynamically reading from the parent query node. Multi-series line charts are not reliably supported. Data Canvas is suited to single-metric, single-dimension bar charts only.
+
+**Artifact:** Screenshot saved as `dashboards/00_data_canvas_eda.png`. Not featured in the README — it is a process artifact, not an analytical deliverable. The monthly trend and all analytical charts belong in notebooks.
 
 ---
 
@@ -36,7 +67,7 @@ WITH funnel AS (
     COUNT(DISTINCT CASE WHEN event_type = 'view'     THEN user_session END) AS sessions_with_view,
     COUNT(DISTINCT CASE WHEN event_type = 'cart'     THEN user_session END) AS sessions_with_cart,
     COUNT(DISTINCT CASE WHEN event_type = 'purchase' THEN user_session END) AS sessions_with_purchase
-  FROM `ecommerce-behavior-analytics.rees46.events`
+  FROM `instant-form-500912-n7.rees46.events`
 )
 SELECT
   sessions_with_view,
@@ -56,7 +87,7 @@ WITH category_funnel AS (
     COUNT(DISTINCT CASE WHEN event_type = 'view'     THEN user_session END) AS views,
     COUNT(DISTINCT CASE WHEN event_type = 'cart'     THEN user_session END) AS carts,
     COUNT(DISTINCT CASE WHEN event_type = 'purchase' THEN user_session END) AS purchases
-  FROM `ecommerce-behavior-analytics.rees46.events`
+  FROM `instant-form-500912-n7.rees46.events`
   GROUP BY top_category
 )
 SELECT
@@ -82,10 +113,10 @@ SELECT
     2
   ) AS abandonment_rate_pct
 FROM
-  (SELECT DISTINCT user_session FROM `ecommerce-behavior-analytics.rees46.events`
+  (SELECT DISTINCT user_session FROM `instant-form-500912-n7.rees46.events`
    WHERE event_type = 'cart') AS cart_sessions
 LEFT JOIN
-  (SELECT DISTINCT user_session FROM `ecommerce-behavior-analytics.rees46.events`
+  (SELECT DISTINCT user_session FROM `instant-form-500912-n7.rees46.events`
    WHERE event_type = 'purchase') AS purchase_sessions
 USING (user_session);
 ```
@@ -109,7 +140,7 @@ SELECT
   MIN(event_time) AS session_start,
   MAX(event_time) AS session_end,
   TIMESTAMP_DIFF(MAX(event_time), MIN(event_time), SECOND) AS session_duration_seconds
-FROM `ecommerce-behavior-analytics.rees46.events`
+FROM `instant-form-500912-n7.rees46.events`
 GROUP BY user_session
 ```
 
@@ -121,11 +152,11 @@ WITH session_events AS (
     event_type,
     event_time,
     ROW_NUMBER() OVER (PARTITION BY user_session ORDER BY event_time) AS event_rank
-  FROM `ecommerce-behavior-analytics.rees46.events`
+  FROM `instant-form-500912-n7.rees46.events`
 ),
 purchase_sessions AS (
   SELECT DISTINCT user_session
-  FROM `ecommerce-behavior-analytics.rees46.events`
+  FROM `instant-form-500912-n7.rees46.events`
   WHERE event_type = 'purchase'
 )
 SELECT
@@ -155,7 +186,7 @@ WITH purchase_events AS (
     user_id,
     event_time,
     price
-  FROM `ecommerce-behavior-analytics.rees46.events`
+  FROM `instant-form-500912-n7.rees46.events`
   WHERE event_type = 'purchase'
     AND price > 0
 ),
@@ -217,7 +248,7 @@ WITH first_purchase AS (
   SELECT
     user_id,
     DATE_TRUNC(MIN(DATE(event_time)), MONTH) AS cohort_month
-  FROM `ecommerce-behavior-analytics.rees46.events`
+  FROM `instant-form-500912-n7.rees46.events`
   WHERE event_type = 'purchase'
   GROUP BY user_id
 ),
@@ -225,7 +256,7 @@ user_purchases AS (
   SELECT
     e.user_id,
     DATE_TRUNC(DATE(e.event_time), MONTH) AS purchase_month
-  FROM `ecommerce-behavior-analytics.rees46.events` e
+  FROM `instant-form-500912-n7.rees46.events` e
   WHERE e.event_type = 'purchase'
 ),
 cohort_data AS (
@@ -275,7 +306,7 @@ SELECT
   ROUND(AVG(CASE WHEN event_type = 'purchase' THEN price END), 2) AS avg_purchase_price,
   ROUND(COUNT(CASE WHEN event_type = 'purchase' THEN 1 END) * 100.0 /
         NULLIF(COUNT(CASE WHEN event_type = 'view' THEN 1 END), 0), 2) AS view_to_purchase_pct
-FROM `ecommerce-behavior-analytics.rees46.events`
+FROM `instant-form-500912-n7.rees46.events`
 WHERE price > 0 OR event_type = 'view'
 GROUP BY top_category
 HAVING total_views > 10000
@@ -297,7 +328,7 @@ WITH category_stats AS (
     SPLIT(COALESCE(category_code, 'unknown'), '.')[OFFSET(0)] AS top_category,
     APPROX_QUANTILES(price, 4)[OFFSET(1)] AS q1,
     APPROX_QUANTILES(price, 4)[OFFSET(3)] AS q3
-  FROM `ecommerce-behavior-analytics.rees46.events`
+  FROM `instant-form-500912-n7.rees46.events`
   WHERE event_type = 'purchase' AND price > 0
   GROUP BY top_category
 )
@@ -312,7 +343,7 @@ SELECT
   cs.q3,
   (cs.q3 - cs.q1) * 1.5 AS iqr_fence,
   cs.q3 + (cs.q3 - cs.q1) * 1.5 AS upper_fence
-FROM `ecommerce-behavior-analytics.rees46.events` e
+FROM `instant-form-500912-n7.rees46.events` e
 JOIN category_stats cs
   ON SPLIT(COALESCE(e.category_code, 'unknown'), '.')[OFFSET(0)] = cs.top_category
 WHERE e.event_type = 'purchase'
@@ -329,7 +360,7 @@ SELECT
   COUNT(*) AS events_in_session,
   COUNT(DISTINCT product_id) AS distinct_products,
   SUM(CASE WHEN event_type = 'purchase' THEN 1 ELSE 0 END) AS purchases
-FROM `ecommerce-behavior-analytics.rees46.events`
+FROM `instant-form-500912-n7.rees46.events`
 GROUP BY user_id, user_session
 HAVING events_in_session > 500  -- threshold: adjust based on distribution
 ORDER BY events_in_session DESC;
@@ -357,7 +388,7 @@ WITH period_sessions AS (
       ELSE 'covid_onset'
     END AS period,
     MAX(CASE WHEN event_type = 'purchase' THEN 1 ELSE 0 END) AS converted
-  FROM `ecommerce-behavior-analytics.rees46.events`
+  FROM `instant-form-500912-n7.rees46.events`
   GROUP BY user_session, period
 )
 SELECT
@@ -400,9 +431,14 @@ print(f"Significant at α=0.05: {p_value < 0.05}")
 
 ## Output Artifacts
 
-By the end of all 7 modules, the project should have:
+By the end of all modules, the project should have:
 
 ```
+dashboards/
+  00_data_canvas_eda.png         (screenshot of BigQuery Studio Data Canvas)
+  ecommerce_analytics.pbix       (Power BI Report — 5 pages)
+  ecommerce_analytics.xlsx       (Excel equivalent — same KPIs, static)
+
 sql/
   01_funnel_analysis.sql
   02_session_analytics.sql
@@ -413,15 +449,15 @@ sql/
   07_covid_experiment.sql
 
 notebooks/
-  01_funnel_analysis.ipynb
-  03_rfm_segmentation.ipynb      (Python: segment charts)
-  04_cohort_retention.ipynb      (Python: cohort heatmap)
-  07_covid_experiment.ipynb      (Python: z-test + charts)
-
-dashboards/
-  ecommerce_analytics.pbix       (Power BI Report — 5 pages)
-  ecommerce_analytics.xlsx       (Excel equivalent — same KPIs, static)
+  01_funnel_analysis.ipynb       (BQ Studio notebook — cloud Python)
+  02_session_analytics.ipynb     (BQ Studio notebook — cloud Python)
+  03_rfm_segmentation.ipynb      (local Jupyter — segment charts, box plots)
+  04_cohort_retention.ipynb      (local Jupyter — cohort heatmap)
+  05_category_brand.ipynb        (BQ Studio notebook — cloud Python)
+  07_covid_experiment.ipynb      (local Jupyter — z-test + before/after charts)
 ```
+
+**Notebook routing rationale:** BQ Studio notebooks for modules 1, 2, 5 (SQL-centric, minimal charting — cloud Python is sufficient). Local Jupyter for modules 3, 4, 7 (matplotlib/seaborn charts: box plots, cohort heatmap, statistical test visualizations — more capable than BQ Studio's chart renderer for complex visuals).
 
 ---
 
