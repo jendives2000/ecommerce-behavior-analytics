@@ -18,8 +18,8 @@ BigQuery Studio exposes several features beyond the standard query editor. Decis
 | Feature | Decision | Reason |
 | ------- | -------- | ------ |
 | **Data Canvas** | Reference artifact only | Used for quick EDA; visualization nodes have a partial-snapshot limitation. Screenshot saved to `dashboards/`. Not a formal module. |
-| **Notebooks (BQ Studio)** | Use for modules 1, 2, 5 | Cloud-native Python, connected to BQ. No local env needed. |
-| **Notebooks (local Jupyter)** | Use for modules 3, 4, 7 | Matplotlib/seaborn charting is more capable than BQ Studio for complex visuals (cohort heatmap, box plots, z-test charts). |
+| **Notebooks (BQ Studio)** | Skip — use SQL editor directly | Modules 1, 2, 5 are SQL-only. BQ Studio's query editor already handles this; a notebook wrapping `%%bigquery` cells adds friction with no benefit. |
+| **Notebooks (local Jupyter)** | Use for modules 3, 4, 7 | Python does real work here: seaborn cohort heatmap, RFM box plots, z-test charts. These can't be produced in the SQL editor. |
 | **Conversations / Agents** | Skip | AI-assisted querying hides analytical thinking — wrong signal for portfolio. |
 | **Data preparations** | Skip | Project uses ELT pattern (clean in SQL). Dataprep would duplicate this transparently. |
 | **Pipelines** | Skip | Adds significant scope. Flag for Project 3 instead. |
@@ -449,15 +449,12 @@ sql/
   07_covid_experiment.sql
 
 notebooks/
-  01_funnel_analysis.ipynb       (BQ Studio notebook — cloud Python)
-  02_session_analytics.ipynb     (BQ Studio notebook — cloud Python)
   03_rfm_segmentation.ipynb      (local Jupyter — segment charts, box plots)
   04_cohort_retention.ipynb      (local Jupyter — cohort heatmap)
-  05_category_brand.ipynb        (BQ Studio notebook — cloud Python)
   07_covid_experiment.ipynb      (local Jupyter — z-test + before/after charts)
 ```
 
-**Notebook routing rationale:** BQ Studio notebooks for modules 1, 2, 5 (SQL-centric, minimal charting — cloud Python is sufficient). Local Jupyter for modules 3, 4, 7 (matplotlib/seaborn charts: box plots, cohort heatmap, statistical test visualizations — more capable than BQ Studio's chart renderer for complex visuals).
+**Notebook routing rationale:** Modules 1, 2, 5 are SQL-only — run queries directly in BQ Studio's SQL editor. No notebook needed; a notebook wrapping `%%bigquery` cells adds friction with no benefit over the query editor. Local Jupyter notebooks only for modules 3, 4, 7 where Python does real work: seaborn cohort heatmap, RFM box plots, z-test charts.
 
 ---
 
