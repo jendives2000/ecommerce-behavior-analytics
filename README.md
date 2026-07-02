@@ -118,6 +118,54 @@ See `workflows/01_bigquery_setup.md` for setup and loading instructions.
 
 ---
 
+## Data Quality Findings
+
+Three significant data quality issues were surfaced during analysis. Each is documented here because they affect how results should be interpreted — and because real-world analytics work requires knowing what to do when data breaks.
+
+---
+
+### 1. Category Taxonomy Anomaly — `construction` ≠ DIY
+
+**What was found:**
+The raw category code `construction` ranked as the #1 revenue category at 49% of platform revenue (~1B out of ~2.06B). Its top three brands are Apple, Samsung, and Xiaomi — with Apple averaging $868 per purchase inside "DIY / Home Improvement." In October and November 2019, `construction` revenue was under $1.1M/month. In the week of December 2, 2019, it jumped to $35.3M in a single week — while `electronics` simultaneously collapsed from $36M to $3.7M/week. The switch was near-instantaneous.
+
+**What this means:**
+This is not a genuine DIY surge. Smartphones and consumer electronics that were previously tagged as `electronics` began appearing under `construction` starting December 2019 — a platform-side taxonomy event. The `construction` bucket functions as a misclassified electronics catch-all from December 2019 onward. The display name "DIY / Home Improvement" is misleading for this period.
+
+**How it's handled:**
+SQL queries and visualizations flag this explicitly. Category-level metrics treat `construction` as directional at best after December 2019. The data is not altered — the anomaly is disclosed, not corrected. Category analysis in Module 5 and Module 7 should be interpreted with this in mind.
+
+---
+
+### 2. Logging Gap — February 27, 2020
+
+**What was found:**
+On February 27, 2020, the platform logged 197,047 events. Every other day in the dataset averages 1.8–2.2 million events. This is a 90%+ drop. The 7-day rolling z-score is **-18.84** — physically impossible as organic human behavior. Approximately 1.8 million events are missing for that date.
+
+**What this means:**
+Something failed in the data collection pipeline on that day: a logging service crash, ingestion pipeline failure, or network partition. The data for February 27 is effectively absent from the dataset. It is not a real behavioral signal.
+
+**How it's handled in analysis:**
+February 27 is excluded from the Module 7 COVID quasi-experiment pre-period baseline via an explicit `WHERE DATE(event_time) != '2020-02-27'` filter. Including it would artificially lower the pre-COVID average and distort the before/after comparison.
+
+**Real-world note:**
+In a production environment, a gap of this magnitude would trigger an immediate escalation to the data engineering or platform operations team. An analyst's role is to surface and quantify the gap — root cause diagnosis (server crash, pipeline failure, infrastructure issue) belongs to the team that owns the logging infrastructure. In practice, the analyst would typically already be informed through incident reporting channels before discovering the anomaly in query output. The response is: flag it, scope the impact, exclude from affected analyses, and reference the incident ticket in documentation.
+
+---
+
+### 3. Platform Price Cap — $2,574.07
+
+**What was found:**
+IQR outlier analysis (Module 6) identified a hard ceiling on purchase prices across all major categories: exactly **$2,574.07**. All 100 flagged outlier transactions sit at or within $0.03 of this value — across electronics, appliances, computers, accessories, and construction. The maximum price in every major category is the same number.
+
+**What this means:**
+This is a platform-level price ceiling, not genuine price fraud or data error. The platform likely enforces a maximum transaction value at the payment or catalog layer. IQR outlier flags in this dataset reflect transactions hitting that ceiling, not anomalous pricing behavior. Outlier rates should be interpreted as "high-value transactions at the ceiling," not as suspicious activity.
+
+**How it's handled:**
+Outlier analysis in Module 6 documents this finding and adjusts interpretation accordingly. Price outlier counts by category remain useful for understanding which categories sell at maximum price points most frequently.
+
+---
+
 ## Stack
 
 | Layer | Tool | Purpose |
@@ -140,7 +188,7 @@ See `workflows/01_bigquery_setup.md` for setup and loading instructions.
 2. Read `workflows/02_analytics_plan.md` — what to build, in what order, with what SQL patterns
 3. Tools will be built during execution and stored in `tools/`
 
-**Current state:** BigQuery loaded and verified — 411,709,736 events across 7 months. Workflows complete. Module 1 (Funnel Analysis) in progress.
+**Current state:** BigQuery loaded and verified — 411,709,736 events across 7 months. Modules 1–6 complete (Funnel, Session, RFM, Cohort Retention, Category & Brand, Anomaly Detection). Module 7 (COVID Quasi-Experiment) in progress.
 
 ---
 
