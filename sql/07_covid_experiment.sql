@@ -40,11 +40,87 @@
 --   Query 4 — Session behavior shift (depth, products viewed, session purchase rate)
 --   Query 5 — New vs returning buyer mix (did COVID bring new users or activate existing?)
 --
--- VERIFIED RESULTS (run YYYY-MM-DD):
--- [Paste BQ Studio results here after running each query]
+-- VERIFIED RESULTS (run 2026-07-02):
+--
+-- Query 1 — Conversion funnel + AOV: Pre-COVID vs COVID onset
+--   period        views       carts     purchases  total_revenue  AOV       v→pur%  cart→pur%  s_conv%  sessions    pur_sessions
+--   Pre-COVID   297,370,311  14,356,487  5,339,676  1,641,912,463  307.49  1.7956   37.19    5.8356   72,286,478   4,218,364
+--   COVID onset  83,604,585   4,458,709  1,375,611    373,706,635  271.67  1.6454   30.85    6.8867   16,262,389   1,119,942
+--
+--   PARADOX: view_to_purchase DROPPED (1.80% → 1.65%) while session_conversion INCREASED
+--   (5.84% → 6.89%). Resolution: people browsed MORE per session during lockdown (Q4 shows
+--   avg products viewed: 2.79 → 3.41, +22%). More views per session dilutes the view-level
+--   rate even though a higher share of sessions ended in a purchase.
+--   Session conversion is the correct metric for the z-test — it measures buyer intent.
+--
+-- Query 2 — Weekly trend highlights (full 28-week series in CSV):
+--   Nov 11, 2019:  26.2M views — traffic spike, likely flash sale (Black Friday region)
+--   Feb 10, 2020:  527,825 purchases (3.65% v→pur) — Valentine's Day promo anomaly
+--   Mar 9  (split): week straddles Pre-COVID / Transition boundary
+--   Mar 16, 2020:  COVID lockdown week 1 — session_conv immediately jumps to 6.73%
+--   Mar 23, 2020:  session_conv 7.59% (lockdown deepens, people shift to online)
+--   Mar 30, 2020:  session_conv 7.97% (peak conversion week of entire dataset)
+--   Apr 20, 2020:  session_conv drops to 5.12% (possible lockdown fatigue / restrictions ease)
+--
+-- Query 3 — Category revenue mix shift (Jan 2020 baseline):
+--   category                    pre_share%  covid_share%  direction
+--   DIY / Home Improvement *     69.02       57.32         ↓ (taxonomy artifact — not real DIY)
+--   Appliances                   11.06       16.45         ↑ home appliance buying during lockdown
+--   Electronics                   7.19       11.72         ↑ significant gain
+--   apparel                       3.44        4.69         ↑ moderate gain
+--   Sports & Outdoor              2.84        2.01         ↓ gyms closed, outdoor activity restricted
+--   Unknown / No Category         2.38        4.43         ↑ (may absorb misclassified items)
+--   Computers & Peripherals       1.54        1.11         ↓ slight decline
+--   Furniture & Home              1.25        1.13         ≈ stable
+--
+--   Note: DIY* share DROP during COVID is partly because Appliances/Electronics grew — the
+--   misclassified smartphone bucket was already dominant and its share compressed as other
+--   categories accelerated. Interpret all category shifts with the taxonomy caveat in mind.
+--
+-- Query 4 — Session behavior shift:
+--   period        sessions     avg_events/s  avg_products  pur_sessions  s_pur_rate%  avg_s_revenue
+--   Pre-COVID    72,286,479     4.39          2.79         4,218,364      5.84         389.23
+--   COVID onset  16,262,390     5.50          3.41         1,119,943      6.89         333.68
+--
+--   Sessions got 25% longer (4.39 → 5.50 events) and 22% broader (2.79 → 3.41 products).
+--   More sessions converted to purchases (+18% relative rate).
+--   But each purchasing session generated 14% less revenue ($389 → $334).
+--   Interpretation: lockdown drove higher browsing engagement and purchase intent,
+--   but economic uncertainty pushed buyers toward cheaper items.
+--
+-- Query 5 — New vs returning buyer mix:
+--   period        buyer_type      unique_buyers  total_pur   AOV
+--   Pre-COVID     New buyer       1,606,920      2,221,822   289.28
+--   Pre-COVID     Returning       633,585        3,117,854   320.47
+--   COVID onset   New buyer       424,885          583,170   256.01
+--   COVID onset   Returning       305,779          792,441   283.19
+--
+--   Daily rate comparison (normalised for period length):
+--     New buyers/day:      pre=9,858  covid=9,236  → roughly flat (-6%)
+--     Returning buyers/day: pre=3,887  covid=6,648  → +71% surge during lockdown
+--   The COVID boost was driven by EXISTING customers returning more often,
+--   not a wave of new buyers. New acquisition was nearly unchanged.
+--   AOV fell in both groups (~11%) regardless of buyer type — the whole basket got cheaper.
 --
 -- Key insights:
--- [To be filled after results are verified]
+-- 1. Session conversion INCREASED during COVID: 5.84% → 6.89% (+18% relative, ~+1.05 pp).
+--    Given sample sizes (72M pre, 16M COVID sessions), the z-test will almost certainly
+--    confirm statistical significance. The platform became more efficient at converting
+--    sessions into purchases the moment lockdown began.
+-- 2. The view-to-purchase rate DECLINED (1.80% → 1.65%) — an apparent contradiction
+--    resolved by browsing depth: people viewed 22% more products per session during lockdown.
+--    More browsing per session → more views per purchase → lower view-level rate.
+--    This is a methodological lesson: choose the right denominator for conversion analysis.
+-- 3. AOV fell 11.7% ($307.49 → $271.67). Economic uncertainty drove smaller, cheaper baskets.
+--    This held true for both new and returning buyers — behavioral not demographic.
+-- 4. Lockdown activated existing customers: returning buyer daily rate surged +71%.
+--    New buyer acquisition was nearly unchanged. COVID was a retention catalyst, not an
+--    acquisition driver. This has direct implications for CRM and loyalty strategy.
+-- 5. Weekly trend reveals the conversion peak was March 30, 2020 (session_conv 7.97%) —
+--    two weeks into the lockdown. By late April it fell back to 5.12%, suggesting
+--    lockdown e-commerce adoption peaked quickly then stabilised or reversed.
+-- 6. Category winners during COVID: Appliances (+5.4 pp share) and Electronics (+4.5 pp).
+--    Category losers: Sports & Outdoor (-0.8 pp). Home investment patterns dominate.
 
 
 -- ============================================================
@@ -171,7 +247,9 @@ WITH period_purchases AS (
     AND DATE(event_time) != '2020-02-27'
     AND DATE(event_time) NOT BETWEEN '2020-03-13' AND '2020-03-15'
 ),
-category_revenue AS (
+cat_agg AS (
+  -- CTE named 'cat_agg' (not 'category_revenue') to avoid BQ name collision
+  -- with the column alias 'category_revenue' inside this same CTE.
   SELECT
     period,
     CASE raw_category
@@ -197,18 +275,18 @@ category_revenue AS (
 ),
 period_totals AS (
   SELECT period, SUM(category_revenue) AS period_total
-  FROM category_revenue
+  FROM cat_agg
   GROUP BY period
 )
 SELECT
-  cr.period,
-  cr.category,
-  cr.category_revenue,
-  cr.purchase_count,
-  ROUND(cr.category_revenue * 100.0 / NULLIF(pt.period_total, 0), 2) AS revenue_share_pct
-FROM category_revenue cr
+  ca.period,
+  ca.category,
+  ca.category_revenue,
+  ca.purchase_count,
+  ROUND(ca.category_revenue * 100.0 / NULLIF(pt.period_total, 0), 2) AS revenue_share_pct
+FROM cat_agg ca
 JOIN period_totals pt USING (period)
-ORDER BY cr.period, cr.category_revenue DESC;
+ORDER BY ca.period, ca.category_revenue DESC;
 -- * 'DIY / Home Improvement' = raw category_code 'construction'.
 --   Contains Apple/Samsung/Xiaomi smartphones due to taxonomy error (see README Data Quality).
 --   Revenue share for this category should be interpreted with caution.
