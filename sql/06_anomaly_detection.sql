@@ -39,6 +39,9 @@
 --   not genuine price variation. The IQR outlier analysis is flagging items priced at
 --   or near the cap. This is a data artifact: products above the cap were truncated to
 --   2,574.07 in the source data. The cap is real but the "outlier" signal is structural.
+--   Likely mechanism: a 1,000,000 KZT limit converted at the ~388.5 KZT/USD rate in effect
+--   around Oct 2019 — independently corroborated (see README Data Quality Finding #3 and
+--   price_ceiling_research.md), but the exact business reason for the KZT figure is unconfirmed.
 --
 -- Query 2 — Top 100 individual outlier transactions (all prices at cap):
 --   All flagged prices are exactly 2,574.07 (or 2,574.04). The cap is confirmed.
