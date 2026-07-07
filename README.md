@@ -50,6 +50,8 @@ The key portfolio signal: **event-level behavioral data in BigQuery**. GA4, Ampl
 | `user_id` | INTEGER | Persistent user identifier |
 | `user_session` | STRING | Session UUID (resets per browsing session) |
 
+**Event scope note:** This schema tracks only product-level interactions (`view` / `cart` / `purchase`) — there is no event for raw site visits, searches, or homepage browsing that never touches a specific product. Every conversion rate in this project is measured from first product view onward, not from total site traffic (see Data Quality Findings below).
+
 **Time span significance:** Oct 2019 – Feb 2020 = pre-COVID baseline. Mar–Apr 2020 = COVID-onset period. Kazakhstan's first confirmed case was March 13, 2020; national lockdown began March 16. The dataset captures the behavioral shock from the exact week the country shut down — a unusually clean natural experiment.
 
 **Files on Kaggle:** One CSV per month (Oct 2019, Nov 2019, Dec 2019, Jan 2020, Feb 2020, Mar 2020, Apr 2020). Each file ~5–6 GB uncompressed.
@@ -163,6 +165,19 @@ This is a platform-level price ceiling, not genuine price fraud or data error. T
 
 **How it's handled:**
 Outlier analysis in Module 6 documents this finding and adjusts interpretation accordingly. Price outlier counts by category remain useful for understanding which categories sell at maximum price points most frequently.
+
+---
+
+### 4. Funnel Floor Bias — No Raw Site-Visit Event
+
+**What was found:**
+This dataset's `events` table has exactly three `event_type` values: `view`, `cart`, `purchase` — every row is tied to a specific `product_id`. There is no event representing a generic site visit, a search, or homepage browsing that never touches a product page. A small gap confirms this: Module 2's total session count (89,693,595, counted from any event at all) is 213,976 sessions higher than Module 1's "sessions with a view" count (89,479,619) — meaning ~214K sessions have a cart or purchase event but zero logged product views.
+
+**What this means:**
+Every conversion rate reported in this project (6.09% overall, and all category/brand conversion rates) is measured **from first product view onward**, not from raw site arrival. There is an invisible layer of traffic above "viewed a product" — visitors who searched, browsed the homepage, or bounced without ever opening a product page — that this dataset cannot see or measure at all. The true top-of-funnel conversion rate (site arrival → purchase) is almost certainly lower than 6.09%, but it isn't computable from this data.
+
+**How it's handled:**
+This is a tracking-scope limitation, not a data error — REES46's tracking script is scoped to product-level interactions because that's what its core product (recommendations, cart-abandonment remarketing) needs, not general web analytics. The fix is interpretive, not corrective: every conversion metric in this repo should be read as "of people who engaged with a product, what fraction bought" — never as "of all site traffic."
 
 ---
 

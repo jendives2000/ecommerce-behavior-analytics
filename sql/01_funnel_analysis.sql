@@ -3,6 +3,10 @@
 -- and where does it break down?
 -- Table: instant-form-500912-n7.rees46.events (411,709,736 events, Oct 2019 – Apr 2020)
 --
+-- SCOPE NOTE: This dataset has no raw site-visit event — "view" means a product-detail-page
+-- view, not a homepage/search visit. This conversion rate is measured from first product view
+-- onward, not from total site traffic. See README Data Quality Findings: "Funnel Floor Bias."
+--
 -- VERIFIED RESULTS (run 2026-07-01):
 --
 -- Query 1 — Overall funnel (session-level):

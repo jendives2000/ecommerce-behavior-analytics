@@ -2,6 +2,10 @@
 -- Business question: How do users browse before they buy?
 -- Table: instant-form-500912-n7.rees46.events (411,709,736 events, Oct 2019 – Apr 2020)
 --
+-- SCOPE NOTE: "total_sessions" here counts sessions with ANY logged event (view/cart/purchase),
+-- not raw site traffic — there is no event for a visit that never touches a product. See README
+-- Data Quality Findings: "Funnel Floor Bias."
+--
 -- VERIFIED RESULTS (run 2026-07-02):
 --
 -- Query 1 — Overall session depth statistics:
