@@ -31,7 +31,7 @@ table FactFunnelByBrand
 		dataType: double
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: a92e157e-8b99-4463-8da1-a49cbb48b403
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: OverallConvPct
 
 		annotation SummarizationSetBy = Automatic
@@ -40,10 +40,16 @@ table FactFunnelByBrand
 		dataType: double
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: e459b74b-bbb0-4d52-a1ad-44cfd8d81584
-		summarizeBy: sum
+		summarizeBy: average
 		sourceColumn: CartToPurchasePct
+		description: Cart-to-purchase conversion rate per brand (Module 1, Query 4). Cannot be recomputed as a weighted measure like the other rate columns, since this table doesn't carry each brand's raw cart count - only Views and Purchases are available. Read per-row only; averaging across brands is an unweighted approximation.
 
 		annotation SummarizationSetBy = Automatic
+
+	measure 'Brand Conversion Rate' = DIVIDE(SUM(FactFunnelByBrand[Purchases]), SUM(FactFunnelByBrand[Views]))
+		formatString: 0.00%
+		displayFolder: Funnel
+		description: View-to-purchase conversion rate by brand, correctly weighted by volume (SUM of purchases over SUM of views) rather than averaging the OverallConvPct column directly.
 
 	partition FactFunnelByBrand = m
 		mode: import

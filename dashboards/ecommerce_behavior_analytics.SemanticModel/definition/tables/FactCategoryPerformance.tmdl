@@ -39,12 +39,18 @@ table FactCategoryPerformance
 	column AvgPrice
 		dataType: double
 		lineageTag: 646ac75b-fc6f-428c-8ef3-0ed3d1f41b02
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: AvgPrice
+		description: Average purchase price for this category. Do not sum across categories - use 'Weighted Avg Price' for a properly weighted figure across multiple selected categories.
 
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Weighted Avg Price' = DIVIDE(SUM(FactCategoryPerformance[TotalRevenue]), SUM(FactCategoryPerformance[Purchases]))
+		formatString: "$"#,##0.00
+		displayFolder: 'Category & Brand'
+		description: True revenue-weighted average purchase price (SUM of revenue over SUM of purchases), correct when multiple categories are selected - unlike summing or averaging the AvgPrice column, which would treat every category as equally sized.
 
 	partition FactCategoryPerformance = m
 		mode: import

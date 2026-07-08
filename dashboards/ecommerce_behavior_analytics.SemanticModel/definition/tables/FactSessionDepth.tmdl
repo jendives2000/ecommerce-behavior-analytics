@@ -31,10 +31,15 @@ table FactSessionDepth
 		dataType: double
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 651468ac-39ad-479a-a972-832732df83ac
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: ConversionPct
 
 		annotation SummarizationSetBy = Automatic
+
+	measure 'Session Conversion Rate' = DIVIDE(SUM(FactSessionDepth[PurchasingSessions]), SUM(FactSessionDepth[TotalSessions]))
+		formatString: 0.00%
+		displayFolder: Funnel
+		description: Conversion rate by session-depth bucket, correctly weighted by volume rather than averaging the ConversionPct column directly.
 
 	partition FactSessionDepth = m
 		mode: import

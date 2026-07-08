@@ -1,7 +1,15 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.0.0/schema.json",
   "pageOrder": [
-    "45a174fce2c6ec321556"
+    "overview",
+    "funnel",
+    "customer-segments",
+    "category-brand",
+    "covid-impact",
+    "data-dictionary",
+    "cohort-detail",
+    "anomaly-detail",
+    "funnel-floor-bias-tooltip"
   ],
-  "activePageName": "45a174fce2c6ec321556"
+  "activePageName": "overview"
 }

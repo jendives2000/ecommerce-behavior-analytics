@@ -30,8 +30,9 @@ table FactTopBrands
 	column AvgPrice
 		dataType: double
 		lineageTag: 1f308250-a735-4982-bf7e-cc18d19d0048
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: AvgPrice
+		description: Average purchase price for this brand. Do not sum across brands - use 'Brand Weighted Avg Price' for a properly weighted figure across multiple selected brands.
 
 		annotation SummarizationSetBy = Automatic
 
@@ -41,10 +42,16 @@ table FactTopBrands
 		dataType: int64
 		formatString: 0
 		lineageTag: 24ff4a7c-4dd8-49a4-a7a2-9828e8ffbec8
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: CategoriesCount
+		description: Number of distinct categories this brand sells in. Descriptive attribute, not intended to be summed across brands.
 
 		annotation SummarizationSetBy = Automatic
+
+	measure 'Brand Weighted Avg Price' = DIVIDE(SUM(FactTopBrands[TotalRevenue]), SUM(FactTopBrands[Purchases]))
+		formatString: "$"#,##0.00
+		displayFolder: 'Category & Brand'
+		description: True revenue-weighted average purchase price by brand (SUM of revenue over SUM of purchases), correct when multiple brands are selected.
 
 	partition FactTopBrands = m
 		mode: import

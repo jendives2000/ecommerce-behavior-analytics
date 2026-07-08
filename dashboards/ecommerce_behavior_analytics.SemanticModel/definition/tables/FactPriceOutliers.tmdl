@@ -21,8 +21,9 @@ table FactPriceOutliers
 	column Q1
 		dataType: double
 		lineageTag: 365dec90-fcb1-4c46-969f-ea3c8f6e97e0
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Q1
+		description: First-quartile purchase price for this category (IQR method, Module 6). Do not sum across categories.
 
 		annotation SummarizationSetBy = Automatic
 
@@ -31,8 +32,9 @@ table FactPriceOutliers
 	column Q3
 		dataType: double
 		lineageTag: f4a93b6d-8922-4440-acb6-e2a1d0a5d700
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Q3
+		description: Third-quartile purchase price for this category. Do not sum across categories.
 
 		annotation SummarizationSetBy = Automatic
 
@@ -41,8 +43,9 @@ table FactPriceOutliers
 	column IQR
 		dataType: double
 		lineageTag: cbfb3905-7dcd-4a8c-8065-6e54452d93f9
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: IQR
+		description: Interquartile range (Q3 - Q1) for this category. Do not sum across categories.
 
 		annotation SummarizationSetBy = Automatic
 
@@ -51,8 +54,9 @@ table FactPriceOutliers
 	column UpperFence
 		dataType: double
 		lineageTag: 074952fe-f340-4b29-98b3-080b1d32fe45
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: UpperFence
+		description: IQR outlier upper fence (Q3 + 1.5x IQR) for this category. Do not sum across categories.
 
 		annotation SummarizationSetBy = Automatic
 
@@ -61,8 +65,9 @@ table FactPriceOutliers
 	column MaxPrice
 		dataType: double
 		lineageTag: 700408d2-95f3-459e-b85d-5bab99c02779
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: MaxPrice
+		description: Maximum purchase price observed for this category - the platform price cap ($2,574.07) in nearly every category (see README Data Quality Finding #3). Do not sum across categories.
 
 		annotation SummarizationSetBy = Automatic
 
@@ -81,20 +86,27 @@ table FactPriceOutliers
 		dataType: double
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: b9d7c440-0b8c-4c15-91c4-7b405379fd67
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: OutlierPct
+		description: Share of this category's purchases flagged as IQR outliers. Do not sum across categories - use 'Weighted Outlier Rate' for a properly weighted figure.
 
 		annotation SummarizationSetBy = Automatic
 
 	column MaxToFenceRatio
 		dataType: double
 		lineageTag: bf1600f6-dc6d-4830-82cf-fa2174386c6c
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: MaxToFenceRatio
+		description: How many multiples of the upper fence the category's max price reaches. Do not sum across categories.
 
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Weighted Outlier Rate' = DIVIDE(SUM(FactPriceOutliers[OutlierCount]), SUM(FactPriceOutliers[TotalPurchases]))
+		formatString: 0.00%
+		displayFolder: Anomaly
+		description: Share of purchases flagged as IQR outliers, correctly weighted by volume (SUM of outlier count over SUM of total purchases) across multiple selected categories - unlike averaging the OutlierPct column directly.
 
 	partition FactPriceOutliers = m
 		mode: import

@@ -12,6 +12,7 @@ annotation PBI_ProTooling = ["DevMode"]
 
 annotation PBI_QueryOrder = ["DimBrand","DimCategory","DimCohortMonth","DimMonthsSinceFirst","DimSegment","FactAnomalyFindings","FactCategoryMixShift","FactCategoryPerformance","FactCohortRetention","FactConvertingVsNon","FactCovidComparison","FactFunnelByBrand","FactFunnelByCategory","FactPriceOutliers","FactRetentionCurve","FactRFMMonetaryDist","FactRFMSegment","FactSessionDepth","FactTopBrands"]
 
+ref table _Measures
 ref table DimBrand
 ref table DimCategory
 ref table DimCohortMonth

@@ -12,7 +12,7 @@ table FactRetentionCurve
 	column AvgRetention
 		dataType: double
 		lineageTag: 80e29fec-1dd5-4025-b8e5-14924cc5651e
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: AvgRetention
 
 		annotation SummarizationSetBy = Automatic
@@ -22,7 +22,7 @@ table FactRetentionCurve
 	column MinRetention
 		dataType: double
 		lineageTag: 064b9495-9017-493e-8438-3309646063d7
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: MinRetention
 
 		annotation SummarizationSetBy = Automatic
@@ -32,7 +32,7 @@ table FactRetentionCurve
 	column MaxRetention
 		dataType: double
 		lineageTag: dc5b1866-6290-492c-9757-a12b80eb0611
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: MaxRetention
 
 		annotation SummarizationSetBy = Automatic
