@@ -15,6 +15,9 @@
 --   Query 3 — Bot/scraper session detection: sessions with >500 events
 --   Query 4 — Daily event volume + z-score: surface logging gaps
 --   Query 5 — Weekly construction vs electronics: pinpoint taxonomy shift date
+--   Query 6 — Price cap follow-up: tests whether repeat cap-price purchases by the
+--             same user+product look like installment payments or ordinary repeat buys
+--             (see README Data Quality Finding #3 and price_ceiling_research.md)
 --
 -- VERIFIED RESULTS (run 2026-07-02):
 --
@@ -132,6 +135,37 @@
 --   The switch was not gradual — it was near-instantaneous between two consecutive weeks.
 --   This eliminates natural category growth as an explanation. It is a data event.
 --
+-- Query 6 — Price cap follow-up: partial-payment vs. hard-ceiling test (run 2026-07-08):
+--   Context: after independently confirming the $2,574.07 cap likely derives from a
+--   1,000,000 KZT limit (see README Finding #3 / price_ceiling_research.md), one open
+--   question remained — does the recorded price reflect the TRUE final amount paid
+--   (a hard ceiling nobody can exceed), or could it be only the FIRST installment of a
+--   split payment, with additional charges happening outside this tracking data?
+--
+--   Test: do the same (user_id, product_id) pairs hit the cap repeatedly, spread across
+--   a regular, installment-like cadence (e.g., ~every 30 days)?
+--
+--   Results:
+--   - 930 total capped transactions across 689 distinct users (avg 1.35 repeats/user —
+--     modest, not the near-1.0 you'd expect from a pure one-time-only ceiling, but far
+--     from the heavy, structured repetition an installment scheme would produce).
+--   - The overwhelming majority of same user+product repeats happen on the SAME DAY,
+--     often the SAME SESSION (e.g., user 610295394 bought product 100085989 four times
+--     in one session, one day — almost certainly 4 units of the same item in one order,
+--     not 4 separate installment charges).
+--   - Where repeat gaps exist, they are irregular (73, 82, 63, 22, 18, 17, 24 days —
+--     no shared interval), not the fixed, evenly-spaced cadence a real installment plan
+--     would produce.
+--   - The most-repeated product (1802024) is spread across dozens of DIFFERENT users,
+--     each with their own unrelated, random gap — consistent with a generically popular
+--     high-ticket item bought by many separate customers, not one person's payment plan.
+--
+--   Conclusion: evidence leans clearly AGAINST the partial-payment/installment theory.
+--   The repeat pattern is much better explained by ordinary multi-unit or repeat
+--   purchases than by hidden, unlogged installment charges. Not 100% provable without
+--   actual payment-processor records, but the specific pattern installments would
+--   produce (regular, evenly-spaced repeats) is absent from the data.
+--
 -- Key insights (all anomaly types combined):
 -- 1. The platform imposes a hard price cap at 2,574.07. All "outlier" transactions
 --    hitting the IQR upper fence are at this cap. This is a data constraint, not price
@@ -148,6 +182,9 @@
 -- 5. COVID signal appears in the daily volume data: drops in Mar 12–13 (announcement),
 --    recovery and surge in Apr 8–15 (lockdown-driven e-commerce adoption). This sets
 --    up Module 7 (COVID Quasi-Experiment) directly.
+-- 6. The price cap's repeat-purchase pattern (Query 6) rules against a hidden
+--    installment-payment mechanism. The $2,574.07 figure in this dataset should be
+--    read as the true, final recorded price — not a partial first payment.
 
 
 -- ============================================================
@@ -352,3 +389,45 @@ SELECT
   weekly_revenue
 FROM weekly_revenue
 ORDER BY week_start, raw_category;
+
+
+-- ============================================================
+-- Query 6a: Same user+product hitting the price cap more than once
+-- Tests the partial-payment/installment hypothesis for the $2,574.07 cap.
+-- If installments are happening, the same (user_id, product_id) pair should
+-- repeat at the cap price, spread across a regular, plan-like interval.
+-- If it's a simple hard ceiling, repeats should look like ordinary multi-unit
+-- or repeat purchases — same-day clustering or irregular, unrelated gaps.
+-- ============================================================
+SELECT
+  user_id,
+  product_id,
+  COUNT(*)                                                       AS times_at_cap,
+  MIN(DATE(event_time))                                          AS first_occurrence,
+  MAX(DATE(event_time))                                          AS last_occurrence,
+  DATE_DIFF(MAX(DATE(event_time)), MIN(DATE(event_time)), DAY)   AS days_between,
+  COUNT(DISTINCT user_session)                                   AS distinct_sessions
+FROM `instant-form-500912-n7.rees46.events`
+WHERE event_type = 'purchase'
+  AND price BETWEEN 2573.00 AND 2575.00
+GROUP BY user_id, product_id
+HAVING COUNT(*) > 1
+ORDER BY times_at_cap DESC, days_between DESC;
+
+
+-- ============================================================
+-- Query 6b: Overall summary — concentration of capped transactions
+-- avg_capped_purchases_per_user close to 1.0 supports a simple hard
+-- ceiling (most capped transactions belong to distinct, one-time buyers).
+-- ============================================================
+WITH capped AS (
+  SELECT user_id, product_id, event_time, user_session
+  FROM `instant-form-500912-n7.rees46.events`
+  WHERE event_type = 'purchase'
+    AND price BETWEEN 2573.00 AND 2575.00
+)
+SELECT
+  COUNT(*)                                      AS total_capped_transactions,
+  COUNT(DISTINCT user_id)                       AS distinct_users,
+  ROUND(COUNT(*) / COUNT(DISTINCT user_id), 2)  AS avg_capped_purchases_per_user
+FROM capped;
