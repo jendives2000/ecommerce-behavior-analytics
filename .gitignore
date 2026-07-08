@@ -31,3 +31,11 @@ build/
 .DS_Store
 Thumbs.db
 .ipynb_checkpoints/
+
+# Power BI Project (PBIP) — machine-specific, not portable source
+# localSettings.json holds a DPAPI-encrypted securityBindingsSignature tied
+# to the local Windows user account; cache.abf is a disposable local model
+# cache. Per Microsoft's own PBIP + git guidance, neither belongs in source
+# control — the TMDL/JSON definition files are the actual portable source.
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
