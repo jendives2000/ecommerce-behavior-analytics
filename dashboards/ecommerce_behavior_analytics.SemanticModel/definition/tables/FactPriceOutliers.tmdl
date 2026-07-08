@@ -99,7 +99,6 @@ table FactPriceOutliers
 	measure 'Weighted Outlier Rate' = DIVIDE(SUM(FactPriceOutliers[OutlierCount]), SUM(FactPriceOutliers[TotalPurchases]))
 		formatString: 0.00%
 		displayFolder: Anomaly
-		description: Share of purchases flagged as IQR outliers, correctly weighted by volume (SUM of outlier count over SUM of total purchases) across multiple selected categories - unlike averaging the OutlierPct column directly.
 
 	partition FactPriceOutliers = m
 		mode: import

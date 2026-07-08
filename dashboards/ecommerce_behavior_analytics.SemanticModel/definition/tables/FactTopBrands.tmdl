@@ -49,7 +49,6 @@ table FactTopBrands
 	measure 'Brand Weighted Avg Price' = DIVIDE(SUM(FactTopBrands[TotalRevenue]), SUM(FactTopBrands[Purchases]))
 		formatString: "$"#,##0.00
 		displayFolder: 'Category & Brand'
-		description: True revenue-weighted average purchase price by brand (SUM of revenue over SUM of purchases), correct when multiple brands are selected.
 
 	partition FactTopBrands = m
 		mode: import

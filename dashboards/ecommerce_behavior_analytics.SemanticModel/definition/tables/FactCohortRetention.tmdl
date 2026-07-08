@@ -32,7 +32,6 @@ table FactCohortRetention
 	measure 'Weighted Avg Retention' = DIVIDE(SUMX(FactCohortRetention, FactCohortRetention[RetentionRate] * RELATED(DimCohortMonth[CohortUsers])), SUMX(FactCohortRetention, RELATED(DimCohortMonth[CohortUsers])))
 		formatString: 0.00%
 		displayFolder: 'Customer Segments'
-		description: Retention rate weighted by each cohort's actual user count (via DimCohortMonth[CohortUsers]), rather than treating every cohort/month cell equally. More accurate than a naive average when cohort sizes vary (e.g. the 347,118-user Oct 2019 cohort vs. the 215,886-user Jan 2020 cohort).
 
 	partition FactCohortRetention = m
 		mode: import

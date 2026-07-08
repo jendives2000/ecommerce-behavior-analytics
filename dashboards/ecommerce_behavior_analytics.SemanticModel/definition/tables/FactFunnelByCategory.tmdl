@@ -48,7 +48,6 @@ table FactFunnelByCategory
 	measure 'Category Conversion Rate' = DIVIDE(SUM(FactFunnelByCategory[Purchases]), SUM(FactFunnelByCategory[Views]))
 		formatString: 0.00%
 		displayFolder: Funnel
-		description: View-to-purchase conversion rate, correctly weighted by volume (SUM of purchases over SUM of views). Use this instead of averaging the ConversionPct column directly - averaging per-category percentages would overweight small categories and misrepresent the true blended rate when multiple categories are selected.
 
 	partition FactFunnelByCategory = m
 		mode: import

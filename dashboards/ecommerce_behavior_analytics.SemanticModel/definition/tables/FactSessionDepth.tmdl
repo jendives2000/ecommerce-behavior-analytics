@@ -39,7 +39,6 @@ table FactSessionDepth
 	measure 'Session Conversion Rate' = DIVIDE(SUM(FactSessionDepth[PurchasingSessions]), SUM(FactSessionDepth[TotalSessions]))
 		formatString: 0.00%
 		displayFolder: Funnel
-		description: Conversion rate by session-depth bucket, correctly weighted by volume rather than averaging the ConversionPct column directly.
 
 	partition FactSessionDepth = m
 		mode: import

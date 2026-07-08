@@ -48,7 +48,6 @@ table FactFunnelByBrand
 	measure 'Brand Conversion Rate' = DIVIDE(SUM(FactFunnelByBrand[Purchases]), SUM(FactFunnelByBrand[Views]))
 		formatString: 0.00%
 		displayFolder: Funnel
-		description: View-to-purchase conversion rate by brand, correctly weighted by volume (SUM of purchases over SUM of views) rather than averaging the OverallConvPct column directly.
 
 	partition FactFunnelByBrand = m
 		mode: import

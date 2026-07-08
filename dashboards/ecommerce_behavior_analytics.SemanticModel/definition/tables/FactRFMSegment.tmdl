@@ -60,7 +60,6 @@ table FactRFMSegment
 	measure 'Weighted Avg Monetary (All Segments)' = DIVIDE(SUMX(FactRFMSegment, FactRFMSegment[AvgMonetary] * FactRFMSegment[PctUsers]), SUMX(FactRFMSegment, FactRFMSegment[PctUsers]))
 		formatString: "$"#,##0.00
 		displayFolder: 'Customer Segments'
-		description: Blended average customer monetary value across all 6 segments, weighted by each segment's share of users (PctUsers). Correct alternative to summing or unweighted-averaging the AvgMonetary column, which would treat a small segment (e.g. Lost) as equally important as a large one.
 
 	partition FactRFMSegment = m
 		mode: import
