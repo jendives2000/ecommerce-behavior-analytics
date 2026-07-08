@@ -122,7 +122,7 @@ See `workflows/01_bigquery_setup.md` for setup and loading instructions.
 
 ## Data Quality Findings
 
-Three significant data quality issues were surfaced during analysis. Each is documented here because they affect how results should be interpreted — and because real-world analytics work requires knowing what to do when data breaks.
+Four significant data quality issues were surfaced during analysis. Each is documented here because they affect how results should be interpreted — and because real-world analytics work requires knowing what to do when data breaks.
 
 ---
 
@@ -136,6 +136,9 @@ This is not a genuine DIY surge. Smartphones and consumer electronics that were 
 
 **How it's handled:**
 SQL queries and visualizations flag this explicitly. Category-level metrics treat `construction` as directional at best after December 2019. The data is not altered — the anomaly is disclosed, not corrected. Category analysis in Module 5 and Module 7 should be interpreted with this in mind.
+
+**Real-world note:**
+A "corrected" copy of this data — recoding the affected rows back to `electronics` — is technically easy to build (e.g., flip any `construction` row from Apple/Samsung/Xiaomi dated on or after Dec 2, 2019). It was deliberately not built. The aggregate evidence for *something* being wrong is airtight, but a row-level correction requires row-level ground truth this project doesn't have — the brand/date heuristic above is still an inference, not a confirmed mapping. Presenting a heuristic recode as clean data would erase the difference between "verified" and "well-evidenced guess" for anyone downstream. In a production environment, this is the kind of finding an analyst escalates rather than silently patches: REES46 is a third-party CDP sitting between the retailer and this dataset, so the real fix requires confirmation from whichever side owns the category mapping — REES46's data integration team (if their ingestion pipeline mis-tagged the feed) or the retailer's own product/catalog system (if the reclassification happened upstream, before REES46 ever saw it). The analyst's role is to surface, quantify, and disclose; correcting the source-of-truth taxonomy belongs to the team that owns it.
 
 ---
 
@@ -194,6 +197,8 @@ This is a tracking-scope limitation, not a data error — REES46's tracking scri
 | Notebook | Jupyter / Google Colab | Reproducible analysis |
 | BI | Power BI Desktop + Service | Report (.pbix) + live-alert Dashboard; Looker Studio optional |
 | Reporting | Excel (openpyxl) | Stakeholder-facing workbook — same KPIs as Power BI, no tooling required |
+
+**Real-world note on the Excel workbook:** every figure in `dashboards/ecommerce_analytics.xlsx` is hardcoded from verified query results, not a live query. In a real corporate environment, this workbook would typically be wired to BigQuery through a live connection (e.g. the BigQuery ODBC/JDBC driver, or Power Query's native BigQuery connector) so it refreshes automatically as new data lands. That live-refresh model was deliberately not used here: a portfolio artifact needs to keep working and stay inspectable indefinitely, including long after any live BigQuery connection stops being available — self-contained and static beats current and fragile for this specific purpose.
 
 ---
 
