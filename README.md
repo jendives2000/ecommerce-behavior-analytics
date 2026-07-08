@@ -200,6 +200,8 @@ This is a tracking-scope limitation, not a data error — REES46's tracking scri
 
 **Real-world note on the Excel workbook:** every figure in `dashboards/ecommerce_analytics.xlsx` is hardcoded from verified query results, not a live query. In a real corporate environment, this workbook would typically be wired to BigQuery through a live connection (e.g. the BigQuery ODBC/JDBC driver, or Power Query's native BigQuery connector) so it refreshes automatically as new data lands. That live-refresh model was deliberately not used here: a portfolio artifact needs to keep working and stay inspectable indefinitely, including long after any live BigQuery connection stops being available — self-contained and static beats current and fragile for this specific purpose.
 
+**Real-world note on the Power BI report:** the report also uses Import mode rather than a live/DirectQuery connection to BigQuery, for the same self-contained-artifact reasoning as the Excel workbook above, plus Power BI–specific factors (VertiPaq performance, full DAX feature support, and the fact that this dataset is permanently frozen so a live connection has no freshness benefit to offer). Full reasoning and the report's page architecture: [`dashboards/power_bi_notes.md`](dashboards/power_bi_notes.md).
+
 ---
 
 ## How to Start
