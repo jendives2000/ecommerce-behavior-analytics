@@ -4,27 +4,27 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 0,
-        "y": 0
+        "x": 209.195404617655,
+        "y": 343.25724842192687
       },
       "nodes": [
         {
           "location": {
-            "x": 1801.9109863306974,
-            "y": 268.19397751119595
+            "x": 2540.7998752195867,
+            "y": 995.97175528897367
           },
           "nodeIndex": "DimBrand",
           "nodeLineageTag": "4ad2cc35-e4aa-4231-9149-25c0fd00bd95",
           "size": {
-            "height": 104,
+            "height": 148.44444444444457,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 1
         },
         {
           "location": {
-            "x": 372.64979665881174,
-            "y": 177.85745657577058
+            "x": 530.05720406621913,
+            "y": 805.63523435354841
           },
           "nodeIndex": "DimCategory",
           "nodeLineageTag": "df9ce89d-a957-4047-b135-7124c6843e02",
@@ -32,12 +32,12 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 2
         },
         {
           "location": {
-            "x": 945.38093580163763,
-            "y": 469.19915015310892
+            "x": 2375.5025467612777,
+            "y": 1293.6770549049138
           },
           "nodeIndex": "DimCohortMonth",
           "nodeLineageTag": "a9e993a0-7398-474e-a0d5-d203c9237403",
@@ -45,12 +45,12 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 3
         },
         {
           "location": {
-            "x": 2654.2726257460572,
-            "y": 262.19397751119578
+            "x": 2387.6059590793907,
+            "y": 1854.7865701037883
           },
           "nodeIndex": "DimMonthsSinceFirst",
           "nodeLineageTag": "b8b5d3cd-0e23-4bf4-ae85-56678844dcf1",
@@ -58,25 +58,25 @@
             "height": 128,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 4
         },
         {
           "location": {
-            "x": 945.56771626704926,
-            "y": 289.61561562132522
+            "x": 1625.1973458966788,
+            "y": 985.91191191762141
           },
           "nodeIndex": "DimSegment",
           "nodeLineageTag": "96ca28dd-3e24-4325-86c4-dbdd0f6e0ee6",
           "size": {
-            "height": 128,
+            "height": 145,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 5
         },
         {
           "location": {
-            "x": 3172.4495139807868,
-            "y": 303.38902841608433
+            "x": 915.61231527527173,
+            "y": 1628.68178088849
           },
           "nodeIndex": "FactAnomalyFindings",
           "nodeLineageTag": "f0d5a552-37b9-4f8d-9161-1d68b44a2ff6",
@@ -84,38 +84,38 @@
             "height": 128,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 6
         },
         {
           "location": {
-            "x": 340.0047533361689,
-            "y": -50
+            "x": 662.96771629913189,
+            "y": 416.66666666666657
           },
           "nodeIndex": "FactCategoryMixShift",
           "nodeLineageTag": "1e558c4d-1180-4c4c-b2f6-51a012a48b6b",
           "size": {
-            "height": 176,
+            "height": 192.66666666666669,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 7
         },
         {
           "location": {
-            "x": 661.38093580163763,
-            "y": 215.70655822611195
+            "x": 748.4179728386747,
+            "y": 1154.5954471150008
           },
           "nodeIndex": "FactCategoryPerformance",
           "nodeLineageTag": "a9a65881-26b7-4fcd-8a00-2a528be9aa42",
           "size": {
-            "height": 200,
+            "height": 231.48148148148152,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 14
         },
         {
           "location": {
-            "x": 2938.4495139807868,
-            "y": 263.51897014363107
+            "x": 2595.8569213881942,
+            "y": 1563.5189701436311
           },
           "nodeIndex": "FactCohortRetention",
           "nodeLineageTag": "52a82955-2fcf-413f-a88b-47791befc0aa",
@@ -123,141 +123,141 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 8
         },
         {
           "location": {
-            "x": 3456.4495139807868,
-            "y": 255.38902841608433
+            "x": 574.5803879544701,
+            "y": 1628.451284259558
           },
           "nodeIndex": "FactConvertingVsNon",
           "nodeLineageTag": "5d52df32-3950-4096-80f6-896282b77b9d",
           "size": {
-            "height": 224,
+            "height": 264.74074074074076,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 17
         },
         {
           "location": {
-            "x": 3740.4495139807868,
-            "y": 279.38902841608433
+            "x": 1300.1440862935913,
+            "y": 1635.2818567151733
           },
           "nodeIndex": "FactCovidComparison",
           "nodeLineageTag": "7734017f-b38c-47ab-82d1-fe53952c59f2",
           "size": {
-            "height": 176,
+            "height": 203.77777777777777,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 9
         },
         {
           "location": {
-            "x": 2086.0878745654272,
-            "y": 233.51897014363087
+            "x": 2686.0878745654272,
+            "y": 648.33378495844568
           },
           "nodeIndex": "FactFunnelByBrand",
           "nodeLineageTag": "86abbd9d-cdc4-4c71-b75f-6b9c2c6df50e",
           "size": {
-            "height": 200,
+            "height": 231.48148148148152,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 19
         },
         {
           "location": {
-            "x": 50,
-            "y": 100.19974224103612
+            "x": 235.18518518518516,
+            "y": 1171.7182607595546
           },
           "nodeIndex": "FactFunnelByCategory",
           "nodeLineageTag": "3a1b3cf8-4f1a-43f6-b941-013e118019a1",
           "size": {
-            "height": 200,
+            "height": 214.81481481481478,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 15
         },
         {
           "location": {
-            "x": 245.23026044794523,
-            "y": 384.77805683216855
+            "x": 290.93396415164892,
+            "y": 393.14842720253887
           },
           "nodeIndex": "FactPriceOutliers",
           "nodeLineageTag": "f4829d9c-c47b-4337-aa4e-8723c91bbad9",
           "size": {
-            "height": 300,
+            "height": 346.2962962962963,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 16
         },
         {
           "location": {
-            "x": 2370.0878745654272,
-            "y": 219.25908668853754
+            "x": 2168.2360227135755,
+            "y": 1567.4072348366856
           },
           "nodeIndex": "FactRetentionCurve",
           "nodeLineageTag": "87ddb7b9-c67a-4cf3-b4c2-e046f7e42192",
           "size": {
-            "height": 176,
+            "height": 222.2962962962963,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 10
         },
         {
           "location": {
-            "x": 957.02113395018227,
-            "y": 13.578906679059742
+            "x": 1434.7989117279599,
+            "y": 658.02335112350409
           },
           "nodeIndex": "FactRFMMonetaryDist",
           "nodeLineageTag": "16357656-71d0-4048-b5c2-99655f4d3fe5",
           "size": {
-            "height": 224,
+            "height": 242.51851851851859,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 13
         },
         {
           "location": {
-            "x": 1233.7262351500676,
-            "y": 290.5768464361156
+            "x": 1765.2077166315489,
+            "y": 657.24351310278223
           },
           "nodeIndex": "FactRFMSegment",
           "nodeLineageTag": "d8e5dffa-0fa3-499a-be06-75d5d44c451e",
           "size": {
-            "height": 224,
+            "height": 249.92592592592598,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 12
         },
         {
           "location": {
-            "x": 4024.4495139807868,
-            "y": 279.38902841608433
+            "x": 246.67173620300946,
+            "y": 1651.6112506383065
           },
           "nodeIndex": "FactSessionDepth",
           "nodeLineageTag": "e062110c-7784-4896-9a01-d5c2bb19ba3b",
           "size": {
-            "height": 176,
+            "height": 188.962962962963,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 18
         },
         {
           "location": {
-            "x": 1517.7262351500676,
-            "y": 201.25908668853779
+            "x": 2351.0595684834007,
+            "y": 641.99982742927841
           },
           "nodeIndex": "FactTopBrands",
           "nodeLineageTag": "14ab2cbb-4a2b-4784-a4cd-b7f0133dc6f5",
           "size": {
-            "height": 200,
+            "height": 233.33333333333326,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 11
         }
       ],
       "name": "All tables",
-      "zoomValue": 100,
+      "zoomValue": 67.879120126721915,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,

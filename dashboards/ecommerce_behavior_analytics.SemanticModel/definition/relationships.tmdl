@@ -34,12 +34,6 @@ relationship AutoDetected_c080b58b-bae3-4bb4-8c2b-f5112aa5c8c9
 	fromColumn: FactPriceOutliers.CategoryCode
 	toColumn: DimCategory.CategoryCode
 
-relationship AutoDetected_bc819232-7c7b-42f6-81da-1ccfaad7f15a
-	crossFilteringBehavior: bothDirections
-	fromCardinality: one
-	fromColumn: DimSegment.SortOrder
-	toColumn: DimCohortMonth.SortOrder
-
 relationship AutoDetected_64cff58a-a067-4ff8-adaf-e92c68a92a11
 	fromColumn: FactCohortRetention.MonthsSinceFirst
 	toColumn: DimMonthsSinceFirst.MonthsSinceFirst
@@ -61,4 +55,8 @@ relationship AutoDetected_e37cacb9-a216-4910-b4c5-d8dc11ad1377
 	fromCardinality: one
 	fromColumn: FactRFMSegment.Segment
 	toColumn: DimSegment.Segment
+
+relationship 0dbf5704-1245-2c07-e5b3-7b23bd343c7f
+	fromColumn: FactCohortRetention.CohortMonth
+	toColumn: DimCohortMonth.CohortMonth
 

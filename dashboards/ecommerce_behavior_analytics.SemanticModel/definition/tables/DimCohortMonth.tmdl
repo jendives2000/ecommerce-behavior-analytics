@@ -25,7 +25,7 @@ table DimCohortMonth
 		dataType: int64
 		formatString: 0
 		lineageTag: f6a2a655-ddeb-4a4f-bb83-3360e6592c9a
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: CohortUsers
 
 		annotation SummarizationSetBy = Automatic

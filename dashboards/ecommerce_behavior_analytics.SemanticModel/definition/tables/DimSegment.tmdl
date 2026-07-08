@@ -13,7 +13,7 @@ table DimSegment
 		dataType: int64
 		formatString: 0
 		lineageTag: 7161072a-0dd2-4e95-9643-47c6c63fdae9
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: SortOrder
 
 		annotation SummarizationSetBy = Automatic
