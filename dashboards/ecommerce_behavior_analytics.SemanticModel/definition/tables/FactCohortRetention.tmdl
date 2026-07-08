@@ -26,7 +26,6 @@ table FactCohortRetention
 		lineageTag: 6b44cd2c-77df-4af0-822b-0b0680e6ed88
 		summarizeBy: none
 		sourceColumn: RetentionRate
-		description: Retention rate for one cohort at one months-since-first-purchase point. Do not sum across cohort/month cells - use the 'Weighted Avg Retention' measure for a properly weighted figure.
 
 		annotation SummarizationSetBy = Automatic
 

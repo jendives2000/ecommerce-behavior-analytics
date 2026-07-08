@@ -32,7 +32,6 @@ table FactRFMSegment
 		lineageTag: 2723ef59-e1b1-4767-a43a-7734917b90ad
 		summarizeBy: none
 		sourceColumn: AvgRecencyDays
-		description: Average days-since-last-purchase within this segment. Per-segment statistic - do not sum across segments.
 
 		annotation SummarizationSetBy = Automatic
 
@@ -43,7 +42,6 @@ table FactRFMSegment
 		lineageTag: 39d2b2a4-4337-4cf4-aad5-037c3428b5a7
 		summarizeBy: none
 		sourceColumn: AvgFrequency
-		description: Average purchase count within this segment. Per-segment statistic - do not sum across segments.
 
 		annotation SummarizationSetBy = Automatic
 
@@ -54,7 +52,6 @@ table FactRFMSegment
 		lineageTag: aa89e1df-8721-409e-b8cf-750521de9c70
 		summarizeBy: none
 		sourceColumn: AvgMonetary
-		description: Average lifetime spend within this segment. Per-segment statistic - do not sum across segments. Use the 'Weighted Avg Monetary (All Segments)' measure for a properly weighted blended figure.
 
 		annotation SummarizationSetBy = Automatic
 

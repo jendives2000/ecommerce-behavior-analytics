@@ -23,7 +23,6 @@ table FactConvertingVsNon
 		lineageTag: db0d7f3f-b33b-4f58-a5a2-761f0256e075
 		summarizeBy: none
 		sourceColumn: AvgEvents
-		description: Average events per session, per session type (Converting/Non-Converting). Do not sum across session types.
 
 		annotation SummarizationSetBy = Automatic
 
@@ -35,7 +34,6 @@ table FactConvertingVsNon
 		lineageTag: bd53c9e5-0ea7-477d-9ba0-4d02fa96ecd2
 		summarizeBy: none
 		sourceColumn: MedianEvents
-		description: Median events per session, per session type. Do not sum across session types.
 
 		annotation SummarizationSetBy = Automatic
 
@@ -44,7 +42,6 @@ table FactConvertingVsNon
 		lineageTag: d330f2d1-7a51-46a8-8a22-949d4342c88d
 		summarizeBy: none
 		sourceColumn: AvgCarts
-		description: Average carts per session, per session type. Do not sum across session types.
 
 		annotation SummarizationSetBy = Automatic
 
@@ -55,7 +52,6 @@ table FactConvertingVsNon
 		lineageTag: 54bde311-16f4-4d1d-b42a-d129a5daafb1
 		summarizeBy: none
 		sourceColumn: MedianDurationMin
-		description: Median session duration in minutes, per session type. Do not sum across session types.
 
 		annotation SummarizationSetBy = Automatic
 

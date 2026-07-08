@@ -14,7 +14,6 @@ table FactCovidComparison
 		lineageTag: e9a960ab-6ca1-43b6-9477-710b4481d01a
 		summarizeBy: none
 		sourceColumn: PreCovid
-		description: Pre-COVID baseline value for this metric row. Each row is a DIFFERENT metric in a DIFFERENT unit (conversion %, AOV $, event count, revenue $) - summing across rows mixes incompatible units and must never be done. Read per-row only.
 
 		annotation SummarizationSetBy = Automatic
 
@@ -25,7 +24,6 @@ table FactCovidComparison
 		lineageTag: e8ee9ffc-1681-4b45-b634-08c2aed49821
 		summarizeBy: none
 		sourceColumn: CovidOnset
-		description: COVID-onset value for this metric row. Same cross-unit caveat as PreCovid - never sum across rows.
 
 		annotation SummarizationSetBy = Automatic
 
@@ -36,7 +34,6 @@ table FactCovidComparison
 		lineageTag: 957eb5f7-bd0b-428e-be30-4cee320a9172
 		summarizeBy: none
 		sourceColumn: ChangeText
-		description: Relative change (CovidOnset vs. PreCovid) for this metric row, auto-parsed from a percentage-formatted source value. Same cross-unit caveat - never sum across rows.
 
 		annotation SummarizationSetBy = Automatic
 

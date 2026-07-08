@@ -15,7 +15,6 @@ table FactCategoryMixShift
 		lineageTag: 0ca9576b-673c-4621-9d88-a2997ad39aba
 		summarizeBy: none
 		sourceColumn: PreCovidSharePct
-		description: Pre-COVID revenue share for this category. This table lists only the 6 "notable mover" categories out of 14 - summing across rows does not represent total platform share.
 
 		annotation SummarizationSetBy = Automatic
 
@@ -25,7 +24,6 @@ table FactCategoryMixShift
 		lineageTag: fd677329-7901-4b28-ae93-d95a877ea21e
 		summarizeBy: none
 		sourceColumn: CovidSharePct
-		description: COVID-onset revenue share for this category. Same partial-coverage caveat as PreCovidSharePct.
 
 		annotation SummarizationSetBy = Automatic
 
@@ -34,7 +32,6 @@ table FactCategoryMixShift
 		lineageTag: 1290d4d2-e96c-407a-95c1-0e0c6a3e0d40
 		summarizeBy: none
 		sourceColumn: DeltaPP
-		description: Change in revenue share, in percentage points, for this category. Do not sum across categories.
 
 		annotation SummarizationSetBy = Automatic
 

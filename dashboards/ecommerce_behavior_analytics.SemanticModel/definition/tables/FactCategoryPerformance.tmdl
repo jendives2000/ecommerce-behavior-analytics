@@ -41,7 +41,6 @@ table FactCategoryPerformance
 		lineageTag: 646ac75b-fc6f-428c-8ef3-0ed3d1f41b02
 		summarizeBy: none
 		sourceColumn: AvgPrice
-		description: Average purchase price for this category. Do not sum across categories - use 'Weighted Avg Price' for a properly weighted figure across multiple selected categories.
 
 		annotation SummarizationSetBy = Automatic
 

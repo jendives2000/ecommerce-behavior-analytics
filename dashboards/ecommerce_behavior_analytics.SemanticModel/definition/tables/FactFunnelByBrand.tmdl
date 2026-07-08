@@ -42,7 +42,6 @@ table FactFunnelByBrand
 		lineageTag: e459b74b-bbb0-4d52-a1ad-44cfd8d81584
 		summarizeBy: average
 		sourceColumn: CartToPurchasePct
-		description: Cart-to-purchase conversion rate per brand (Module 1, Query 4). Cannot be recomputed as a weighted measure like the other rate columns, since this table doesn't carry each brand's raw cart count - only Views and Purchases are available. Read per-row only; averaging across brands is an unweighted approximation.
 
 		annotation SummarizationSetBy = Automatic
 
