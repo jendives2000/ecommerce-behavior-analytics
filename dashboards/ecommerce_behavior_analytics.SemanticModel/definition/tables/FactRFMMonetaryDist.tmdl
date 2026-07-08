@@ -1,0 +1,76 @@
+table FactRFMMonetaryDist
+	lineageTag: 16357656-71d0-4048-b5c2-99655f4d3fe5
+
+	column Segment
+		dataType: string
+		lineageTag: 99f4ad5f-0c7e-4a7c-ad4c-df8312ae8485
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column P25
+		dataType: double
+		lineageTag: 2c6de8d0-b0c3-42bc-942b-d288e0c8ddec
+		summarizeBy: sum
+		sourceColumn: P25
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Median
+		dataType: double
+		lineageTag: 662d8283-34f3-42d3-b134-4513a0295802
+		summarizeBy: sum
+		sourceColumn: Median
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column P75
+		dataType: double
+		lineageTag: 11189596-c704-499f-aa5d-d11be5362578
+		summarizeBy: sum
+		sourceColumn: P75
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column P90
+		dataType: double
+		lineageTag: 83edf717-5365-4c66-9402-4bbb96bc6aad
+		summarizeBy: sum
+		sourceColumn: P90
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Max
+		dataType: double
+		lineageTag: 9e74b836-9b66-4252-8cc8-bcdb5c8a73a2
+		summarizeBy: sum
+		sourceColumn: Max
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FactRFMMonetaryDist = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jean-Yves TRAN\FOR_GITHUB\Data_Analyst_Projects\project2_ecommerce_behavior_analytics\dashboards\powerbi_source_data.xlsx"), null, true),
+				    FactRFMMonetaryDist_Sheet = Source{[Item="FactRFMMonetaryDist",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(FactRFMMonetaryDist_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Segment", type text}, {"P25", type number}, {"Median", type number}, {"P75", type number}, {"P90", type number}, {"Max", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

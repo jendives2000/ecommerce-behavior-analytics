@@ -1,0 +1,46 @@
+table FactCohortRetention
+	lineageTag: 52a82955-2fcf-413f-a88b-47791befc0aa
+
+	column CohortMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c9fba6c7-c303-4563-9f09-497013afdb98
+		summarizeBy: none
+		sourceColumn: CohortMonth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MonthsSinceFirst
+		dataType: string
+		lineageTag: 10274f1d-5470-48b8-819a-e421be89e40d
+		summarizeBy: none
+		sourceColumn: MonthsSinceFirst
+
+		annotation SummarizationSetBy = Automatic
+
+	column RetentionRate
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 6b44cd2c-77df-4af0-822b-0b0680e6ed88
+		summarizeBy: sum
+		sourceColumn: RetentionRate
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactCohortRetention = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jean-Yves TRAN\FOR_GITHUB\Data_Analyst_Projects\project2_ecommerce_behavior_analytics\dashboards\powerbi_source_data.xlsx"), null, true),
+				    FactCohortRetention_Sheet = Source{[Item="FactCohortRetention",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(FactCohortRetention_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"CohortMonth", type date}, {"MonthsSinceFirst", type text}, {"RetentionRate", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -10,5 +10,27 @@ annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_ProTooling = ["DevMode"]
 
+annotation PBI_QueryOrder = ["DimBrand","DimCategory","DimCohortMonth","DimMonthsSinceFirst","DimSegment","FactAnomalyFindings","FactCategoryMixShift","FactCategoryPerformance","FactCohortRetention","FactConvertingVsNon","FactCovidComparison","FactFunnelByBrand","FactFunnelByCategory","FactPriceOutliers","FactRetentionCurve","FactRFMMonetaryDist","FactRFMSegment","FactSessionDepth","FactTopBrands"]
+
+ref table DimBrand
+ref table DimCategory
+ref table DimCohortMonth
+ref table DimMonthsSinceFirst
+ref table DimSegment
+ref table FactAnomalyFindings
+ref table FactCategoryMixShift
+ref table FactCategoryPerformance
+ref table FactCohortRetention
+ref table FactConvertingVsNon
+ref table FactCovidComparison
+ref table FactFunnelByBrand
+ref table FactFunnelByCategory
+ref table FactPriceOutliers
+ref table FactRetentionCurve
+ref table FactRFMMonetaryDist
+ref table FactRFMSegment
+ref table FactSessionDepth
+ref table FactTopBrands
+
 ref cultureInfo en-US
 

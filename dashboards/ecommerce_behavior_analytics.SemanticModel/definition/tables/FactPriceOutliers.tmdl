@@ -1,0 +1,113 @@
+table FactPriceOutliers
+	lineageTag: f4829d9c-c47b-4337-aa4e-8723c91bbad9
+
+	column CategoryCode
+		dataType: string
+		lineageTag: 16555323-9014-44d1-9e4f-f2f50c17e439
+		summarizeBy: none
+		sourceColumn: CategoryCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalPurchases
+		dataType: int64
+		formatString: 0
+		lineageTag: 3aceafdd-4c32-4c4f-bce5-3609f69b1cca
+		summarizeBy: sum
+		sourceColumn: TotalPurchases
+
+		annotation SummarizationSetBy = Automatic
+
+	column Q1
+		dataType: double
+		lineageTag: 365dec90-fcb1-4c46-969f-ea3c8f6e97e0
+		summarizeBy: sum
+		sourceColumn: Q1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Q3
+		dataType: double
+		lineageTag: f4a93b6d-8922-4440-acb6-e2a1d0a5d700
+		summarizeBy: sum
+		sourceColumn: Q3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IQR
+		dataType: double
+		lineageTag: cbfb3905-7dcd-4a8c-8065-6e54452d93f9
+		summarizeBy: sum
+		sourceColumn: IQR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column UpperFence
+		dataType: double
+		lineageTag: 074952fe-f340-4b29-98b3-080b1d32fe45
+		summarizeBy: sum
+		sourceColumn: UpperFence
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MaxPrice
+		dataType: double
+		lineageTag: 700408d2-95f3-459e-b85d-5bab99c02779
+		summarizeBy: sum
+		sourceColumn: MaxPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OutlierCount
+		dataType: int64
+		formatString: 0
+		lineageTag: cbf925da-8e61-4070-86f9-e0d977be7c3a
+		summarizeBy: sum
+		sourceColumn: OutlierCount
+
+		annotation SummarizationSetBy = Automatic
+
+	column OutlierPct
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: b9d7c440-0b8c-4c15-91c4-7b405379fd67
+		summarizeBy: sum
+		sourceColumn: OutlierPct
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaxToFenceRatio
+		dataType: double
+		lineageTag: bf1600f6-dc6d-4830-82cf-fa2174386c6c
+		summarizeBy: sum
+		sourceColumn: MaxToFenceRatio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FactPriceOutliers = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jean-Yves TRAN\FOR_GITHUB\Data_Analyst_Projects\project2_ecommerce_behavior_analytics\dashboards\powerbi_source_data.xlsx"), null, true),
+				    FactPriceOutliers_Sheet = Source{[Item="FactPriceOutliers",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(FactPriceOutliers_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"CategoryCode", type text}, {"TotalPurchases", Int64.Type}, {"Q1", type number}, {"Q3", type number}, {"IQR", type number}, {"UpperFence", type number}, {"MaxPrice", type number}, {"OutlierCount", Int64.Type}, {"OutlierPct", type number}, {"MaxToFenceRatio", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

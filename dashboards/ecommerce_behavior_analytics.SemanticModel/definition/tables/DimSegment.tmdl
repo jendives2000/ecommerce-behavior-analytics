@@ -1,0 +1,35 @@
+table DimSegment
+	lineageTag: 96ca28dd-3e24-4325-86c4-dbdd0f6e0ee6
+
+	column Segment
+		dataType: string
+		lineageTag: dbf27c05-6386-4370-aacb-40ef4d2d9699
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column SortOrder
+		dataType: int64
+		formatString: 0
+		lineageTag: 7161072a-0dd2-4e95-9643-47c6c63fdae9
+		summarizeBy: none
+		sourceColumn: SortOrder
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimSegment = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jean-Yves TRAN\FOR_GITHUB\Data_Analyst_Projects\project2_ecommerce_behavior_analytics\dashboards\powerbi_source_data.xlsx"), null, true),
+				    DimSegment_Sheet = Source{[Item="DimSegment",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(DimSegment_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Segment", type text}, {"SortOrder", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,47 @@
+table DimCohortMonth
+	lineageTag: a9e993a0-7398-474e-a0d5-d203c9237403
+
+	column CohortMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3ec56652-2aef-4641-8a22-72ef5d43f579
+		summarizeBy: none
+		sourceColumn: CohortMonth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column SortOrder
+		dataType: int64
+		formatString: 0
+		lineageTag: 91d4cf5c-340d-4325-b012-9b075c15bd19
+		summarizeBy: none
+		sourceColumn: SortOrder
+
+		annotation SummarizationSetBy = Automatic
+
+	column CohortUsers
+		dataType: int64
+		formatString: 0
+		lineageTag: f6a2a655-ddeb-4a4f-bb83-3360e6592c9a
+		summarizeBy: sum
+		sourceColumn: CohortUsers
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimCohortMonth = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jean-Yves TRAN\FOR_GITHUB\Data_Analyst_Projects\project2_ecommerce_behavior_analytics\dashboards\powerbi_source_data.xlsx"), null, true),
+				    DimCohortMonth_Sheet = Source{[Item="DimCohortMonth",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(DimCohortMonth_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"CohortMonth", type date}, {"SortOrder", Int64.Type}, {"CohortUsers", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

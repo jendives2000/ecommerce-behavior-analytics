@@ -1,0 +1,56 @@
+table FactCovidComparison
+	lineageTag: 7734017f-b38c-47ab-82d1-fe53952c59f2
+
+	column Metric
+		dataType: string
+		lineageTag: d0d368e8-bc37-4280-9937-87fc4ff23b07
+		summarizeBy: none
+		sourceColumn: Metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column PreCovid
+		dataType: double
+		lineageTag: e9a960ab-6ca1-43b6-9477-710b4481d01a
+		summarizeBy: sum
+		sourceColumn: PreCovid
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CovidOnset
+		dataType: double
+		lineageTag: e8ee9ffc-1681-4b45-b634-08c2aed49821
+		summarizeBy: sum
+		sourceColumn: CovidOnset
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ChangeText
+		dataType: double
+		lineageTag: 957eb5f7-bd0b-428e-be30-4cee320a9172
+		summarizeBy: sum
+		sourceColumn: ChangeText
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FactCovidComparison = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jean-Yves TRAN\FOR_GITHUB\Data_Analyst_Projects\project2_ecommerce_behavior_analytics\dashboards\powerbi_source_data.xlsx"), null, true),
+				    FactCovidComparison_Sheet = Source{[Item="FactCovidComparison",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(FactCovidComparison_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Metric", type text}, {"PreCovid", type number}, {"CovidOnset", type number}, {"ChangeText", Percentage.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

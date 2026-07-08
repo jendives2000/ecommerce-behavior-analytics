@@ -1,0 +1,74 @@
+table FactConvertingVsNon
+	lineageTag: 5d52df32-3950-4096-80f6-896282b77b9d
+
+	column SessionType
+		dataType: string
+		lineageTag: dd973f2f-6d12-4348-b467-51444e00135d
+		summarizeBy: none
+		sourceColumn: SessionType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sessions
+		dataType: int64
+		formatString: 0
+		lineageTag: 187353da-6802-42a7-ae92-0f2abbc5c3f4
+		summarizeBy: sum
+		sourceColumn: Sessions
+
+		annotation SummarizationSetBy = Automatic
+
+	column AvgEvents
+		dataType: double
+		lineageTag: db0d7f3f-b33b-4f58-a5a2-761f0256e075
+		summarizeBy: sum
+		sourceColumn: AvgEvents
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MedianEvents
+		dataType: int64
+		formatString: 0
+		lineageTag: bd53c9e5-0ea7-477d-9ba0-4d02fa96ecd2
+		summarizeBy: sum
+		sourceColumn: MedianEvents
+
+		annotation SummarizationSetBy = Automatic
+
+	column AvgCarts
+		dataType: double
+		lineageTag: d330f2d1-7a51-46a8-8a22-949d4342c88d
+		summarizeBy: sum
+		sourceColumn: AvgCarts
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MedianDurationMin
+		dataType: double
+		lineageTag: 54bde311-16f4-4d1d-b42a-d129a5daafb1
+		summarizeBy: sum
+		sourceColumn: MedianDurationMin
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FactConvertingVsNon = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jean-Yves TRAN\FOR_GITHUB\Data_Analyst_Projects\project2_ecommerce_behavior_analytics\dashboards\powerbi_source_data.xlsx"), null, true),
+				    FactConvertingVsNon_Sheet = Source{[Item="FactConvertingVsNon",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(FactConvertingVsNon_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"SessionType", type text}, {"Sessions", Int64.Type}, {"AvgEvents", type number}, {"MedianEvents", Int64.Type}, {"AvgCarts", type number}, {"MedianDurationMin", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

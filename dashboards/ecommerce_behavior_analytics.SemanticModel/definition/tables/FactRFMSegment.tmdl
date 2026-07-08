@@ -1,0 +1,74 @@
+table FactRFMSegment
+	lineageTag: d8e5dffa-0fa3-499a-be06-75d5d44c451e
+
+	column Segment
+		dataType: string
+		lineageTag: d05e4d43-94b7-41f6-8cfb-33383b8cfe2d
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column PctUsers
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 155c93c6-225b-48c8-bf7a-14ac81d21784
+		summarizeBy: sum
+		sourceColumn: PctUsers
+
+		annotation SummarizationSetBy = Automatic
+
+	column PctRevenue
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 5896327f-114c-467c-b30e-821a529c2227
+		summarizeBy: sum
+		sourceColumn: PctRevenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column AvgRecencyDays
+		dataType: double
+		lineageTag: 2723ef59-e1b1-4767-a43a-7734917b90ad
+		summarizeBy: sum
+		sourceColumn: AvgRecencyDays
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AvgFrequency
+		dataType: double
+		lineageTag: 39d2b2a4-4337-4cf4-aad5-037c3428b5a7
+		summarizeBy: sum
+		sourceColumn: AvgFrequency
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AvgMonetary
+		dataType: double
+		lineageTag: aa89e1df-8721-409e-b8cf-750521de9c70
+		summarizeBy: sum
+		sourceColumn: AvgMonetary
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FactRFMSegment = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jean-Yves TRAN\FOR_GITHUB\Data_Analyst_Projects\project2_ecommerce_behavior_analytics\dashboards\powerbi_source_data.xlsx"), null, true),
+				    FactRFMSegment_Sheet = Source{[Item="FactRFMSegment",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(FactRFMSegment_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Segment", type text}, {"PctUsers", type number}, {"PctRevenue", type number}, {"AvgRecencyDays", type number}, {"AvgFrequency", type number}, {"AvgMonetary", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

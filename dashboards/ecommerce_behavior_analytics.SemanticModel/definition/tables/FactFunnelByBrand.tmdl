@@ -1,0 +1,62 @@
+table FactFunnelByBrand
+	lineageTag: 86abbd9d-cdc4-4c71-b75f-6b9c2c6df50e
+
+	column Brand
+		dataType: string
+		lineageTag: 75d64f50-2831-4e4f-8322-c85d09b85329
+		summarizeBy: none
+		sourceColumn: Brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column Views
+		dataType: int64
+		formatString: 0
+		lineageTag: 1275845a-e4ba-434f-af74-6af2e72923dc
+		summarizeBy: sum
+		sourceColumn: Views
+
+		annotation SummarizationSetBy = Automatic
+
+	column Purchases
+		dataType: int64
+		formatString: 0
+		lineageTag: 6fa4726e-236d-41d7-9dff-20405007d024
+		summarizeBy: sum
+		sourceColumn: Purchases
+
+		annotation SummarizationSetBy = Automatic
+
+	column OverallConvPct
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: a92e157e-8b99-4463-8da1-a49cbb48b403
+		summarizeBy: sum
+		sourceColumn: OverallConvPct
+
+		annotation SummarizationSetBy = Automatic
+
+	column CartToPurchasePct
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: e459b74b-bbb0-4d52-a1ad-44cfd8d81584
+		summarizeBy: sum
+		sourceColumn: CartToPurchasePct
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactFunnelByBrand = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jean-Yves TRAN\FOR_GITHUB\Data_Analyst_Projects\project2_ecommerce_behavior_analytics\dashboards\powerbi_source_data.xlsx"), null, true),
+				    FactFunnelByBrand_Sheet = Source{[Item="FactFunnelByBrand",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(FactFunnelByBrand_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Brand", type text}, {"Views", Int64.Type}, {"Purchases", Int64.Type}, {"OverallConvPct", type number}, {"CartToPurchasePct", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

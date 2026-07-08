@@ -1,0 +1,43 @@
+table DimCategory
+	lineageTag: df9ce89d-a957-4047-b135-7124c6843e02
+
+	column CategoryCode
+		dataType: string
+		lineageTag: 34f288c4-93c8-405e-90ae-e2e8c8e24f7d
+		summarizeBy: none
+		sourceColumn: CategoryCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column DisplayName
+		dataType: string
+		lineageTag: a0e439ac-1d3c-4f8f-bb5f-f7afdd1f3034
+		summarizeBy: none
+		sourceColumn: DisplayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column TaxonomyMislabeledFlag
+		dataType: string
+		lineageTag: 4b0db56b-0f3a-46bf-81d3-559920c3b4e1
+		summarizeBy: none
+		sourceColumn: TaxonomyMislabeledFlag
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimCategory = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jean-Yves TRAN\FOR_GITHUB\Data_Analyst_Projects\project2_ecommerce_behavior_analytics\dashboards\powerbi_source_data.xlsx"), null, true),
+				    DimCategory_Sheet = Source{[Item="DimCategory",Kind="Sheet"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(DimCategory_Sheet,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"CategoryCode", type text}, {"DisplayName", type text}, {"TaxonomyMislabeledFlag", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

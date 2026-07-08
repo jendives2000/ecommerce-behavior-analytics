@@ -1,0 +1,64 @@
+relationship AutoDetected_38e11ef1-374e-4055-b02d-5b91ab170ac6
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FactFunnelByBrand.Brand
+	toColumn: DimBrand.Brand
+
+relationship AutoDetected_6d0266a8-e67d-40b9-95bc-236111112198
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FactTopBrands.Brand
+	toColumn: DimBrand.Brand
+
+relationship AutoDetected_98b89229-41a8-46dc-bd86-d440c2356219
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FactCategoryMixShift.CategoryCode
+	toColumn: DimCategory.CategoryCode
+
+relationship AutoDetected_2728f9a9-ef76-41c8-b0fc-653e6a7350b2
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FactCategoryPerformance.CategoryCode
+	toColumn: DimCategory.CategoryCode
+
+relationship AutoDetected_230e001d-6dad-4039-82bf-c0eba5f586e8
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FactFunnelByCategory.CategoryCode
+	toColumn: DimCategory.CategoryCode
+
+relationship AutoDetected_c080b58b-bae3-4bb4-8c2b-f5112aa5c8c9
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FactPriceOutliers.CategoryCode
+	toColumn: DimCategory.CategoryCode
+
+relationship AutoDetected_bc819232-7c7b-42f6-81da-1ccfaad7f15a
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: DimSegment.SortOrder
+	toColumn: DimCohortMonth.SortOrder
+
+relationship AutoDetected_64cff58a-a067-4ff8-adaf-e92c68a92a11
+	fromColumn: FactCohortRetention.MonthsSinceFirst
+	toColumn: DimMonthsSinceFirst.MonthsSinceFirst
+
+relationship AutoDetected_38320f5c-c67b-4c3a-82fb-fdb5b83400ec
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FactRetentionCurve.MonthsSinceFirst
+	toColumn: DimMonthsSinceFirst.MonthsSinceFirst
+
+relationship AutoDetected_5afe4867-86ae-4f69-a097-265adb171d3c
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FactRFMMonetaryDist.Segment
+	toColumn: DimSegment.Segment
+
+relationship AutoDetected_e37cacb9-a216-4910-b4c5-d8dc11ad1377
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FactRFMSegment.Segment
+	toColumn: DimSegment.Segment
+

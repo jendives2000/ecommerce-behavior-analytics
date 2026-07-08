@@ -1,0 +1,56 @@
+table FactRetentionCurve
+	lineageTag: 87ddb7b9-c67a-4cf3-b4c2-e046f7e42192
+
+	column MonthsSinceFirst
+		dataType: string
+		lineageTag: 916595ab-8c65-40a8-94ac-b60c000d6c11
+		summarizeBy: none
+		sourceColumn: MonthsSinceFirst
+
+		annotation SummarizationSetBy = Automatic
+
+	column AvgRetention
+		dataType: double
+		lineageTag: 80e29fec-1dd5-4025-b8e5-14924cc5651e
+		summarizeBy: sum
+		sourceColumn: AvgRetention
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MinRetention
+		dataType: double
+		lineageTag: 064b9495-9017-493e-8438-3309646063d7
+		summarizeBy: sum
+		sourceColumn: MinRetention
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MaxRetention
+		dataType: double
+		lineageTag: dc5b1866-6290-492c-9757-a12b80eb0611
+		summarizeBy: sum
+		sourceColumn: MaxRetention
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FactRetentionCurve = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jean-Yves TRAN\FOR_GITHUB\Data_Analyst_Projects\project2_ecommerce_behavior_analytics\dashboards\powerbi_source_data.xlsx"), null, true),
+				    FactRetentionCurve_Sheet = Source{[Item="FactRetentionCurve",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(FactRetentionCurve_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"MonthsSinceFirst", type text}, {"AvgRetention", type number}, {"MinRetention", type number}, {"MaxRetention", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
