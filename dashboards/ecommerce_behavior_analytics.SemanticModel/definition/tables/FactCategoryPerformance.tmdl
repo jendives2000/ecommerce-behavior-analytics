@@ -1,6 +1,13 @@
 table FactCategoryPerformance
 	lineageTag: a9a65881-26b7-4fcd-8a00-2a528be9aa42
 
+	/// Average purchase price across whichever categories are selected, calculated as total revenue divided by total purchases. Gives a correctly blended price across multiple categories, unlike averaging each category's individual average price.
+	measure 'Weighted Avg Price' = DIVIDE(SUM(FactCategoryPerformance[TotalRevenue]), SUM(FactCategoryPerformance[Purchases]))
+		formatString: "$"#,##0.00
+		displayFolder: 'Category & Brand'
+		lineageTag: 306249a2-b7ed-4e38-b8c0-2e5827a49a7e
+
+	/// Links to DimCategory. One row per one of the top 8 categories by revenue.
 	column CategoryCode
 		dataType: string
 		lineageTag: 67172dbf-ab81-47ba-b290-ee4b296842e3
@@ -9,6 +16,7 @@ table FactCategoryPerformance
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Total product-view events for this category.
 	column Views
 		dataType: int64
 		formatString: 0
@@ -18,6 +26,7 @@ table FactCategoryPerformance
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Total purchase events for this category.
 	column Purchases
 		dataType: int64
 		formatString: 0
@@ -27,6 +36,7 @@ table FactCategoryPerformance
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Total revenue from this category, in US dollars.
 	column TotalRevenue
 		dataType: int64
 		formatString: 0
@@ -36,6 +46,7 @@ table FactCategoryPerformance
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Average purchase price for this category. Read per-row only - use the 'Weighted Avg Price' measure for a correctly blended figure across multiple categories.
 	column AvgPrice
 		dataType: double
 		lineageTag: 646ac75b-fc6f-428c-8ef3-0ed3d1f41b02
@@ -45,10 +56,6 @@ table FactCategoryPerformance
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Weighted Avg Price' = DIVIDE(SUM(FactCategoryPerformance[TotalRevenue]), SUM(FactCategoryPerformance[Purchases]))
-		formatString: "$"#,##0.00
-		displayFolder: 'Category & Brand'
 
 	partition FactCategoryPerformance = m
 		mode: import

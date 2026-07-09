@@ -1,6 +1,7 @@
 table FactAnomalyFindings
 	lineageTag: f0d5a552-37b9-4f8d-9161-1d68b44a2ff6
 
+	/// Short name of a specific data-quality or anomaly finding from the Module 6 analysis (e.g. 'Price cap confirmed', 'Bot detection').
 	column Finding
 		dataType: string
 		lineageTag: 00c021a0-3ca8-4057-a182-dab3123d3487
@@ -9,6 +10,7 @@ table FactAnomalyFindings
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Full plain-language explanation of that finding, written for someone with no prior context on the project.
 	column Detail
 		dataType: string
 		lineageTag: 3f39d5c5-39c4-42d8-8ed0-3b70e9ec5a60

@@ -1,6 +1,7 @@
 table DimBrand
 	lineageTag: 4ad2cc35-e4aa-4231-9149-25c0fd00bd95
 
+	/// Brand name as recorded in the source data (lowercase, e.g. 'apple', 'samsung'). One row per distinct brand appearing in the funnel or top-brands analysis.
 	column Brand
 		dataType: string
 		lineageTag: 63bcdd46-e205-477f-b3c0-8986b491175e

@@ -1,6 +1,7 @@
 table FactRetentionCurve
 	lineageTag: 87ddb7b9-c67a-4cf3-b4c2-e046f7e42192
 
+	/// Links to DimMonthsSinceFirst.
 	column MonthsSinceFirst
 		dataType: string
 		lineageTag: 916595ab-8c65-40a8-94ac-b60c000d6c11
@@ -9,6 +10,7 @@ table FactRetentionCurve
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Average retention rate at this point in the customer lifecycle, averaged across all cohorts that have reached this point.
 	column AvgRetention
 		dataType: double
 		lineageTag: 80e29fec-1dd5-4025-b8e5-14924cc5651e
@@ -19,6 +21,7 @@ table FactRetentionCurve
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Lowest retention rate recorded by any single cohort at this point in the lifecycle.
 	column MinRetention
 		dataType: double
 		lineageTag: 064b9495-9017-493e-8438-3309646063d7
@@ -29,6 +32,7 @@ table FactRetentionCurve
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Highest retention rate recorded by any single cohort at this point in the lifecycle.
 	column MaxRetention
 		dataType: double
 		lineageTag: dc5b1866-6290-492c-9757-a12b80eb0611

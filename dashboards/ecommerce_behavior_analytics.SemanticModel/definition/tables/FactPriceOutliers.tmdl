@@ -1,6 +1,13 @@
 table FactPriceOutliers
 	lineageTag: f4829d9c-c47b-4337-aa4e-8723c91bbad9
 
+	/// Share of purchases flagged as statistical price outliers (IQR method - unusually high compared to the typical range for that category), correctly weighted by purchase volume across whichever categories are selected.
+	measure 'Weighted Outlier Rate' = DIVIDE(SUM(FactPriceOutliers[OutlierCount]), SUM(FactPriceOutliers[TotalPurchases]))
+		formatString: 0.00%
+		displayFolder: Anomaly
+		lineageTag: 1d3c563c-c476-48d5-9abc-87ef2d20e10a
+
+	/// Links to DimCategory. Covers all 14 categories.
 	column CategoryCode
 		dataType: string
 		lineageTag: 16555323-9014-44d1-9e4f-f2f50c17e439
@@ -9,6 +16,7 @@ table FactPriceOutliers
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Total number of purchases in this category, used as the base for the outlier percentage.
 	column TotalPurchases
 		dataType: int64
 		formatString: 0
@@ -18,6 +26,7 @@ table FactPriceOutliers
 
 		annotation SummarizationSetBy = Automatic
 
+	/// 25th percentile purchase price for this category - the boundary of the cheapest quarter of purchases.
 	column Q1
 		dataType: double
 		lineageTag: 365dec90-fcb1-4c46-969f-ea3c8f6e97e0
@@ -28,6 +37,7 @@ table FactPriceOutliers
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// 75th percentile purchase price for this category - the boundary of the most expensive quarter of purchases.
 	column Q3
 		dataType: double
 		lineageTag: f4a93b6d-8922-4440-acb6-e2a1d0a5d700
@@ -38,6 +48,7 @@ table FactPriceOutliers
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Interquartile range (Q3 minus Q1) - the width of the 'typical' price band for this category, used to calculate the outlier threshold.
 	column IQR
 		dataType: double
 		lineageTag: cbfb3905-7dcd-4a8c-8065-6e54452d93f9
@@ -48,6 +59,7 @@ table FactPriceOutliers
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// The outlier detection threshold for this category (Q3 + 1.5 x IQR, the standard statistical rule of thumb). Any purchase above this price is flagged as a statistical outlier.
 	column UpperFence
 		dataType: double
 		lineageTag: 074952fe-f340-4b29-98b3-080b1d32fe45
@@ -58,6 +70,7 @@ table FactPriceOutliers
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Highest purchase price recorded in this category. In almost every category this is exactly $2,574.07 - a platform-wide price ceiling, not genuine price variation. See the README's Data Quality Findings for the full explanation.
 	column MaxPrice
 		dataType: double
 		lineageTag: 700408d2-95f3-459e-b85d-5bab99c02779
@@ -68,6 +81,7 @@ table FactPriceOutliers
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Number of purchases in this category priced above the UpperFence threshold.
 	column OutlierCount
 		dataType: int64
 		formatString: 0
@@ -77,6 +91,7 @@ table FactPriceOutliers
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Share of this category's purchases flagged as outliers. Read per-row only - use the 'Weighted Outlier Rate' measure for a correctly blended figure across multiple categories.
 	column OutlierPct
 		dataType: double
 		formatString: 0.00%;-0.00%;0.00%
@@ -86,6 +101,7 @@ table FactPriceOutliers
 
 		annotation SummarizationSetBy = Automatic
 
+	/// How many multiples of the UpperFence threshold the category's MaxPrice reaches (e.g. a ratio of 2.0 means the most expensive purchase was twice the outlier threshold).
 	column MaxToFenceRatio
 		dataType: double
 		lineageTag: bf1600f6-dc6d-4830-82cf-fa2174386c6c
@@ -95,10 +111,6 @@ table FactPriceOutliers
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Weighted Outlier Rate' = DIVIDE(SUM(FactPriceOutliers[OutlierCount]), SUM(FactPriceOutliers[TotalPurchases]))
-		formatString: 0.00%
-		displayFolder: Anomaly
 
 	partition FactPriceOutliers = m
 		mode: import

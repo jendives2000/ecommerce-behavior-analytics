@@ -1,6 +1,7 @@
 table FactRFMMonetaryDist
 	lineageTag: 16357656-71d0-4048-b5c2-99655f4d3fe5
 
+	/// Links to DimSegment.
 	column Segment
 		dataType: string
 		lineageTag: 99f4ad5f-0c7e-4a7c-ad4c-df8312ae8485
@@ -9,6 +10,7 @@ table FactRFMMonetaryDist
 
 		annotation SummarizationSetBy = Automatic
 
+	/// 25th percentile (bottom quarter) of lifetime spend for customers in this segment.
 	column P25
 		dataType: double
 		lineageTag: 2c6de8d0-b0c3-42bc-942b-d288e0c8ddec
@@ -19,6 +21,7 @@ table FactRFMMonetaryDist
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Median (50th percentile) lifetime spend for customers in this segment.
 	column Median
 		dataType: double
 		lineageTag: 662d8283-34f3-42d3-b134-4513a0295802
@@ -29,6 +32,7 @@ table FactRFMMonetaryDist
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// 75th percentile (top quarter) of lifetime spend for customers in this segment.
 	column P75
 		dataType: double
 		lineageTag: 11189596-c704-499f-aa5d-d11be5362578
@@ -39,6 +43,7 @@ table FactRFMMonetaryDist
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// 90th percentile of lifetime spend for customers in this segment - the top 10% spend at least this much.
 	column P90
 		dataType: double
 		lineageTag: 83edf717-5365-4c66-9402-4bbb96bc6aad
@@ -49,6 +54,7 @@ table FactRFMMonetaryDist
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Highest lifetime spend recorded for any single customer in this segment. Several segments cap out at exactly $2,574.07 - the platform's price ceiling per transaction, not a coincidence. See the project's price cap research notes for the full explanation.
 	column Max
 		dataType: double
 		lineageTag: 9e74b836-9b66-4252-8cc8-bcdb5c8a73a2

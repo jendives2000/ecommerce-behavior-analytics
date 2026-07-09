@@ -1,6 +1,13 @@
 table FactTopBrands
 	lineageTag: 14ab2cbb-4a2b-4784-a4cd-b7f0133dc6f5
 
+	/// Average purchase price across whichever brands are selected, calculated as total revenue divided by total purchases. Gives a correctly blended price across multiple brands.
+	measure 'Brand Weighted Avg Price' = DIVIDE(SUM(FactTopBrands[TotalRevenue]), SUM(FactTopBrands[Purchases]))
+		formatString: "$"#,##0.00
+		displayFolder: 'Category & Brand'
+		lineageTag: ec7ed343-e675-4ec3-ac69-7bb5b1a4aa56
+
+	/// Links to DimBrand. Covers all 10 brands tracked in the top-brands analysis.
 	column Brand
 		dataType: string
 		lineageTag: a69b34fd-e236-4118-9399-1aea377afbac
@@ -9,6 +16,7 @@ table FactTopBrands
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Total purchase events for this brand.
 	column Purchases
 		dataType: int64
 		formatString: 0
@@ -18,6 +26,7 @@ table FactTopBrands
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Total revenue from this brand, in US dollars.
 	column TotalRevenue
 		dataType: int64
 		formatString: 0
@@ -27,6 +36,7 @@ table FactTopBrands
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Average purchase price for this brand. Read per-row only - use the 'Brand Weighted Avg Price' measure for a correctly blended figure across multiple brands.
 	column AvgPrice
 		dataType: double
 		lineageTag: 1f308250-a735-4982-bf7e-cc18d19d0048
@@ -37,6 +47,7 @@ table FactTopBrands
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Number of distinct product categories this brand sells in.
 	column CategoriesCount
 		dataType: int64
 		formatString: 0
@@ -45,10 +56,6 @@ table FactTopBrands
 		sourceColumn: CategoriesCount
 
 		annotation SummarizationSetBy = Automatic
-
-	measure 'Brand Weighted Avg Price' = DIVIDE(SUM(FactTopBrands[TotalRevenue]), SUM(FactTopBrands[Purchases]))
-		formatString: "$"#,##0.00
-		displayFolder: 'Category & Brand'
 
 	partition FactTopBrands = m
 		mode: import

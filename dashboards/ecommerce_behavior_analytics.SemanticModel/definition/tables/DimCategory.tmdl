@@ -1,6 +1,7 @@
 table DimCategory
 	lineageTag: df9ce89d-a957-4047-b135-7124c6843e02
 
+	/// Raw category code as it appears in the original tracking data (e.g. 'construction', 'electronics'). The technical key used to join to the fact tables - see DisplayName for the human-readable version.
 	column CategoryCode
 		dataType: string
 		lineageTag: 34f288c4-93c8-405e-90ae-e2e8c8e24f7d
@@ -9,6 +10,7 @@ table DimCategory
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Human-readable category name for use in report visuals (e.g. 'DIY / Home Improvement' instead of the raw code 'construction').
 	column DisplayName
 		dataType: string
 		lineageTag: a0e439ac-1d3c-4f8f-bb5f-f7afdd1f3034
@@ -17,6 +19,7 @@ table DimCategory
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Set to 'Y' only for the 'construction' category. Flags a known data quality issue: starting the week of December 2, 2019, Apple/Samsung/Xiaomi products were reclassified from 'electronics' into 'construction' on the source platform, so revenue and conversion figures for this category after that date don't reflect genuine DIY/home-improvement demand. See the project README's Data Quality Findings for the full explanation.
 	column TaxonomyMislabeledFlag
 		dataType: string
 		lineageTag: 4b0db56b-0f3a-46bf-81d3-559920c3b4e1

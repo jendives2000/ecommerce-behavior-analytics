@@ -1,0 +1,71 @@
+table DataDictionary_Measures
+	lineageTag: 18a334f5-dcd5-457b-90af-592c2327e262
+
+	column ID
+		isNameInferred
+		sourceColumn: [ID]
+
+	column Name
+		isNameInferred
+		sourceColumn: [Name]
+
+	column Table
+		isNameInferred
+		sourceColumn: [Table]
+
+	column Description
+		isNameInferred
+		sourceColumn: [Description]
+
+	column DataType
+		isNameInferred
+		sourceColumn: [DataType]
+
+	column Expression
+		isNameInferred
+		sourceColumn: [Expression]
+
+	column FormatString
+		isNameInferred
+		sourceColumn: [FormatString]
+
+	column IsHidden
+		isNameInferred
+		sourceColumn: [IsHidden]
+
+	column State
+		isNameInferred
+		sourceColumn: [State]
+
+	column KPIID
+		isNameInferred
+		sourceColumn: [KPIID]
+
+	column IsSimpleMeasure
+		isNameInferred
+		sourceColumn: [IsSimpleMeasure]
+
+	column DisplayFolder
+		isNameInferred
+		sourceColumn: [DisplayFolder]
+
+	column DetailRowsDefinition
+		isNameInferred
+		sourceColumn: [DetailRowsDefinition]
+
+	column DataCategory
+		isNameInferred
+		sourceColumn: [DataCategory]
+
+	column FormatStringDefinition
+		isNameInferred
+		sourceColumn: [FormatStringDefinition]
+
+	column LineageTag
+		isNameInferred
+		sourceColumn: [LineageTag]
+
+	partition DataDictionary_Measures = calculated
+		mode: import
+		source = INFO.VIEW.MEASURES()
+

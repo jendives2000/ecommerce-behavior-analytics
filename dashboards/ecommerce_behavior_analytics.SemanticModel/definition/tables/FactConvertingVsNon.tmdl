@@ -1,6 +1,7 @@
 table FactConvertingVsNon
 	lineageTag: 5d52df32-3950-4096-80f6-896282b77b9d
 
+	/// Either 'Converting' (session included a purchase) or 'Non-Converting'.
 	column SessionType
 		dataType: string
 		lineageTag: dd973f2f-6d12-4348-b467-51444e00135d
@@ -9,6 +10,7 @@ table FactConvertingVsNon
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Number of sessions of this type.
 	column Sessions
 		dataType: int64
 		formatString: 0
@@ -18,6 +20,7 @@ table FactConvertingVsNon
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Average number of events per session, for this session type only. Don't sum or average across the two session types.
 	column AvgEvents
 		dataType: double
 		lineageTag: db0d7f3f-b33b-4f58-a5a2-761f0256e075
@@ -28,6 +31,7 @@ table FactConvertingVsNon
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Median number of events per session, for this session type only.
 	column MedianEvents
 		dataType: int64
 		formatString: 0
@@ -37,6 +41,7 @@ table FactConvertingVsNon
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Average number of cart-add events per session, for this session type only.
 	column AvgCarts
 		dataType: double
 		lineageTag: d330f2d1-7a51-46a8-8a22-949d4342c88d
@@ -47,6 +52,7 @@ table FactConvertingVsNon
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Median session length in minutes, for this session type only.
 	column MedianDurationMin
 		dataType: double
 		lineageTag: 54bde311-16f4-4d1d-b42a-d129a5daafb1

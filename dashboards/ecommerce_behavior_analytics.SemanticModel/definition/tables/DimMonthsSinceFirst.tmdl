@@ -1,6 +1,7 @@
 table DimMonthsSinceFirst
 	lineageTag: b8b5d3cd-0e23-4bf4-ae85-56678844dcf1
 
+	/// How many months after a customer's first purchase this row represents, labeled M0 (the signup month itself) through M6. M0 is always 100% retention by definition.
 	column MonthsSinceFirst
 		dataType: string
 		lineageTag: 7edf2278-078d-44d0-bf79-6dae052da8c4
@@ -9,6 +10,7 @@ table DimMonthsSinceFirst
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Numeric sort order matching MonthsSinceFirst (0 through 6), since 'M0'-'M6' as text wouldn't sort correctly on its own.
 	column SortOrder
 		dataType: int64
 		formatString: 0

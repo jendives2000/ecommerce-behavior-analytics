@@ -1,6 +1,13 @@
 table FactSessionDepth
 	lineageTag: e062110c-7784-4896-9a01-d5c2bb19ba3b
 
+	/// Conversion rate across whichever session-depth buckets are selected, calculated as total purchasing sessions divided by total sessions. Gives a correctly blended rate, unlike averaging each bucket's individual conversion percentage.
+	measure 'Session Conversion Rate' = DIVIDE(SUM(FactSessionDepth[PurchasingSessions]), SUM(FactSessionDepth[TotalSessions]))
+		formatString: 0.00%
+		displayFolder: Funnel
+		lineageTag: d86a30d4-da47-4b1b-b288-809c975e9cf5
+
+	/// A range of how many events happened in a single browsing session (e.g. '1 event', '6-10 events'). Used to see how session depth relates to whether a purchase happens.
 	column EventBucket
 		dataType: string
 		lineageTag: 8fc88180-490f-4802-8808-c4d81b9bbf01
@@ -9,6 +16,7 @@ table FactSessionDepth
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Number of sessions falling into this event-count bucket.
 	column TotalSessions
 		dataType: int64
 		formatString: 0
@@ -18,6 +26,7 @@ table FactSessionDepth
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Of the sessions in this bucket, how many included a purchase.
 	column PurchasingSessions
 		dataType: int64
 		formatString: 0
@@ -27,6 +36,7 @@ table FactSessionDepth
 
 		annotation SummarizationSetBy = Automatic
 
+	/// This bucket's conversion rate. Read per-row only - use the 'Session Conversion Rate' measure for a correctly blended figure.
 	column ConversionPct
 		dataType: double
 		formatString: 0.00%;-0.00%;0.00%
@@ -35,10 +45,6 @@ table FactSessionDepth
 		sourceColumn: ConversionPct
 
 		annotation SummarizationSetBy = Automatic
-
-	measure 'Session Conversion Rate' = DIVIDE(SUM(FactSessionDepth[PurchasingSessions]), SUM(FactSessionDepth[TotalSessions]))
-		formatString: 0.00%
-		displayFolder: Funnel
 
 	partition FactSessionDepth = m
 		mode: import

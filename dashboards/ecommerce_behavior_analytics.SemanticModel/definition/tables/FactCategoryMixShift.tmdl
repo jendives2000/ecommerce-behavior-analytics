@@ -1,6 +1,7 @@
 table FactCategoryMixShift
 	lineageTag: 1e558c4d-1180-4c4c-b2f6-51a012a48b6b
 
+	/// Links to DimCategory. Covers only the 6 categories whose revenue share moved the most around COVID onset - not all 14.
 	column CategoryCode
 		dataType: string
 		lineageTag: 638babfe-2c1c-4c49-ac83-537f13e99f4c
@@ -9,6 +10,7 @@ table FactCategoryMixShift
 
 		annotation SummarizationSetBy = Automatic
 
+	/// This category's share of total revenue before COVID onset. Because this table only lists 6 of 14 categories, don't sum this column expecting it to reach 100%.
 	column PreCovidSharePct
 		dataType: double
 		formatString: 0.00%;-0.00%;0.00%
@@ -18,6 +20,7 @@ table FactCategoryMixShift
 
 		annotation SummarizationSetBy = Automatic
 
+	/// This category's share of total revenue after COVID onset, for comparison against PreCovidSharePct.
 	column CovidSharePct
 		dataType: double
 		formatString: 0.00%;-0.00%;0.00%
@@ -27,6 +30,7 @@ table FactCategoryMixShift
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Change in revenue share for this category, in percentage points (COVID-onset share minus pre-COVID share). Positive means this category grew its share of the pie during COVID.
 	column DeltaPP
 		dataType: double
 		lineageTag: 1290d4d2-e96c-407a-95c1-0e0c6a3e0d40

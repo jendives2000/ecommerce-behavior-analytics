@@ -8,11 +8,10 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_ProTooling = ["DevMode"]
+annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
 
 annotation PBI_QueryOrder = ["DimBrand","DimCategory","DimCohortMonth","DimMonthsSinceFirst","DimSegment","FactAnomalyFindings","FactCategoryMixShift","FactCategoryPerformance","FactCohortRetention","FactConvertingVsNon","FactCovidComparison","FactFunnelByBrand","FactFunnelByCategory","FactPriceOutliers","FactRetentionCurve","FactRFMMonetaryDist","FactRFMSegment","FactSessionDepth","FactTopBrands"]
 
-ref table _Measures
 ref table DimBrand
 ref table DimCategory
 ref table DimCohortMonth
@@ -32,6 +31,9 @@ ref table FactRFMMonetaryDist
 ref table FactRFMSegment
 ref table FactSessionDepth
 ref table FactTopBrands
+ref table _Measures
+ref table DataDictionary_Measures
+ref table DataDictionary_Columns
 
 ref cultureInfo en-US
 

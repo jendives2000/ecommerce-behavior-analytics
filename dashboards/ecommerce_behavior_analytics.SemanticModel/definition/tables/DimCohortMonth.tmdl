@@ -1,6 +1,7 @@
 table DimCohortMonth
 	lineageTag: a9e993a0-7398-474e-a0d5-d203c9237403
 
+	/// The calendar month in which a group of customers made their first purchase (their 'acquisition cohort'). Used to track how each monthly group of new customers behaves over time.
 	column CohortMonth
 		dataType: dateTime
 		formatString: Long Date
@@ -12,6 +13,7 @@ table DimCohortMonth
 
 		annotation UnderlyingDateTimeDataType = Date
 
+	/// Chronological sort order for CohortMonth (1 = October 2019 through 7 = April 2020), since the month labels alone don't sort correctly.
 	column SortOrder
 		dataType: int64
 		formatString: 0
@@ -21,6 +23,7 @@ table DimCohortMonth
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Number of customers who first purchased in this cohort month. Used to weight retention calculations so larger cohorts count more than smaller ones.
 	column CohortUsers
 		dataType: int64
 		formatString: 0

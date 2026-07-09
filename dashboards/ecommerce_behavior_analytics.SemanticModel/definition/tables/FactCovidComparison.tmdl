@@ -1,6 +1,7 @@
 table FactCovidComparison
 	lineageTag: 7734017f-b38c-47ab-82d1-fe53952c59f2
 
+	/// Name of the specific metric being compared (e.g. 'Session Conversion %', 'Avg Order Value ($)'). Each row is a different metric in a different unit.
 	column Metric
 		dataType: string
 		lineageTag: d0d368e8-bc37-4280-9937-87fc4ff23b07
@@ -9,6 +10,7 @@ table FactCovidComparison
 
 		annotation SummarizationSetBy = Automatic
 
+	/// This metric's value during the pre-COVID baseline period. Never sum this column across rows - each row is a different metric in a different unit (percentage, dollars, event count), so a sum would be meaningless.
 	column PreCovid
 		dataType: double
 		lineageTag: e9a960ab-6ca1-43b6-9477-710b4481d01a
@@ -19,6 +21,7 @@ table FactCovidComparison
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// This metric's value during the COVID-onset period, for comparison against PreCovid.
 	column CovidOnset
 		dataType: double
 		lineageTag: e8ee9ffc-1681-4b45-b634-08c2aed49821
@@ -29,6 +32,7 @@ table FactCovidComparison
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// The relative change from PreCovid to CovidOnset for this metric. Same caveat as the other columns - never sum across rows.
 	column ChangeText
 		dataType: double
 		lineageTag: 957eb5f7-bd0b-428e-be30-4cee320a9172

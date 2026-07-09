@@ -1,37 +1,58 @@
 table _Measures
 	lineageTag: 8f2b6e5a-1c4d-4a3e-9f7b-2d6e8a0c5b1f
 
+	/// Total number of tracked events (views, cart adds, purchases) across the entire dataset, October 2019 through April 2020. Fixed value from the verified BigQuery row count - this model doesn't import raw event-level data, so it can't be recalculated from what's here.
 	measure 'Total Events' = 411709736
 		formatString: #,##0
 		displayFolder: 'Overview KPIs'
+		lineageTag: f40b8719-ee36-452f-99c1-5a7113673ff8
 
+	/// Number of distinct users who made at least one purchase during the tracked period. Fixed value from the RFM analysis - user-level detail isn't imported into this model.
 	measure 'Purchasing Users' = 2064899
 		formatString: #,##0
 		displayFolder: 'Overview KPIs'
+		lineageTag: d6a46e5e-244e-4231-8482-fd7b3c35ad64
 
+	/// Share of all product views across the entire dataset that led to a purchase, covering all 14 categories. Fixed value - the FactFunnelByCategory table only holds the top 10 categories, so recalculating from it here would undercount.
 	measure 'Overall Conversion Rate' = 0.0609
 		formatString: 0.00%
 		displayFolder: 'Overview KPIs'
+		lineageTag: 85658db1-2ce6-48eb-8965-e2649a28847b
 
+	/// Total purchase revenue across all 14 categories, in US dollars. Fixed value for the same reason as Overall Conversion Rate - the imported category tables only cover a subset.
 	measure 'Total Revenue' = 2060000000
 		formatString: "$"#,##0
 		displayFolder: 'Overview KPIs'
+		lineageTag: 14a1b683-6977-4e98-87e6-c7c9010d0595
 
+	/// Share of shopping-cart sessions that never turned into a purchase. Fixed value, calculated from the full dataset outside this model.
 	measure 'Cart Abandonment Rate' = 0.5409
 		formatString: 0.00%
 		displayFolder: 'Overview KPIs'
+		lineageTag: 75a7afe1-ecc7-4e7d-9e34-e1668d620cd1
 
+	/// Share of total revenue that comes from the 'Champion' customer segment (the top tier in the Recency-Frequency-Monetary scoring model). Recalculates live from FactRFMSegment, since that table covers all 6 segments.
 	measure 'Champion Revenue Share' = CALCULATE(SUM(FactRFMSegment[PctRevenue]), FactRFMSegment[Segment] = "Champion")
 		formatString: 0.00%
 		displayFolder: 'Overview KPIs'
+		lineageTag: 5a198fd3-390d-4041-bd75-d128789c330c
 
+	/// Average share of customers still active one month after their first purchase, averaged across all acquisition cohorts. Recalculates live from FactRetentionCurve.
 	measure 'Month-1 Retention Avg' = CALCULATE(SUM(FactRetentionCurve[AvgRetention]), FactRetentionCurve[MonthsSinceFirst] = "M1")
 		formatString: 0.00%
 		displayFolder: 'Overview KPIs'
+		lineageTag: d70921b5-9452-40d9-83ad-443a9e525873
 
+	/// How much session-level conversion rate changed comparing the period before COVID-19 lockdowns to the period right after they began. A positive number means conversion went up. Recalculates live from FactCovidComparison.
 	measure 'COVID Session Conversion Lift' = VAR PreValue = CALCULATE(SUM(FactCovidComparison[PreCovid]), FactCovidComparison[Metric] = "Session Conversion %") VAR OnsetValue = CALCULATE(SUM(FactCovidComparison[CovidOnset]), FactCovidComparison[Metric] = "Session Conversion %") RETURN DIVIDE(OnsetValue - PreValue, PreValue)
 		formatString: +0.0%;-0.0%;0.0%
 		displayFolder: 'Overview KPIs'
+		lineageTag: 7aad4945-6362-4370-9e07-6ba017a7676e
+
+	column Value
+		lineageTag: a861b4e5-d496-4bae-9bed-e7872af11c91
+		isNameInferred
+		sourceColumn: [Value]
 
 	partition _Measures = calculated
 		mode: import

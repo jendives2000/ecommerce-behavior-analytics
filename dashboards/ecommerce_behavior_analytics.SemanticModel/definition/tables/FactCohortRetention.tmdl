@@ -1,6 +1,13 @@
 table FactCohortRetention
 	lineageTag: 52a82955-2fcf-413f-a88b-47791befc0aa
 
+	/// Average retention rate across all acquisition cohorts and all months after first purchase, excluding the trivial 'month zero' point (where retention is always 100% by definition, since everyone is active in their own signup month). Weighted by each cohort's actual size, so large cohorts count more than small ones.
+	measure 'Weighted Avg Retention' = VAR NonZeroMonths = FILTER(FactCohortRetention, FactCohortRetention[MonthsSinceFirst] <> "M0") RETURN DIVIDE(SUMX(NonZeroMonths, FactCohortRetention[RetentionRate] * RELATED(DimCohortMonth[CohortUsers])), SUMX(NonZeroMonths, RELATED(DimCohortMonth[CohortUsers])))
+		formatString: 0.00%
+		displayFolder: 'Customer Segments'
+		lineageTag: e6b68ad1-8aaf-4a35-927d-3cbff41f5c65
+
+	/// Links to DimCohortMonth - the month this cohort of customers first purchased.
 	column CohortMonth
 		dataType: dateTime
 		formatString: Long Date
@@ -12,6 +19,7 @@ table FactCohortRetention
 
 		annotation UnderlyingDateTimeDataType = Date
 
+	/// Links to DimMonthsSinceFirst - how many months after first purchase this retention figure applies to.
 	column MonthsSinceFirst
 		dataType: string
 		lineageTag: 10274f1d-5470-48b8-819a-e421be89e40d
@@ -20,6 +28,7 @@ table FactCohortRetention
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Share of this cohort still active (made a purchase) this many months after their first purchase. Combinations the dataset can't yet observe (e.g. a cohort's retention 6 months out, if the dataset doesn't extend that far) are intentionally left out of this table rather than shown as 0% - a blank means 'not yet observable,' not 'nobody came back.'
 	column RetentionRate
 		dataType: double
 		formatString: 0.00%;-0.00%;0.00%
@@ -28,10 +37,6 @@ table FactCohortRetention
 		sourceColumn: RetentionRate
 
 		annotation SummarizationSetBy = Automatic
-
-	measure 'Weighted Avg Retention' = VAR NonZeroMonths = FILTER(FactCohortRetention, FactCohortRetention[MonthsSinceFirst] <> "M0") RETURN DIVIDE(SUMX(NonZeroMonths, FactCohortRetention[RetentionRate] * RELATED(DimCohortMonth[CohortUsers])), SUMX(NonZeroMonths, RELATED(DimCohortMonth[CohortUsers])))
-		formatString: 0.00%
-		displayFolder: 'Customer Segments'
 
 	partition FactCohortRetention = m
 		mode: import
