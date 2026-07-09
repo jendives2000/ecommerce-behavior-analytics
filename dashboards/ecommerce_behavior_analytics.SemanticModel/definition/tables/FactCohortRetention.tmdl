@@ -29,7 +29,7 @@ table FactCohortRetention
 
 		annotation SummarizationSetBy = Automatic
 
-	measure 'Weighted Avg Retention' = DIVIDE(SUMX(FactCohortRetention, FactCohortRetention[RetentionRate] * RELATED(DimCohortMonth[CohortUsers])), SUMX(FactCohortRetention, RELATED(DimCohortMonth[CohortUsers])))
+	measure 'Weighted Avg Retention' = VAR NonZeroMonths = FILTER(FactCohortRetention, FactCohortRetention[MonthsSinceFirst] <> "M0") RETURN DIVIDE(SUMX(NonZeroMonths, FactCohortRetention[RetentionRate] * RELATED(DimCohortMonth[CohortUsers])), SUMX(NonZeroMonths, RELATED(DimCohortMonth[CohortUsers])))
 		formatString: 0.00%
 		displayFolder: 'Customer Segments'
 

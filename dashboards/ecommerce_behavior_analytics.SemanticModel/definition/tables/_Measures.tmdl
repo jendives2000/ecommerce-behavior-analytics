@@ -14,7 +14,7 @@ table _Measures
 		displayFolder: 'Overview KPIs'
 
 	measure 'Total Revenue' = 2060000000
-		formatString: "$"#,##0.00,,,"B"
+		formatString: "$"#,##0
 		displayFolder: 'Overview KPIs'
 
 	measure 'Cart Abandonment Rate' = 0.5409
