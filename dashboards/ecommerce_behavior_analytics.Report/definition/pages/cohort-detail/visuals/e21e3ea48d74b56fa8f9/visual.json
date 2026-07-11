@@ -211,51 +211,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "d0a166d4f89790f3cacb",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactCohortRetention"
-              }
-            },
-            "Property": "CohortMonth"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "139631fddcabb8a9225a",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactCohortRetention"
-              }
-            },
-            "Property": "MonthsSinceFirst"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "e45ea9c87fa0a81cf9c4",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactCohortRetention"
-              }
-            },
-            "Property": "RetentionRate"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

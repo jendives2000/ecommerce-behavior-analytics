@@ -7,13 +7,32 @@
     "z": 7000,
     "height": 110.0990099009901,
     "width": 247.12871287128715,
-    "tabOrder": 2000
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "cardVisual",
     "query": {
       "queryState": {
         "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "COVID Session Conversion Lift"
+                }
+              },
+              "queryRef": "_Measures.COVID Session Conversion Lift",
+              "nativeQueryRef": "COVID Impact on Conversion",
+              "displayName": "COVID Impact on Conversion"
+            }
+          ]
+        },
+        "Tooltips": {
           "projections": [
             {
               "field": {
@@ -260,26 +279,28 @@
             }
           }
         }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Default'"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "3224b185a3f3eeeaf8f3",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "COVID Session Conversion Lift"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

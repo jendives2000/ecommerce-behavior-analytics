@@ -49,23 +49,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "972077a19bdfd1f52a82",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Month-1 Retention KPI Card"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

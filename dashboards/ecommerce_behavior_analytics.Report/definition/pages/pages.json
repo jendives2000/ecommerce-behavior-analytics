@@ -3,13 +3,13 @@
   "pageOrder": [
     "overview",
     "funnel",
-    "customer-segments",
     "category-brand",
+    "customer-segments",
     "covid-impact",
+    "data-dictionary",
     "cohort-detail",
     "anomaly-detail",
-    "funnel-floor-bias-tooltip",
-    "data-dictionary"
+    "funnel-floor-bias-tooltip"
   ],
-  "activePageName": "data-dictionary"
+  "activePageName": "funnel"
 }

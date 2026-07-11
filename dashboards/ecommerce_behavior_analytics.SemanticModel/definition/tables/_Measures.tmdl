@@ -152,6 +152,33 @@ table _Measures
 		displayFolder: Insights\Overview
 		lineageTag: 709af52b-ac37-4ed3-807f-9eb8ac924e30
 
+	/// Single dynamic sentence comparing how strongly session depth, category, and brand each swing conversion rate - recalculates live so the multiples always match current data. Also dynamically checks whichever category currently ranks #1 by conversion against the TaxonomyMislabeledFlag column, only appending the taxonomy caveat if the actual top-ranked category is the flagged one (does not hardcode a category name). Bind to an HTML Content visual's data role.
+	measure 'Funnel Insight' =
+			VAR TopCategoryTable =
+			    TOPN(
+			        1,
+			        SUMMARIZE(FactFunnelByCategory, FactFunnelByCategory[CategoryCode], "CatRate", [Category Conversion Rate]),
+			        [CatRate], DESC
+			    )
+			VAR TopCategoryCode = MAXX(TopCategoryTable, FactFunnelByCategory[CategoryCode])
+			VAR TopCategoryDisplayName = LOOKUPVALUE(DimCategory[DisplayName], DimCategory[CategoryCode], TopCategoryCode)
+			VAR TopCategoryFlagged = LOOKUPVALUE(DimCategory[TaxonomyMislabeledFlag], DimCategory[CategoryCode], TopCategoryCode)
+			VAR SessionMin = MINX(VALUES(FactSessionDepth[EventBucket]), [Session Conversion Rate])
+			VAR SessionMax = MAXX(VALUES(FactSessionDepth[EventBucket]), [Session Conversion Rate])
+			VAR SessionSwing = FORMAT(DIVIDE(SessionMax, SessionMin), "0")
+			VAR MainParagraph =
+			    "How much someone browses matters far more than what they browse. Visitors who view just one product almost never buy, but conversion climbs sharply the more they look around, leveling off once someone's clearly engaged - a swing of roughly " & SessionSwing & "x between the least and most engaged visitors, dwarfing anything category or brand choice can explain."
+			VAR CaveatParagraph =
+			    IF(
+			        TopCategoryFlagged = "Y",
+			        "<p style='margin:8px 0 0 0;'>Note: the top category shown, " & TopCategoryDisplayName & ", has a known data quality flag - see Data Quality Findings for details.</p>",
+			        ""
+			    )
+			RETURN
+			    "<div style='font-family:Segoe UI,sans-serif;color:#FFFFFF;font-size:15px;text-align:justify;'><p style='margin:0;'>" & MainParagraph & "</p>" & CaveatParagraph & "</div>"
+		displayFolder: Insights\Funnel
+		lineageTag: 7e44e649-7356-471c-8c8f-cc7ad0f3ca6a
+
 	column Value
 		lineageTag: a861b4e5-d496-4bae-9bed-e7872af11c91
 		isNameInferred

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
   "name": "2b155765f5e514907563",
   "position": {
-    "x": 390.49504950495049,
-    "y": 15.04950495049505,
-    "z": 2,
-    "height": 34.851485148514854,
-    "width": 880,
-    "tabOrder": 2
+    "x": 386.90176322418131,
+    "y": 14.5088161209068,
+    "z": 4000,
+    "height": 34.659949622166245,
+    "width": 880.20151133501258,
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "pageNavigator",
@@ -39,6 +39,17 @@
           },
           "selector": {
             "id": "funnel"
+          }
+        },
+        {
+          "properties": {
+            "showHiddenPages": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
           }
         }
       ],

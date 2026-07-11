@@ -4,10 +4,10 @@
   "position": {
     "x": 390.49504950495049,
     "y": 15.04950495049505,
-    "z": 3,
+    "z": 3000,
     "height": 34.851485148514854,
     "width": 880,
-    "tabOrder": 3
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "pageNavigator",
@@ -39,6 +39,17 @@
           },
           "selector": {
             "id": "covid-impact"
+          }
+        },
+        {
+          "properties": {
+            "showHiddenPages": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
           }
         }
       ],

@@ -262,23 +262,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "dd99b3baec1a388b0dcc",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Cart Abandonment Rate"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

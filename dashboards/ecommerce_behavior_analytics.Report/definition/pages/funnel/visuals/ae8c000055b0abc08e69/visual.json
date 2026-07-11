@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "ae8c000055b0abc08e69",
+  "position": {
+    "x": 216.81072865252725,
+    "y": 0,
+    "z": 1000,
+    "height": 36.389481165600571,
+    "width": 248.35820895522389,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Brand Conversion Rate",
+                    "textStyle": {
+                      "fontSize": "18pt",
+                      "color": "#666666"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "4aa205b1308a1633f7fd"
+}

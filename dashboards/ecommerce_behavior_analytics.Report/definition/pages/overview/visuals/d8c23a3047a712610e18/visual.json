@@ -26,6 +26,17 @@
           "selector": {
             "id": "overview"
           }
+        },
+        {
+          "properties": {
+            "showHiddenPages": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
         }
       ],
       "fill": [

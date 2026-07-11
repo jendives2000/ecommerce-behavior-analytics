@@ -1,0 +1,417 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.0.0/schema.json",
+  "displayName": "Viz Session Depth",
+  "name": "d491f4af103d5c7042fb",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "8ef9778ec44f9234d41d",
+      "85e2eb86cb315e33fe6f",
+      "f559ce173773560f809b",
+      "0e6d79cebe31b51a9b2a"
+    ]
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "funnel",
+    "sections": {
+      "funnel": {
+        "visualContainers": {
+          "0e6d79cebe31b51a9b2a": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ee8ab3ab2b2611550e4f",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactSessionDepth"
+                        }
+                      },
+                      "Property": "EventBucket"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "8a802f225ab88e1457ae",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "FactSessionDepth"
+                            }
+                          },
+                          "Property": "TotalSessions"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "3222aa9cde207842b2f9",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactSessionDepth"
+                        }
+                      },
+                      "Property": "Session Conversion Rate"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "lineClusteredColumnComboChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "FactSessionDepth"
+                            }
+                          },
+                          "Property": "TotalSessions"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactSessionDepth"
+                        }
+                      },
+                      "Property": "EventBucket"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "2b155765f5e514907563": {
+            "singleVisual": {
+              "visualType": "pageNavigator",
+              "objects": {}
+            }
+          },
+          "395f46b96ca39b6b6543": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "3dfde3e262726ad46868": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "64cbe4c35488f882ccbe",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimBrand"
+                        }
+                      },
+                      "Property": "Brand"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "15bdefc4754b595f9a51",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactFunnelByBrand"
+                        }
+                      },
+                      "Property": "Brand Conversion Rate"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredBarChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactFunnelByBrand"
+                        }
+                      },
+                      "Property": "Brand Conversion Rate"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimBrand"
+                        }
+                      },
+                      "Property": "Brand"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "6120d6dae5d215f2999a": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "7e54a7e421f81df5533a": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "85e2eb86cb315e33fe6f": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "84c0603d1c1068cdf4bf",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "FactFunnelByCategory"
+                            }
+                          },
+                          "Property": "Views"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "f117485fd9b689ac9e1e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "FactFunnelByCategory"
+                            }
+                          },
+                          "Property": "Carts"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "92f05656d5eb838464bb",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "FactFunnelByCategory"
+                            }
+                          },
+                          "Property": "Purchases"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "funnel",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "FactFunnelByCategory"
+                            }
+                          },
+                          "Property": "Views"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  }
+                }
+              ],
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "87b7ec29e19843c9f8dc": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "ae8c000055b0abc08e69": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "d5bb9578d7ba000510f6": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "d1273f48a53b7147efdc",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimCategory"
+                        }
+                      },
+                      "Property": "DisplayName"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "67d32d107365cf5bb4a4",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactFunnelByCategory"
+                        }
+                      },
+                      "Property": "Category Conversion Rate"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredBarChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactFunnelByCategory"
+                        }
+                      },
+                      "Property": "Category Conversion Rate"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimCategory"
+                        }
+                      },
+                      "Property": "DisplayName"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "f559ce173773560f809b": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "8ef9778ec44f9234d41d": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
