@@ -3,6 +3,6 @@
   "name": "funnel-floor-bias-tooltip",
   "displayName": "Funnel Floor Bias",
   "displayOption": "FitToPage",
-  "height": 240,
-  "width": 320
+  "height": 720,
+  "width": 1280
 }

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "bb50541a1398fe512190",
+  "position": {
+    "x": 41.466992665036678,
+    "y": 495.2567237163812,
+    "z": 10000,
+    "height": 149.43765281173594,
+    "width": 304.35207823960883,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6855",
+    "query": {
+      "queryState": {
+        "content": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Month-1 Retention KPI Card"
+                }
+              },
+              "queryRef": "_Measures.Month-1 Retention KPI Card",
+              "nativeQueryRef": "Month-1 Retention KPI Card"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "972077a19bdfd1f52a82",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Month-1 Retention KPI Card"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

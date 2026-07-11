@@ -15,9 +15,11 @@ table _Measures
 
 	/// Share of all product views across the entire dataset that led to a purchase, covering all 14 categories. Fixed value - the FactFunnelByCategory table only holds the top 10 categories, so recalculating from it here would undercount.
 	measure 'Overall Conversion Rate' = 0.0609
-		formatString: 0.00%
+		formatString: 0.0%
 		displayFolder: 'Overview KPIs'
 		lineageTag: 85658db1-2ce6-48eb-8965-e2649a28847b
+
+		annotation PBI_FormatHint = {"isCustom":true}
 
 	/// Total purchase revenue across all 14 categories, in US dollars. Fixed value for the same reason as Overall Conversion Rate - the imported category tables only cover a subset.
 	measure 'Total Revenue' = 2060000000
@@ -27,15 +29,19 @@ table _Measures
 
 	/// Share of shopping-cart sessions that never turned into a purchase. Fixed value, calculated from the full dataset outside this model.
 	measure 'Cart Abandonment Rate' = 0.5409
-		formatString: 0.00%
+		formatString: 0.0%
 		displayFolder: 'Overview KPIs'
 		lineageTag: 75a7afe1-ecc7-4e7d-9e34-e1668d620cd1
 
+		annotation PBI_FormatHint = {"isCustom":true}
+
 	/// Share of total revenue that comes from the 'Champion' customer segment (the top tier in the Recency-Frequency-Monetary scoring model). Recalculates live from FactRFMSegment, since that table covers all 6 segments.
 	measure 'Champion Revenue Share' = CALCULATE(SUM(FactRFMSegment[PctRevenue]), FactRFMSegment[Segment] = "Champion")
-		formatString: 0.00%
+		formatString: 0.0%
 		displayFolder: 'Overview KPIs'
 		lineageTag: 5a198fd3-390d-4041-bd75-d128789c330c
+
+		annotation PBI_FormatHint = {"isCustom":true}
 
 	/// Average share of customers still active one month after their first purchase, averaged across all acquisition cohorts. Recalculates live from FactRetentionCurve.
 	measure 'Month-1 Retention Avg' = CALCULATE(SUM(FactRetentionCurve[AvgRetention]), FactRetentionCurve[MonthsSinceFirst] = "M1")
@@ -48,6 +54,103 @@ table _Measures
 		formatString: +0.0%;-0.0%;0.0%
 		displayFolder: 'Overview KPIs'
 		lineageTag: 7aad4945-6362-4370-9e07-6ba017a7676e
+
+	/// Hex color code (green or red) reflecting whether the COVID Session Conversion Lift measure is positive or negative. Feeds the badge background on the 'COVID Lift KPI Card' HTML Content visual - not meant to be used directly in a chart.
+	measure 'COVID Lift Color' = IF ( [COVID Session Conversion Lift] >= 0, "#2ECC71", "#E74C3C" )
+		displayFolder: HTML Cards
+		lineageTag: 3c30c61a-a086-4895-98e9-a4232732d3b4
+
+	/// Plain-language read of whether conversion improved or declined after COVID-19 onset, driven by the sign of COVID Session Conversion Lift. Feeds the 'COVID Lift KPI Card' HTML Content visual - not meant to be used directly in a chart.
+	measure 'COVID Lift Direction Text' =
+			IF (
+			    [COVID Session Conversion Lift] >= 0,
+			    "Conversion rate improved after COVID-19 onset",
+			    "Conversion rate declined after COVID-19 onset"
+			)
+		displayFolder: HTML Cards
+		lineageTag: fd3ca5f4-1b97-4b54-99f5-d13da1bdc822
+
+	/// Self-contained HTML/CSS string combining the COVID Session Conversion Lift value, a color-coded badge, and a plain-language interpretation - built for the HTML Content custom visual, which renders whatever HTML a bound measure returns. Demonstrates a compound KPI card a native Power BI card visual can't produce in a single tile. Bind this measure to the visual's data role.
+	measure 'COVID Lift KPI Card' =
+			VAR LiftValue = FORMAT ( [COVID Session Conversion Lift], "+0.0%;-0.0%;0.0%" )
+			VAR BadgeColor = [COVID Lift Color]
+			VAR DirectionText = [COVID Lift Direction Text]
+			RETURN
+			    "<div style='font-family:Segoe UI,sans-serif;text-align:center;padding:12px;'>" &
+			        "<div style='font-size:12px;color:#9B9BA8;text-transform:uppercase;letter-spacing:0.5px;'>COVID Impact on Conversion</div>" &
+			        "<div style='font-size:32px;font-weight:700;color:#FFFFFF;margin-top:4px;'>" & LiftValue & "</div>" &
+			        "<div style='display:inline-block;margin-top:8px;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600;color:white;background-color:" & BadgeColor & ";'>" & DirectionText & "</div>" &
+			    "</div>"
+		displayFolder: HTML Cards
+		lineageTag: e56ed8dc-76de-4659-9d04-7156ddab4b5d
+
+	/// Where the current Month-1 Retention Avg sits between the lowest and highest single-cohort M1 retention on record (0 = at the historical low, 1 = at the historical high). Feeds the badge on the 'Month-1 Retention KPI Card' - not meant to be used directly in a chart.
+	measure 'Retention Position Ratio' =
+			VAR M1Avg = [Month-1 Retention Avg]
+			VAR M1Min = CALCULATE(SUM(FactRetentionCurve[MinRetention]), FactRetentionCurve[MonthsSinceFirst] = "M1")
+			VAR M1Max = CALCULATE(SUM(FactRetentionCurve[MaxRetention]), FactRetentionCurve[MonthsSinceFirst] = "M1")
+			RETURN DIVIDE(M1Avg - M1Min, M1Max - M1Min)
+		displayFolder: HTML Cards
+		lineageTag: deca8e6b-02b5-4b6d-a417-735ac0af1347
+
+	/// Plain-language read of where the current Month-1 Retention Avg sits relative to the historical range of individual cohorts, based on Retention Position Ratio. Feeds the 'Month-1 Retention KPI Card' - not meant to be used directly in a chart.
+	measure 'Retention Position Text' =
+			VAR Ratio = [Retention Position Ratio]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        Ratio < 0.33, "Toward the lower end of the historical cohort range",
+			        Ratio > 0.67, "Toward the higher end of the historical cohort range",
+			        "In the middle of the historical cohort range"
+			    )
+		displayFolder: HTML Cards
+		lineageTag: adc6ce70-bef6-4b0b-a4c5-fcb55e0338b1
+
+	/// Hex color code (amber/blue/green) reflecting whether the current Month-1 Retention Avg sits in the lower, middle, or upper third of the historical cohort range. Feeds the badge background on the 'Month-1 Retention KPI Card' - not meant to be used directly in a chart.
+	measure 'Retention Position Color' =
+			VAR Ratio = [Retention Position Ratio]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        Ratio < 0.33, "#E67E22",
+			        Ratio > 0.67, "#2ECC71",
+			        "#5B8DBE"
+			    )
+		displayFolder: HTML Cards
+		lineageTag: 4151cde0-9079-4246-baa9-659ce86836d3
+
+	/// Self-contained HTML/CSS string combining the Month-1 Retention Avg value with a badge showing where it sits relative to the historical range of individual cohorts (min-max from FactRetentionCurve) - not an external benchmark, purely this dataset's own cohort history. Bind this measure to an HTML Content visual's data role.
+	measure 'Month-1 Retention KPI Card' =
+			VAR RetentionValue = FORMAT ( [Month-1 Retention Avg], "0.0%" )
+			VAR BadgeColor = [Retention Position Color]
+			VAR PositionText = [Retention Position Text]
+			RETURN
+			    "<div style='font-family:Segoe UI,sans-serif;text-align:center;padding:12px;'>" &
+			        "<div style='font-size:12px;color:#9B9BA8;text-transform:uppercase;letter-spacing:0.5px;'>Month-1 Retention Avg</div>" &
+			        "<div style='font-size:32px;font-weight:700;color:#FFFFFF;margin-top:4px;'>" & RetentionValue & "</div>" &
+			        "<div style='display:inline-block;margin-top:8px;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600;color:white;background-color:" & BadgeColor & ";'>" & PositionText & "</div>" &
+			    "</div>"
+		displayFolder: HTML Cards
+		lineageTag: e9cf188e-6674-4aee-9dc7-6ea8e5c46f75
+
+	/// Single dynamic sentence synthesizing the Overview page's core story - conversion rate, cart abandonment, and month-1 retention - recalculated live from the model so it never goes stale if someone filters the page differently. Not a static caption; reuses the Retention Position Ratio logic already built for the retention KPI card. Bind directly to a text-based visual (Card, HTML Content, or a text box referencing this measure).
+	measure 'Overview Insight' =
+			VAR ConvRate = FORMAT ( [Overall Conversion Rate], "0.0%" )
+			VAR AbandonRate = FORMAT ( [Cart Abandonment Rate], "0.0%" )
+			VAR RetentionRate = FORMAT ( [Month-1 Retention Avg], "0.0%" )
+			VAR Ratio = [Retention Position Ratio]
+			VAR RetentionFraming =
+			    SWITCH(
+			        TRUE(),
+			        Ratio < 0.33, "toward the weaker end of the historical range",
+			        Ratio > 0.67, "toward the stronger end of the historical range",
+			        "roughly mid-range historically"
+			    )
+			VAR InsightText = ConvRate & " of views convert and " & AbandonRate & " of carts are abandoned; first-month retention lands at " & RetentionRate & ", " & RetentionFraming & "."
+			RETURN
+			    "<div style='font-family:Segoe UI,sans-serif;color:#FFFFFF;font-size:20px;'>" & InsightText & "</div>"
+		displayFolder: Insights\Overview
+		lineageTag: 709af52b-ac37-4ed3-807f-9eb8ac924e30
 
 	column Value
 		lineageTag: a861b4e5-d496-4bae-9bed-e7872af11c91

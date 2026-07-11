@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "1b40ae15c3740cca0e8f",
+  "position": {
+    "x": 272.81023928770173,
+    "y": 262.83806343906514,
+    "z": 0,
+    "height": 176.64997217584866,
+    "width": 438.77573734001118,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6855",
+    "query": {
+      "queryState": {
+        "content": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "COVID Lift KPI Card"
+                }
+              },
+              "queryRef": "_Measures.COVID Lift KPI Card",
+              "nativeQueryRef": "COVID Lift KPI Card"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

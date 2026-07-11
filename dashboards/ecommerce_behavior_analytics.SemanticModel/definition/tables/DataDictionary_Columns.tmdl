@@ -2,98 +2,122 @@ table DataDictionary_Columns
 	lineageTag: 78545696-4e5e-4640-9853-c21b7085c726
 
 	column ID
+		lineageTag: 92a66513-3102-4cf2-bf08-23f72dbd56b7
 		isNameInferred
 		sourceColumn: [ID]
 
 	column Name
+		lineageTag: c550cbfb-6441-47ce-9ced-535e492c4c0b
 		isNameInferred
 		sourceColumn: [Name]
 
 	column Table
+		lineageTag: 9a05d445-1b5f-43ac-a9a6-791b1932d3cd
 		isNameInferred
 		sourceColumn: [Table]
 
 	column DataType
+		lineageTag: c5d5cc82-77f6-4b01-8844-26b30e88f772
 		isNameInferred
 		sourceColumn: [DataType]
 
 	column DataCategory
+		lineageTag: 7cc986e2-d1f3-4d30-92fb-161ab6986618
 		isNameInferred
 		sourceColumn: [DataCategory]
 
 	column Description
+		lineageTag: 366faa11-d750-4946-a9c3-200d98cca2d7
 		isNameInferred
 		sourceColumn: [Description]
 
 	column IsHidden
+		lineageTag: 74d46da8-edbb-401d-8b03-62d8ed67e88a
 		isNameInferred
 		sourceColumn: [IsHidden]
 
 	column IsUnique
+		lineageTag: 45ed184d-1dc1-4acb-8690-2cde51a4c9dd
 		isNameInferred
 		sourceColumn: [IsUnique]
 
 	column IsKey
+		lineageTag: 2190acc0-e5a6-4343-a820-c350e42ddc70
 		isNameInferred
 		sourceColumn: [IsKey]
 
 	column IsNullable
+		lineageTag: 53c1de73-bce7-44a4-a7c7-6b771667e1be
 		isNameInferred
 		sourceColumn: [IsNullable]
 
 	column Alignment
+		lineageTag: d177ef76-39a8-4aa3-8d16-03b78267a15f
 		isNameInferred
 		sourceColumn: [Alignment]
 
 	column SummarizeBy
+		lineageTag: c62e42ed-1153-47dd-ad1c-4702021b0e11
 		isNameInferred
 		sourceColumn: [SummarizeBy]
 
 	column ColumnStorage
+		lineageTag: 5079541f-8381-47ce-8a74-2b37e9e84add
 		isNameInferred
 		sourceColumn: [ColumnStorage]
 
 	column Type
+		lineageTag: 81e33435-2d7f-42f7-bb89-a1ba6a9d1b5a
 		isNameInferred
 		sourceColumn: [Type]
 
 	column SourceColumn
+		lineageTag: 393163b1-9d4e-4f23-9fdf-f64bca76fd9d
 		isNameInferred
 		sourceColumn: [SourceColumn]
 
 	column Expression
+		lineageTag: 2a34062c-57f4-4863-b4c5-57dc2c387da5
 		isNameInferred
 		sourceColumn: [Expression]
 
 	column FormatString
+		lineageTag: 9a0b7054-b366-460e-9b7b-37bafd158a2e
 		isNameInferred
 		sourceColumn: [FormatString]
 
 	column IsAvailableInMDX
+		lineageTag: f89b3fef-5d87-4672-90f2-743e1b1268fa
 		isNameInferred
 		sourceColumn: [IsAvailableInMDX]
 
 	column SortByColumn
+		lineageTag: a2379eef-cc04-4d83-93cf-6bdd2aaf0a5b
 		isNameInferred
 		sourceColumn: [SortByColumn]
 
 	column GroupingBehavior
+		lineageTag: 93314bcf-431e-47aa-8f8b-0dec6c85d1e5
 		isNameInferred
 		sourceColumn: [GroupingBehavior]
 
 	column SourceProviderType
+		lineageTag: 3b5cf769-84f6-428f-9cb5-b9b49857c944
 		isNameInferred
 		sourceColumn: [SourceProviderType]
 
 	column DisplayFolder
+		lineageTag: ee797c14-f543-4a0a-b300-60f100d9c9dc
 		isNameInferred
 		sourceColumn: [DisplayFolder]
 
 	column AlternateOf
+		lineageTag: 46944e1a-503b-4fd0-9c5e-06beac31f8bf
 		isNameInferred
 		sourceColumn: [AlternateOf]
 
 	column LineageTag
+		lineageTag: cdfc51b1-d3a8-4260-bded-030ce1a87478
 		isNameInferred
 		sourceColumn: [LineageTag]
 

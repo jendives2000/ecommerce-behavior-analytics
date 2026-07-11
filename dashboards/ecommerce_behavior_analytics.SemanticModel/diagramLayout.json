@@ -11,7 +11,7 @@
         {
           "location": {
             "x": 2540.7998752195867,
-            "y": 995.97175528897367
+            "y": 1192.5459688902431
           },
           "nodeIndex": "DimBrand",
           "nodeLineageTag": "4ad2cc35-e4aa-4231-9149-25c0fd00bd95",
@@ -24,7 +24,7 @@
         {
           "location": {
             "x": 530.05720406621913,
-            "y": 805.63523435354841
+            "y": 1002.2094479548178
           },
           "nodeIndex": "DimCategory",
           "nodeLineageTag": "df9ce89d-a957-4047-b135-7124c6843e02",
@@ -37,7 +37,7 @@
         {
           "location": {
             "x": 2375.5025467612777,
-            "y": 1293.6770549049138
+            "y": 1490.2512685061834
           },
           "nodeIndex": "DimCohortMonth",
           "nodeLineageTag": "a9e993a0-7398-474e-a0d5-d203c9237403",
@@ -50,7 +50,7 @@
         {
           "location": {
             "x": 2387.6059590793907,
-            "y": 1854.7865701037883
+            "y": 2051.3607837050577
           },
           "nodeIndex": "DimMonthsSinceFirst",
           "nodeLineageTag": "b8b5d3cd-0e23-4bf4-ae85-56678844dcf1",
@@ -63,7 +63,7 @@
         {
           "location": {
             "x": 1625.1973458966788,
-            "y": 985.91191191762141
+            "y": 1182.4861255188907
           },
           "nodeIndex": "DimSegment",
           "nodeLineageTag": "96ca28dd-3e24-4325-86c4-dbdd0f6e0ee6",
@@ -76,7 +76,7 @@
         {
           "location": {
             "x": 915.61231527527173,
-            "y": 1628.68178088849
+            "y": 1825.2559944897594
           },
           "nodeIndex": "FactAnomalyFindings",
           "nodeLineageTag": "f0d5a552-37b9-4f8d-9161-1d68b44a2ff6",
@@ -89,7 +89,7 @@
         {
           "location": {
             "x": 662.96771629913189,
-            "y": 416.66666666666657
+            "y": 613.24088026793606
           },
           "nodeIndex": "FactCategoryMixShift",
           "nodeLineageTag": "1e558c4d-1180-4c4c-b2f6-51a012a48b6b",
@@ -102,7 +102,7 @@
         {
           "location": {
             "x": 748.4179728386747,
-            "y": 1154.5954471150008
+            "y": 1351.1696607162703
           },
           "nodeIndex": "FactCategoryPerformance",
           "nodeLineageTag": "a9a65881-26b7-4fcd-8a00-2a528be9aa42",
@@ -115,7 +115,7 @@
         {
           "location": {
             "x": 2595.8569213881942,
-            "y": 1563.5189701436311
+            "y": 1760.0931837449007
           },
           "nodeIndex": "FactCohortRetention",
           "nodeLineageTag": "52a82955-2fcf-413f-a88b-47791befc0aa",
@@ -128,7 +128,7 @@
         {
           "location": {
             "x": 574.5803879544701,
-            "y": 1628.451284259558
+            "y": 1825.0254978608273
           },
           "nodeIndex": "FactConvertingVsNon",
           "nodeLineageTag": "5d52df32-3950-4096-80f6-896282b77b9d",
@@ -141,7 +141,7 @@
         {
           "location": {
             "x": 1300.1440862935913,
-            "y": 1635.2818567151733
+            "y": 1831.8560703164426
           },
           "nodeIndex": "FactCovidComparison",
           "nodeLineageTag": "7734017f-b38c-47ab-82d1-fe53952c59f2",
@@ -154,7 +154,7 @@
         {
           "location": {
             "x": 2686.0878745654272,
-            "y": 648.33378495844568
+            "y": 844.90799855971511
           },
           "nodeIndex": "FactFunnelByBrand",
           "nodeLineageTag": "86abbd9d-cdc4-4c71-b75f-6b9c2c6df50e",
@@ -167,7 +167,7 @@
         {
           "location": {
             "x": 235.18518518518516,
-            "y": 1171.7182607595546
+            "y": 1368.2924743608241
           },
           "nodeIndex": "FactFunnelByCategory",
           "nodeLineageTag": "3a1b3cf8-4f1a-43f6-b941-013e118019a1",
@@ -180,7 +180,7 @@
         {
           "location": {
             "x": 290.93396415164892,
-            "y": 393.14842720253887
+            "y": 589.7226408038083
           },
           "nodeIndex": "FactPriceOutliers",
           "nodeLineageTag": "f4829d9c-c47b-4337-aa4e-8723c91bbad9",
@@ -193,7 +193,7 @@
         {
           "location": {
             "x": 2168.2360227135755,
-            "y": 1567.4072348366856
+            "y": 1763.9814484379549
           },
           "nodeIndex": "FactRetentionCurve",
           "nodeLineageTag": "87ddb7b9-c67a-4cf3-b4c2-e046f7e42192",
@@ -206,7 +206,7 @@
         {
           "location": {
             "x": 1434.7989117279599,
-            "y": 658.02335112350409
+            "y": 854.59756472477352
           },
           "nodeIndex": "FactRFMMonetaryDist",
           "nodeLineageTag": "16357656-71d0-4048-b5c2-99655f4d3fe5",
@@ -219,7 +219,7 @@
         {
           "location": {
             "x": 1765.2077166315489,
-            "y": 657.24351310278223
+            "y": 853.81772670405167
           },
           "nodeIndex": "FactRFMSegment",
           "nodeLineageTag": "d8e5dffa-0fa3-499a-be06-75d5d44c451e",
@@ -232,7 +232,7 @@
         {
           "location": {
             "x": 246.67173620300946,
-            "y": 1651.6112506383065
+            "y": 1848.185464239576
           },
           "nodeIndex": "FactSessionDepth",
           "nodeLineageTag": "e062110c-7784-4896-9a01-d5c2bb19ba3b",
@@ -245,7 +245,7 @@
         {
           "location": {
             "x": 2351.0595684834007,
-            "y": 641.99982742927841
+            "y": 838.57404103054785
           },
           "nodeIndex": "FactTopBrands",
           "nodeLineageTag": "14ab2cbb-4a2b-4784-a4cd-b7f0133dc6f5",
@@ -254,6 +254,45 @@
             "width": 234
           },
           "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 2734.902689380242,
+            "y": 841.39328505189417
+          },
+          "nodeIndex": "_Measures",
+          "nodeLineageTag": "8f2b6e5a-1c4d-4a3e-9f7b-2d6e8a0c5b1f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3018.902689380242,
+            "y": 841.39328505189417
+          },
+          "nodeIndex": "DataDictionary_Columns",
+          "nodeLineageTag": "78545696-4e5e-4640-9853-c21b7085c726",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3302.902689380242,
+            "y": 841.39328505189417
+          },
+          "nodeIndex": "DataDictionary_Measures",
+          "nodeLineageTag": "18a334f5-dcd5-457b-90af-592c2327e262",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",

@@ -6,10 +6,10 @@
     "customer-segments",
     "category-brand",
     "covid-impact",
-    "data-dictionary",
     "cohort-detail",
     "anomaly-detail",
-    "funnel-floor-bias-tooltip"
+    "funnel-floor-bias-tooltip",
+    "data-dictionary"
   ],
-  "activePageName": "overview"
+  "activePageName": "data-dictionary"
 }

@@ -2,66 +2,82 @@ table DataDictionary_Measures
 	lineageTag: 18a334f5-dcd5-457b-90af-592c2327e262
 
 	column ID
+		lineageTag: 1831d0e1-39d2-4c2f-be49-4018b185133d
 		isNameInferred
 		sourceColumn: [ID]
 
 	column Name
+		lineageTag: 70de74da-e823-466f-833d-17caa69dcd2b
 		isNameInferred
 		sourceColumn: [Name]
 
 	column Table
+		lineageTag: 70bf021c-bb4e-4a64-8988-18abe8cc4835
 		isNameInferred
 		sourceColumn: [Table]
 
 	column Description
+		lineageTag: b27da5c4-af7a-4551-8d3d-71e9c6320849
 		isNameInferred
 		sourceColumn: [Description]
 
 	column DataType
+		lineageTag: 9a59b2fa-2c68-43a7-991d-3cf40a41616d
 		isNameInferred
 		sourceColumn: [DataType]
 
 	column Expression
+		lineageTag: 38b91557-ac1b-46e0-8ea2-f36b654098aa
 		isNameInferred
 		sourceColumn: [Expression]
 
 	column FormatString
+		lineageTag: 1cbc6070-3a5c-4bc0-bb13-d8094b87b9dd
 		isNameInferred
 		sourceColumn: [FormatString]
 
 	column IsHidden
+		lineageTag: d0642562-d0b4-4253-ab32-daaa5fe91190
 		isNameInferred
 		sourceColumn: [IsHidden]
 
 	column State
+		lineageTag: 83a366af-94d8-4b66-b040-2dc0004e6058
 		isNameInferred
 		sourceColumn: [State]
 
 	column KPIID
+		lineageTag: 4bfdde78-ccb2-4ca2-80e5-ec7a80c19800
 		isNameInferred
 		sourceColumn: [KPIID]
 
 	column IsSimpleMeasure
+		lineageTag: 4d63eb8e-0f6c-4b8d-894e-4d8d8f8816f6
 		isNameInferred
 		sourceColumn: [IsSimpleMeasure]
 
 	column DisplayFolder
+		lineageTag: c334c9ea-2438-496b-9308-748fe702da77
 		isNameInferred
 		sourceColumn: [DisplayFolder]
 
 	column DetailRowsDefinition
+		lineageTag: b4678675-8e93-4c2e-8bd8-a5ef754ec378
 		isNameInferred
 		sourceColumn: [DetailRowsDefinition]
 
 	column DataCategory
+		lineageTag: 9accf7f5-2cc5-4a40-80dc-45373d18e9c5
 		isNameInferred
 		sourceColumn: [DataCategory]
 
 	column FormatStringDefinition
+		lineageTag: 0d6870fd-dfb7-47e6-9ae3-4338c0621cc6
 		isNameInferred
 		sourceColumn: [FormatStringDefinition]
 
 	column LineageTag
+		lineageTag: 5ea83c1d-58b4-4911-85c8-40709ab06360
 		isNameInferred
 		sourceColumn: [LineageTag]
 
