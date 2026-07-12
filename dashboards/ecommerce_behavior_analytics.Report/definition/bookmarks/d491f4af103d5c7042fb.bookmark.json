@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.0.0/schema.json",
-  "displayName": "Viz Session Depth",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Session Depth vs Conversion",
   "name": "d491f4af103d5c7042fb",
   "options": {
     "applyOnlyToTargetVisuals": true,
@@ -376,21 +376,6 @@
                   }
                 ]
               }
-            }
-          },
-          "f559ce173773560f809b": {
-            "singleVisual": {
-              "visualType": "actionButton",
-              "objects": {},
-              "display": {
-                "mode": "hidden"
-              }
-            }
-          },
-          "8ef9778ec44f9234d41d": {
-            "singleVisual": {
-              "visualType": "actionButton",
-              "objects": {}
             }
           }
         }

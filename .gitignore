@@ -39,3 +39,7 @@ Thumbs.db
 # control — the TMDL/JSON definition files are the actual portable source.
 **/.pbi/localSettings.json
 **/.pbi/cache.abf
+
+# Personal reference documentation (Power BI feature docs, scraped images)
+# — working notes for this build, not part of the portfolio deliverable.
+dashboards/documentation/

@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.0.0/schema.json",
-  "displayName": "Viz V C P",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Funnel Views-Carts-Purchases",
   "name": "32d75f4708e135cd13ad",
   "options": {
     "applyOnlyToTargetVisuals": true,
@@ -375,21 +375,6 @@
                     }
                   }
                 ]
-              }
-            }
-          },
-          "f559ce173773560f809b": {
-            "singleVisual": {
-              "visualType": "actionButton",
-              "objects": {}
-            }
-          },
-          "8ef9778ec44f9234d41d": {
-            "singleVisual": {
-              "visualType": "actionButton",
-              "objects": {},
-              "display": {
-                "mode": "hidden"
               }
             }
           }

@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.0.0/schema.json",
-  "displayName": "Default Funnel",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Reset Visuals",
   "name": "dc601c73b32e963c72e1",
   "options": {
     "targetVisualNames": []
@@ -15,7 +15,7 @@
             "filters": {
               "byExpr": [
                 {
-                  "name": "6b4d8abeec1232c9c0b6",
+                  "name": "12665ddbfda63fd394e1",
                   "type": "Categorical",
                   "expression": {
                     "Column": {
@@ -30,7 +30,7 @@
                   "howCreated": 0
                 },
                 {
-                  "name": "a4184d3142bd9e9031f9",
+                  "name": "3089d9dbd72af48dfc42",
                   "type": "Advanced",
                   "expression": {
                     "Aggregation": {
@@ -50,7 +50,7 @@
                   "howCreated": 0
                 },
                 {
-                  "name": "f373bd4168bce1d27e4d",
+                  "name": "0d9cf8506aa92cf8dca6",
                   "type": "Advanced",
                   "expression": {
                     "Measure": {
@@ -105,6 +105,12 @@
               }
             }
           },
+          "2518ec67ba4c84054b77": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
           "2b155765f5e514907563": {
             "singleVisual": {
               "visualType": "pageNavigator",
@@ -121,7 +127,7 @@
             "filters": {
               "byExpr": [
                 {
-                  "name": "c680703ac121b730ebf0",
+                  "name": "bbef66ef95b42bb1200f",
                   "type": "Categorical",
                   "expression": {
                     "Column": {
@@ -136,7 +142,7 @@
                   "howCreated": 0
                 },
                 {
-                  "name": "ea973a98c384fed2da9a",
+                  "name": "3e86bd3aaef2cf481193",
                   "type": "Advanced",
                   "expression": {
                     "Measure": {
@@ -202,7 +208,7 @@
             "filters": {
               "byExpr": [
                 {
-                  "name": "9a44ec2b7ea522dab8bd",
+                  "name": "be292b3d819cfc610936",
                   "type": "Advanced",
                   "expression": {
                     "Aggregation": {
@@ -222,7 +228,7 @@
                   "howCreated": 0
                 },
                 {
-                  "name": "a3131dbb42e1d6a24f33",
+                  "name": "fd01aac3400ced35bf2e",
                   "type": "Advanced",
                   "expression": {
                     "Aggregation": {
@@ -242,7 +248,7 @@
                   "howCreated": 0
                 },
                 {
-                  "name": "f0cf914e72446e7d675c",
+                  "name": "db02f5013d055a4b63fe",
                   "type": "Advanced",
                   "expression": {
                     "Aggregation": {
@@ -297,6 +303,31 @@
               "objects": {}
             }
           },
+          "958d899b8905f423bfc0": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "260e0f81fcb9936d4dde",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Funnel Insight"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6855",
+              "objects": {}
+            }
+          },
           "ae8c000055b0abc08e69": {
             "singleVisual": {
               "visualType": "textbox",
@@ -307,7 +338,7 @@
             "filters": {
               "byExpr": [
                 {
-                  "name": "64552f78001bf1c9f215",
+                  "name": "937fe98308cda5f0fbc7",
                   "type": "Categorical",
                   "expression": {
                     "Column": {
@@ -322,7 +353,7 @@
                   "howCreated": 0
                 },
                 {
-                  "name": "e49a481be1e92625a0ff",
+                  "name": "badd8c2d3fe0e390f17a",
                   "type": "Advanced",
                   "expression": {
                     "Measure": {
@@ -372,49 +403,9 @@
               }
             }
           },
-          "f559ce173773560f809b": {
+          "57e889cd02bbda9e07ef": {
             "singleVisual": {
-              "visualType": "actionButton",
-              "objects": {},
-              "display": {
-                "mode": "hidden"
-              }
-            }
-          },
-          "8ef9778ec44f9234d41d": {
-            "singleVisual": {
-              "visualType": "actionButton",
-              "objects": {}
-            }
-          },
-          "958d899b8905f423bfc0": {
-            "filters": {
-              "byExpr": [
-                {
-                  "name": "86b79f01ae2aeafed677",
-                  "type": "Advanced",
-                  "expression": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "_Measures"
-                        }
-                      },
-                      "Property": "Funnel Insight"
-                    }
-                  },
-                  "howCreated": 0
-                }
-              ]
-            },
-            "singleVisual": {
-              "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6855",
-              "objects": {}
-            }
-          },
-          "2518ec67ba4c84054b77": {
-            "singleVisual": {
-              "visualType": "shape",
+              "visualType": "bookmarkNavigator",
               "objects": {}
             }
           }
