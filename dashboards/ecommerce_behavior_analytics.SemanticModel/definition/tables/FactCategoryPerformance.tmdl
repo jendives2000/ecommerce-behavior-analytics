@@ -7,6 +7,17 @@ table FactCategoryPerformance
 		displayFolder: 'Category & Brand'
 		lineageTag: 306249a2-b7ed-4e38-b8c0-2e5827a49a7e
 
+	/// Median purchase volume across whichever categories are in view, recalculating live so it stays correct under any future filter/slicer. Built specifically to bind to the Y-axis constant line on the 'Price vs. Purchase Volume by Category' scatter chart, since scatter charts don't expose a dynamic Y-axis Median Line option in the Analytics pane - a constant line bound to this measure achieves the same result. Not meant to be used directly in another chart.
+	measure 'Category Purchase Volume Median' = MEDIAN(FactCategoryPerformance[Purchases])
+		formatString: #,##0
+		displayFolder: Category & Brand
+		lineageTag: 846cd9d4-c537-4ed1-a2b6-2a296fec4942
+
+	/// Hex color for the 'Revenue by Category' bar chart - amber for whichever category carries the TaxonomyMislabeledFlag, otherwise the theme's default bar blue. Bind via Format visual > Bars > Colors > fx > Format by: Field value, so the flagged category's known data-quality issue is visible on the chart itself, not just in a caption.
+	measure 'Category Revenue Bar Color' = IF(SELECTEDVALUE(DimCategory[TaxonomyMislabeledFlag]) = "Y", "#E67E22", "#70B0E0")
+		displayFolder: Category & Brand\Chart Colors
+		lineageTag: b078fea6-d2db-4699-bbe3-4afb7dd7d5d1
+
 	/// Links to DimCategory. One row per one of the top 8 categories by revenue.
 	column CategoryCode
 		dataType: string

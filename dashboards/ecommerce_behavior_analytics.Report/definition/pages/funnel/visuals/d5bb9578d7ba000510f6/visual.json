@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "d5bb9578d7ba000510f6",
   "position": {
     "x": 0,
@@ -106,6 +106,50 @@
                 }
               }
             }
+          }
+        },
+        {
+          "properties": {
+            "borderShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "borderSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "2D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "DimCategory"
+                          }
+                        },
+                        "Property": "DisplayName"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'DIY / Home Improvement'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
           }
         }
       ],

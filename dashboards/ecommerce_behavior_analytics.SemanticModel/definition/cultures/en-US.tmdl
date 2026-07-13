@@ -15719,108 +15719,131 @@ cultureInfo en-US
 			          }
 			        }
 			      ]
+			    },
+			    "entity__measure.funnel_insight": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Measures",
+			          "ConceptualProperty": "Funnel Insight"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "funnel insight": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "insight": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "funnel awareness": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "funnel intuition": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "funnel perception": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "funnel acumen": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "funnel comprehension": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "funnel discernment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "funnel perceptiveness": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "awareness": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "intuition": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "perception": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
-			    "fact_category_mix_shift_has_dim_category": {
-			      "Binding": {
-			        "ConceptualEntity": "FactCategoryMixShift"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_category_mix_shift": {
-			          "Target": {
-			            "Entity": "fact_category_mix_shift"
-			          }
-			        },
-			        "dim_category": {
-			          "Target": {
-			            "Entity": "dim_category"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_category_mix_shift"
-			            },
-			            "Object": {
-			              "Role": "dim_category"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fact_category_mix_shifts_have_dim_categories"
-			        }
-			      ]
-			    },
-			    "dim_segment_has_fact_RFM_segment": {
-			      "Binding": {
-			        "ConceptualEntity": "DimSegment"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_segment": {
-			          "Target": {
-			            "Entity": "dim_segment"
-			          }
-			        },
-			        "fact_RFM_segment": {
-			          "Target": {
-			            "Entity": "fact_RFM_segment"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_segment"
-			            },
-			            "Object": {
-			              "Role": "fact_RFM_segment"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_segments_have_fact_RFM_segments"
-			        }
-			      ]
-			    },
-			    "dim_segment_has_fact_RFM_monetary_dist": {
-			      "Binding": {
-			        "ConceptualEntity": "DimSegment"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_segment": {
-			          "Target": {
-			            "Entity": "dim_segment"
-			          }
-			        },
-			        "fact_RFM_monetary_dist": {
-			          "Target": {
-			            "Entity": "fact_RFM_monetary_dist"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_segment"
-			            },
-			            "Object": {
-			              "Role": "fact_RFM_monetary_dist"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_segments_have_fact_RFM_monetary_dists"
-			        }
-			      ]
-			    },
 			    "dim_month_since_first_has_fact_retention_curve": {
 			      "Binding": {
 			        "ConceptualEntity": "DimMonthsSinceFirst"
@@ -16049,6 +16072,105 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "dim_brands_have_fact_funnel_by_brand"
+			        }
+			      ]
+			    },
+			    "fact_session_depth_has_entity__measure_funnel_insight": {
+			      "Binding": {
+			        "ConceptualEntity": "FactSessionDepth"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_session_depth": {
+			          "Target": {
+			            "Entity": "fact_session_depth"
+			          }
+			        },
+			        "entity__measure.funnel_insight": {
+			          "Target": {
+			            "Entity": "entity__measure.funnel_insight"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_session_depth"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.funnel_insight"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_session_depths_have_funnel_insight"
+			        }
+			      ]
+			    },
+			    "fact_funnel_by_category_has_entity__measure_funnel_insight": {
+			      "Binding": {
+			        "ConceptualEntity": "FactFunnelByCategory"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_funnel_by_category": {
+			          "Target": {
+			            "Entity": "fact_funnel_by_category"
+			          }
+			        },
+			        "entity__measure.funnel_insight": {
+			          "Target": {
+			            "Entity": "entity__measure.funnel_insight"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_funnel_by_category"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.funnel_insight"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_funnel_by_category_have_funnel_insight"
+			        }
+			      ]
+			    },
+			    "dim_category_has_entity__measure_funnel_insight": {
+			      "Binding": {
+			        "ConceptualEntity": "DimCategory"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_category": {
+			          "Target": {
+			            "Entity": "dim_category"
+			          }
+			        },
+			        "entity__measure.funnel_insight": {
+			          "Target": {
+			            "Entity": "entity__measure.funnel_insight"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_category"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.funnel_insight"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_categories_have_funnel_insight"
 			        }
 			      ]
 			    },
@@ -21299,6 +21421,105 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "some_data_dictionary_measures_are_hidden_data_dictionary_measures"
+			        }
+			      ]
+			    },
+			    "dim_segment_has_fact_RFM_monetary_dist": {
+			      "Binding": {
+			        "ConceptualEntity": "DimSegment"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_segment": {
+			          "Target": {
+			            "Entity": "dim_segment"
+			          }
+			        },
+			        "fact_RFM_monetary_dist": {
+			          "Target": {
+			            "Entity": "fact_RFM_monetary_dist"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_segment"
+			            },
+			            "Object": {
+			              "Role": "fact_RFM_monetary_dist"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_segments_have_fact_RFM_monetary_dists"
+			        }
+			      ]
+			    },
+			    "dim_segment_has_fact_RFM_segment": {
+			      "Binding": {
+			        "ConceptualEntity": "DimSegment"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_segment": {
+			          "Target": {
+			            "Entity": "dim_segment"
+			          }
+			        },
+			        "fact_RFM_segment": {
+			          "Target": {
+			            "Entity": "fact_RFM_segment"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_segment"
+			            },
+			            "Object": {
+			              "Role": "fact_RFM_segment"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_segments_have_fact_RFM_segments"
+			        }
+			      ]
+			    },
+			    "fact_category_mix_shift_has_dim_category": {
+			      "Binding": {
+			        "ConceptualEntity": "FactCategoryMixShift"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_category_mix_shift": {
+			          "Target": {
+			            "Entity": "fact_category_mix_shift"
+			          }
+			        },
+			        "dim_category": {
+			          "Target": {
+			            "Entity": "dim_category"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_category_mix_shift"
+			            },
+			            "Object": {
+			              "Role": "dim_category"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_category_mix_shifts_have_dim_categories"
 			        }
 			      ]
 			    },

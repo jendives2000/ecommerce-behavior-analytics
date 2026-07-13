@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "12ad915a2fc3d193cc1c",
   "position": {
-    "x": 11.844997108155003,
-    "y": 313.15211104684789,
-    "z": 7000,
-    "height": 390.07461247838319,
-    "width": 599.652978600347,
-    "tabOrder": 6000
+    "x": 11.750305997552019,
+    "y": 314.90820073439409,
+    "z": 6000,
+    "height": 388.54345165238675,
+    "width": 600.04895960832312,
+    "tabOrder": 8000
   },
   "visualGroup": {
     "displayName": "Funnel & SD vs C",

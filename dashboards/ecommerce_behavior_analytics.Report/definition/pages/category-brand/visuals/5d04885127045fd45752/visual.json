@@ -1,16 +1,16 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "0e6d79cebe31b51a9b2a",
+  "name": "5d04885127045fd45752",
   "position": {
-    "x": 19.098665368775453,
-    "y": 80.446999356361545,
-    "z": 0,
-    "height": 308.09645229602518,
-    "width": 549.84401563814583,
-    "tabOrder": 0
+    "x": 0,
+    "y": 0,
+    "z": 2001,
+    "height": 282.00734394124845,
+    "width": 574.98164014687882,
+    "tabOrder": 2001
   },
   "visual": {
-    "visualType": "lineClusteredColumnComboChart",
+    "visualType": "clusteredBarChart",
     "query": {
       "queryState": {
         "Category": {
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "FactSessionDepth"
+                      "Entity": "DimCategory"
                     }
                   },
-                  "Property": "EventBucket"
+                  "Property": "DisplayName"
                 }
               },
-              "queryRef": "FactSessionDepth.EventBucket",
-              "nativeQueryRef": "EventBucket",
+              "queryRef": "DimCategory.DisplayName",
+              "nativeQueryRef": "DisplayName",
               "active": true
             }
           ]
@@ -41,36 +41,17 @@
                     "Column": {
                       "Expression": {
                         "SourceRef": {
-                          "Entity": "FactSessionDepth"
+                          "Entity": "FactCategoryPerformance"
                         }
                       },
-                      "Property": "TotalSessions"
+                      "Property": "TotalRevenue"
                     }
                   },
                   "Function": 0
                 }
               },
-              "queryRef": "Sum(FactSessionDepth.TotalSessions)",
-              "nativeQueryRef": "Total Sessions",
-              "displayName": "Total Sessions"
-            }
-          ]
-        },
-        "Y2": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "FactSessionDepth"
-                    }
-                  },
-                  "Property": "Session Conversion Rate"
-                }
-              },
-              "queryRef": "FactSessionDepth.Session Conversion Rate",
-              "nativeQueryRef": "Session Conversion Rate"
+              "queryRef": "Sum(FactCategoryPerformance.TotalRevenue)",
+              "nativeQueryRef": "Sum of TotalRevenue"
             }
           ]
         }
@@ -84,25 +65,51 @@
                   "Column": {
                     "Expression": {
                       "SourceRef": {
-                        "Entity": "FactSessionDepth"
+                        "Entity": "FactCategoryPerformance"
                       }
                     },
-                    "Property": "TotalSessions"
+                    "Property": "TotalRevenue"
                   }
                 },
                 "Function": 0
               }
             },
-            "direction": "Descending"
+            "direction": "Ascending"
           }
-        ],
-        "isDefaultSort": true
+        ]
       }
     },
     "objects": {
       "categoryAxis": [
         {
           "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
             "showAxisTitle": {
               "expr": {
                 "Literal": {
@@ -110,10 +117,17 @@
                 }
               }
             },
-            "show": {
+            "start": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "0D"
+                }
+              }
+            },
+            "end": {
+              "expr": {
+                "Literal": {
+                  "Value": "1100000000D"
                 }
               }
             }
@@ -122,19 +136,72 @@
       ],
       "dataPoint": [
         {
+          "properties": {}
+        },
+        {
           "properties": {
             "fill": {
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 2,
-                      "Percent": -0.5
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactCategoryPerformance"
+                        }
+                      },
+                      "Property": "Category Revenue Bar Color"
                     }
                   }
                 }
               }
             }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "borderShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "DimCategory"
+                          }
+                        },
+                        "Property": "DisplayName"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'DIY / Home Improvement'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
           }
         }
       ],
@@ -145,6 +212,13 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
                 }
               }
             },
@@ -159,178 +233,11 @@
                   }
                 }
               }
-            }
-          }
-        },
-        {
-          "properties": {
-            "labelPosition": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Auto'"
-                }
-              }
-            },
-            "enableBackground": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "enableValueDataLabel": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "Sum(FactSessionDepth.TotalSessions)"
-          }
-        },
-        {
-          "properties": {
-            "enableBackground": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "labelPrecision": {
-              "expr": {
-                "Literal": {
-                  "Value": "1L"
-                }
-              }
-            },
-            "enableDetailDataLabel": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
             },
             "labelPosition": {
               "expr": {
                 "Literal": {
-                  "Value": "'Auto'"
-                }
-              }
-            },
-            "optimizeLabelDisplay": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "10D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "FactSessionDepth.Session Conversion Rate"
-          }
-        }
-      ],
-      "legend": [
-        {
-          "properties": {
-            "showTitle": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "valueAxis": [
-        {
-          "properties": {
-            "secStart": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            },
-            "secEnd": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
-                }
-              }
-            },
-            "secShow": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "secTitleColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 1,
-                      "Percent": 0.4
-                    }
-                  }
-                }
-              }
-            },
-            "titleColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 1,
-                      "Percent": 0.4
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ],
-      "seriesLabels": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "lineStyles": [
-        {
-          "properties": {
-            "strokeWidth": {
-              "expr": {
-                "Literal": {
-                  "Value": "2D"
+                  "Value": "'OutsideEnd'"
                 }
               }
             }
@@ -361,6 +268,13 @@
                 }
               }
             },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            },
             "fontSize": {
               "expr": {
                 "Literal": {
@@ -371,7 +285,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Session Depth vs. Conversion'"
+                  "Value": "'Revenue by Category'"
                 }
               }
             }
@@ -477,5 +391,5 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "12ad915a2fc3d193cc1c"
+  "parentGroupName": "51c8ccdbee1cdcc9fdb0"
 }

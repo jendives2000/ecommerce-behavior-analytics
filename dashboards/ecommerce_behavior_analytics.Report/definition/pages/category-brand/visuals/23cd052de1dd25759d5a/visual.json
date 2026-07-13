@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "958d899b8905f423bfc0",
+  "name": "23cd052de1dd25759d5a",
   "position": {
-    "x": 57.968176254589963,
-    "y": 80.68543451652387,
-    "z": 7000,
-    "height": 202.88861689106486,
-    "width": 524.84700122399022,
-    "tabOrder": 6000
+    "x": 17.233782129742963,
+    "y": 90.085679314565482,
+    "z": 9000,
+    "height": 147.2705018359853,
+    "width": 607.88249694002445,
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6855",
@@ -23,11 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Funnel Insight"
+                  "Property": "Category Brand Insight"
                 }
               },
-              "queryRef": "_Measures.Funnel Insight",
-              "nativeQueryRef": "Funnel Insight"
+              "queryRef": "_Measures.Category Brand Insight",
+              "nativeQueryRef": "Category Brand Insight"
             }
           ]
         }

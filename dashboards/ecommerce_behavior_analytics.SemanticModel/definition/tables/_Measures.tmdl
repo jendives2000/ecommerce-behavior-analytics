@@ -155,11 +155,7 @@ table _Measures
 	/// Single dynamic sentence comparing how strongly session depth, category, and brand each swing conversion rate - recalculates live so the multiples always match current data. Also dynamically checks whichever category currently ranks #1 by conversion against the TaxonomyMislabeledFlag column, only appending the taxonomy caveat if the actual top-ranked category is the flagged one (does not hardcode a category name). Bind to an HTML Content visual's data role.
 	measure 'Funnel Insight' =
 			VAR TopCategoryTable =
-			    TOPN(
-			        1,
-			        SUMMARIZE(FactFunnelByCategory, FactFunnelByCategory[CategoryCode], "CatRate", [Category Conversion Rate]),
-			        [CatRate], DESC
-			    )
+			    TOPN(1, SUMMARIZE(FactFunnelByCategory, FactFunnelByCategory[CategoryCode], "CatRate", [Category Conversion Rate]), [CatRate], DESC)
 			VAR TopCategoryCode = MAXX(TopCategoryTable, FactFunnelByCategory[CategoryCode])
 			VAR TopCategoryDisplayName = LOOKUPVALUE(DimCategory[DisplayName], DimCategory[CategoryCode], TopCategoryCode)
 			VAR TopCategoryFlagged = LOOKUPVALUE(DimCategory[TaxonomyMislabeledFlag], DimCategory[CategoryCode], TopCategoryCode)
@@ -171,13 +167,42 @@ table _Measures
 			VAR CaveatParagraph =
 			    IF(
 			        TopCategoryFlagged = "Y",
-			        "<p style='margin:8px 0 0 0;'>Note: the top category shown, " & TopCategoryDisplayName & ", has a known data quality flag - see Data Quality Findings for details.</p>",
+			        "<p style='margin:8px 0 0 0;'>Note: the top category shown, " & TopCategoryDisplayName & ", has a known data quality flag - see Data Quality Findings for details. More detail is available on the Category & Brand page.</p>",
 			        ""
 			    )
 			RETURN
 			    "<div style='font-family:Segoe UI,sans-serif;color:#FFFFFF;font-size:15px;text-align:justify;'><p style='margin:0;'>" & MainParagraph & "</p>" & CaveatParagraph & "</div>"
 		displayFolder: Insights\Funnel
 		lineageTag: 7e44e649-7356-471c-8c8f-cc7ad0f3ca6a
+
+	/// Single dynamic paragraph summarizing revenue concentration across categories and brands - which category and which brand actually dominate revenue on this page, expressed as a share of total. Dynamically checks whichever category currently ranks #1 by revenue against the TaxonomyMislabeledFlag column, only appending the caveat if the actual top-ranked category is the flagged one. Bind to an HTML Content visual's data role.
+	measure 'Category Brand Insight' =
+			VAR TopCategoryTable =
+			    TOPN(1, SUMMARIZE(FactCategoryPerformance, FactCategoryPerformance[CategoryCode], "Rev", CALCULATE(SUM(FactCategoryPerformance[TotalRevenue]))), [Rev], DESC)
+			VAR TopCategoryCode = MAXX(TopCategoryTable, FactCategoryPerformance[CategoryCode])
+			VAR TopCategoryRevenue = MAXX(TopCategoryTable, [Rev])
+			VAR TopCategoryDisplayName = LOOKUPVALUE(DimCategory[DisplayName], DimCategory[CategoryCode], TopCategoryCode)
+			VAR TopCategoryFlagged = LOOKUPVALUE(DimCategory[TaxonomyMislabeledFlag], DimCategory[CategoryCode], TopCategoryCode)
+			VAR TotalCategoryRevenue = SUM(FactCategoryPerformance[TotalRevenue])
+			VAR CategoryShare = FORMAT(DIVIDE(TopCategoryRevenue, TotalCategoryRevenue), "0%")
+			VAR TopBrandTable =
+			    TOPN(1, SUMMARIZE(FactTopBrands, FactTopBrands[Brand], "Rev", CALCULATE(SUM(FactTopBrands[TotalRevenue]))), [Rev], DESC)
+			VAR TopBrandName = MAXX(TopBrandTable, FactTopBrands[Brand])
+			VAR TopBrandRevenue = MAXX(TopBrandTable, [Rev])
+			VAR TotalBrandRevenue = SUM(FactTopBrands[TotalRevenue])
+			VAR BrandShare = FORMAT(DIVIDE(TopBrandRevenue, TotalBrandRevenue), "0%")
+			VAR TopBrandDisplayName = UPPER(LEFT(TopBrandName, 1)) & MID(TopBrandName, 2, LEN(TopBrandName))
+			VAR MainParagraph =
+			    IF(
+			        TopCategoryFlagged = "Y",
+			        "<p style='margin:0;font-weight:600;color:#E67E22;'>On the surface, " & TopCategoryDisplayName & " looks like it drives " & CategoryShare & " of all category revenue here - but that is an illusion: since December 2019, Apple/Samsung/Xiaomi products were reclassified into this category from Electronics, so it is really consumer electronics revenue hiding under the wrong label.</p>" &
+			        "<p style='margin:8px 0 0 0;'>Strip that out, and the real concentration story is on the brand side: " & TopBrandDisplayName & " alone accounts for " & BrandShare & " of brand revenue shown here - more than every other brand combined.</p>",
+			        "<p style='margin:0;'>" & TopCategoryDisplayName & " alone accounts for " & CategoryShare & " of the category revenue shown here, and " & TopBrandDisplayName & " a similar " & BrandShare & " of brand revenue - a handful of players carry most of the weight on this page, not a broad spread across categories or brands.</p>"
+			    )
+			RETURN
+			    "<div style='font-family:Segoe UI,sans-serif;color:#FFFFFF;font-size:13px;text-align:justify;'>" & MainParagraph & "</div>"
+		displayFolder: Insights\Category & Brand
+		lineageTag: a64934ed-8a48-4e36-9a0a-960172c018ae
 
 	column Value
 		lineageTag: a861b4e5-d496-4bae-9bed-e7872af11c91

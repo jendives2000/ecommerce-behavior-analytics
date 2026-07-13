@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "2518ec67ba4c84054b77",
+  "name": "dada34defe4e35c69512",
   "position": {
-    "x": 24.283965728274172,
+    "x": 672.11750305997555,
     "y": 64.235006119951038,
-    "z": 8000,
-    "height": 219.3390452876377,
-    "width": 15.667074663402692,
+    "z": 1000,
+    "height": 650.96695226438192,
+    "width": 607.88249694002445,
     "tabOrder": 7000
   },
   "visual": {
@@ -18,7 +18,14 @@
             "tileShape": {
               "expr": {
                 "Literal": {
-                  "Value": "'line'"
+                  "Value": "'tabRoundCorner'"
+                }
+              }
+            },
+            "tabRoundCornerTopRight": {
+              "expr": {
+                "Literal": {
+                  "Value": "40L"
                 }
               }
             }
@@ -31,14 +38,14 @@
             "shapeAngle": {
               "expr": {
                 "Literal": {
-                  "Value": "90L"
+                  "Value": "180L"
                 }
               }
             }
           }
         }
       ],
-      "fill": [
+      "outline": [
         {
           "properties": {
             "show": {
@@ -51,18 +58,25 @@
           }
         }
       ],
-      "outline": [
+      "fill": [
         {
           "properties": {
-            "lineColor": {
+            "fillColor": {
               "solid": {
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
                       "ColorId": 1,
-                      "Percent": 0.2
+                      "Percent": 0
                     }
                   }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "80D"
                 }
               }
             }
