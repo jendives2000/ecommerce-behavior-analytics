@@ -98,9 +98,9 @@ table _Measures
 			VAR Ratio = [Retention Position Ratio]
 			RETURN
 			    SWITCH(
-			        TRUE(),
-			        Ratio < 0.33, "Toward the lower end of the historical cohort range",
-			        Ratio > 0.67, "Toward the higher end of the historical cohort range",
+			        TierBucket(Ratio),
+			        "Low", "Toward the lower end of the historical cohort range",
+			        "High", "Toward the higher end of the historical cohort range",
 			        "In the middle of the historical cohort range"
 			    )
 		displayFolder: HTML Cards
@@ -111,9 +111,9 @@ table _Measures
 			VAR Ratio = [Retention Position Ratio]
 			RETURN
 			    SWITCH(
-			        TRUE(),
-			        Ratio < 0.33, "#E67E22",
-			        Ratio > 0.67, "#2ECC71",
+			        TierBucket(Ratio),
+			        "Low", "#E67E22",
+			        "High", "#2ECC71",
 			        "#5B8DBE"
 			    )
 		displayFolder: HTML Cards
@@ -141,9 +141,9 @@ table _Measures
 			VAR Ratio = [Retention Position Ratio]
 			VAR RetentionFraming =
 			    SWITCH(
-			        TRUE(),
-			        Ratio < 0.33, "toward the weaker end of the historical range",
-			        Ratio > 0.67, "toward the stronger end of the historical range",
+			        TierBucket(Ratio),
+			        "Low", "toward the weaker end of the historical range",
+			        "High", "toward the stronger end of the historical range",
 			        "roughly mid-range historically"
 			    )
 			VAR InsightText = ConvRate & " of views convert and " & AbandonRate & " of carts are abandoned; first-month retention lands at " & RetentionRate & ", " & RetentionFraming & "."

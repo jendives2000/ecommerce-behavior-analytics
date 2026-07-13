@@ -1,0 +1,4 @@
+/// Buckets a 0-1 ratio into Low (<0.33), Mid, or High (>0.67). Shared threshold logic for any measure that colors or captions a value by where it sits in a historical range - avoids re-writing the same SWITCH(TRUE(), ...) thresholds in every consuming measure.
+function TierBucket = (ratio : SCALAR NUMERIC) => SWITCH(TRUE(), ratio < 0.33, "Low", ratio > 0.67, "High", "Mid")
+	lineageTag: 9bda96c6-b5d2-46ee-aac7-3000ae03a135
+
