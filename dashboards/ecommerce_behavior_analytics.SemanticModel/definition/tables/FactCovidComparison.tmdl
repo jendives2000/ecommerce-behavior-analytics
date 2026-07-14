@@ -1,6 +1,39 @@
 table FactCovidComparison
 	lineageTag: 7734017f-b38c-47ab-82d1-fe53952c59f2
 
+	/// Pre-COVID value for whichever metric is in the current row, formatted per-metric (percent, currency, or plain number) since FactCovidComparison mixes units across rows and a single column format string can't express that. Use in place of the raw PreCovid column in the comparison table.
+	measure 'COVID Pre-Period (Formatted)' =
+			VAR CurrentMetric = SELECTEDVALUE(FactCovidComparison[Metric])
+			VAR RawValue = SUM(FactCovidComparison[PreCovid])
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        CurrentMetric = "Session Conversion %", FORMAT(RawValue, "0.0%"),
+			        CurrentMetric IN {"Avg Order Value ($)", "Avg Session Revenue ($)"}, FORMAT(RawValue, "$#,##0.0"),
+			        FORMAT(RawValue, "0.0")
+			    )
+		displayFolder: COVID Impact
+		lineageTag: 2f5e73f0-2594-4a71-ace2-6629f6ccc610
+
+	/// Same as COVID Pre-Period (Formatted) but for the CovidOnset column - per-metric formatted string.
+	measure 'COVID Onset Period (Formatted)' =
+			VAR CurrentMetric = SELECTEDVALUE(FactCovidComparison[Metric])
+			VAR RawValue = SUM(FactCovidComparison[CovidOnset])
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        CurrentMetric = "Session Conversion %", FORMAT(RawValue, "0.0%"),
+			        CurrentMetric IN {"Avg Order Value ($)", "Avg Session Revenue ($)"}, FORMAT(RawValue, "$#,##0.0"),
+			        FORMAT(RawValue, "0.0")
+			    )
+		displayFolder: COVID Impact
+		lineageTag: b10d6d3f-9b0a-4f06-99f4-7343cf7ed801
+
+	/// Raw difference (CovidOnset minus PreCovid) for whichever metric is in the current row. Positive means the metric rose during COVID onset, negative means it fell. Built specifically to drive the COVID Onset column's icon conditional formatting (Format by: Rules, based on this field) - not meant to be displayed directly, since mixing units across rows (percent vs dollars vs counts) makes the raw difference itself not directly comparable across metrics, only its sign matters here.
+	measure 'COVID Onset vs Pre-COVID Delta' = SUM(FactCovidComparison[CovidOnset]) - SUM(FactCovidComparison[PreCovid])
+		displayFolder: COVID Impact
+		lineageTag: 56e4f6bb-51fe-46ba-92dc-9c9a8be345a7
+
 	/// Name of the specific metric being compared (e.g. 'Session Conversion %', 'Avg Order Value ($)'). Each row is a different metric in a different unit.
 	column Metric
 		dataType: string
@@ -35,13 +68,12 @@ table FactCovidComparison
 	/// The relative change from PreCovid to CovidOnset for this metric. Same caveat as the other columns - never sum across rows.
 	column ChangeText
 		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 957eb5f7-bd0b-428e-be30-4cee320a9172
 		summarizeBy: none
 		sourceColumn: ChangeText
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	partition FactCovidComparison = m
 		mode: import

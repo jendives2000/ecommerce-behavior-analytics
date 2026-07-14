@@ -79,7 +79,7 @@ table _Measures
 			    "<div style='font-family:Segoe UI,sans-serif;text-align:center;padding:12px;'>" &
 			        "<div style='font-size:12px;color:#9B9BA8;text-transform:uppercase;letter-spacing:0.5px;'>COVID Impact on Conversion</div>" &
 			        "<div style='font-size:32px;font-weight:700;color:#FFFFFF;margin-top:4px;'>" & LiftValue & "</div>" &
-			        "<div style='display:inline-block;margin-top:8px;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600;color:white;background-color:" & BadgeColor & ";'>" & DirectionText & "</div>" &
+			        "<div style='display:inline-block;margin-top:8px;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:400;color:black;background-color:" & BadgeColor & ";'>" & DirectionText & "</div>" &
 			    "</div>"
 		displayFolder: HTML Cards
 		lineageTag: e56ed8dc-76de-4659-9d04-7156ddab4b5d
@@ -223,6 +223,21 @@ table _Measures
 			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:15px;text-align:justify;'><p style='margin:0;'>" & MainParagraph & "</p><p style='margin:8px 0 0 0;'>" & SecondaryParagraph & "</p></div>"
 		displayFolder: Insights\Customer Segments
 		lineageTag: ba20ed7c-59ca-4ba0-8db1-78e7a5853170
+
+	/// Single dynamic insight for the COVID Impact page - recalculates live from FactCovidComparison. Complements the COVID Lift KPI Card (which headlines the session conversion number) by explaining the behavioral mechanism: deeper browsing (events/session, products viewed both up) alongside cheaper baskets (AOV down). Bind to an HTML Content visual's data role.
+	measure 'COVID Impact Insight' =
+			VAR EventsChangePct = CALCULATE(SUM(FactCovidComparison[ChangeText]), FactCovidComparison[Metric] = "Avg Events / Session")
+			VAR ProductsChangePct = CALCULATE(SUM(FactCovidComparison[ChangeText]), FactCovidComparison[Metric] = "Avg Products Viewed")
+			VAR AOVChangePct = CALCULATE(SUM(FactCovidComparison[ChangeText]), FactCovidComparison[Metric] = "Avg Order Value ($)")
+			VAR EventsChangeText = FORMAT(EventsChangePct, "+0%;-0%;0%")
+			VAR ProductsChangeText = FORMAT(ProductsChangePct, "+0%;-0%;0%")
+			VAR AOVChangeText = FORMAT(AOVChangePct, "+0%;-0%;0%")
+			VAR MainParagraph = "Lockdown did not just push more sessions toward a purchase - it changed how people shopped. Events per session rose " & EventsChangeText & " and products viewed rose " & ProductsChangeText & ", meaning visitors browsed noticeably deeper before deciding."
+			VAR SecondaryParagraph = "But baskets got cheaper: average order value fell " & AOVChangeText & ". More people bought, and they browsed more to get there, but each purchase was worth less - consistent with buyers trading down during economic uncertainty."
+			RETURN
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:15px;text-align:justify;'><p style='margin:0;'>" & MainParagraph & "</p><p style='margin:8px 0 0 0;'>" & SecondaryParagraph & "</p></div>"
+		displayFolder: Insights\COVID Impact
+		lineageTag: e6cee53e-6503-4cfb-9214-3e779f156c8b
 
 	column Value
 		lineageTag: a861b4e5-d496-4bae-9bed-e7872af11c91

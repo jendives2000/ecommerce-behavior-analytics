@@ -4589,6 +4589,16 @@ cultureInfo en-US
 			            },
 			            "Weight": 0.491
 			          }
+			        },
+			        {
+			          "Change": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -16295,42 +16305,465 @@ cultureInfo en-US
 			          }
 			        }
 			      ]
-			    }
-			  },
-			  "Relationships": {
-			    "dim_segment_has_fact_RFM_segment": {
-			      "Binding": {
-			        "ConceptualEntity": "DimSegment"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_segment": {
-			          "Target": {
-			            "Entity": "dim_segment"
-			          }
-			        },
-			        "fact_RFM_segment": {
-			          "Target": {
-			            "Entity": "fact_RFM_segment"
-			          }
+			    },
+			    "fact_converting_vs_non.total_sessions_grand_total": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactConvertingVsNon",
+			          "ConceptualProperty": "Total Sessions Grand Total"
 			        }
 			      },
-			      "Phrasings": [
+			      "State": "Generated",
+			      "Terms": [
 			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_segment"
+			          "total sessions grand total": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "grand total": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "sessions grand total": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "total session grand aggregate": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
 			            },
-			            "Object": {
-			              "Role": "fact_RFM_segment"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_segments_have_fact_RFM_segments"
+			            "Weight": 0.748
+			          }
+			        },
+			        {
+			          "total session grand overall": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        },
+			        {
+			          "session grand aggregate": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "session grand overall": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "grand aggregate": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "grand overall": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "aggregate session grand total": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.599
+			          }
+			        },
+			        {
+			          "overall session grand total": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.599
+			          }
 			        }
 			      ]
 			    },
+			    "fact_covid_comparison.COVID_preperiod_formatted": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactCovidComparison",
+			          "ConceptualProperty": "COVID Pre-Period (Formatted)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "COVID pre-period (formatted)": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "COVID pre-period": {
+			            "State": "Generated",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "COVID pre period (formatted)": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "Pre-COVID": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_covid_comparison.COVID_onset_period_formatted": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactCovidComparison",
+			          "ConceptualProperty": "COVID Onset Period (Formatted)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "COVID onset period (formatted)": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "COVID onset period": {
+			            "State": "Generated",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "COVID Onset": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "entity__measure.customer_segments_insight": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Measures",
+			          "ConceptualProperty": "Customer Segments Insight"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "customer segments insight": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "insight": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "segments insight": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "client segment insight": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "consumer segment insight": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "user segment insight": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "buyer segment insight": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "patron segment insight": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "purchaser segment insight": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "shopper segment insight": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "customer segment awareness": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "customer segment intuition": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "customer segment perception": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        }
+			      ]
+			    },
+			    "fact_covid_comparison.COVID_onset_vs_preCOVID_delta": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactCovidComparison",
+			          "ConceptualProperty": "COVID Onset vs Pre-COVID Delta"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "COVID onset vs pre-COVID delta": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "COVID onset vs pre COVID delta": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "entity__measure.COVID_impact_insight": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Measures",
+			          "ConceptualProperty": "COVID Impact Insight"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "COVID impact insight": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "insight": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "impact insight": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "covid impact awareness": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "covid impact intuition": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "covid impact perception": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "covid impact acumen": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "covid impact comprehension": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "covid impact discernment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "covid impact perceptiveness": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "impact awareness": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "impact intuition": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "impact perception": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        }
+			      ]
+			    }
+			  },
+			  "Relationships": {
 			    "dim_segment_has_fact_RFM_monetary_dist": {
 			      "Binding": {
 			        "ConceptualEntity": "DimSegment"
@@ -16592,6 +17025,237 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "dim_brands_have_fact_funnel_by_brand"
+			        }
+			      ]
+			    },
+			    "fact_covid_comparison_has_entity__measure_COVID_impact_insight": {
+			      "Binding": {
+			        "ConceptualEntity": "FactCovidComparison"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_covid_comparison": {
+			          "Target": {
+			            "Entity": "fact_covid_comparison"
+			          }
+			        },
+			        "entity__measure.COVID_impact_insight": {
+			          "Target": {
+			            "Entity": "entity__measure.COVID_impact_insight"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_covid_comparison"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.COVID_impact_insight"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_covid_comparisons_have_COVID_impact_insight"
+			        }
+			      ]
+			    },
+			    "fact_covid_comparison_has_COVID_onset_vs_preCOVID_delta": {
+			      "Binding": {
+			        "ConceptualEntity": "FactCovidComparison"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_covid_comparison": {
+			          "Target": {
+			            "Entity": "fact_covid_comparison"
+			          }
+			        },
+			        "fact_covid_comparison.COVID_onset_vs_preCOVID_delta": {
+			          "Target": {
+			            "Entity": "fact_covid_comparison.COVID_onset_vs_preCOVID_delta"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_covid_comparison"
+			            },
+			            "Object": {
+			              "Role": "fact_covid_comparison.COVID_onset_vs_preCOVID_delta"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_covid_comparisons_have_COVID_onset_vs_preCOVID_delta"
+			        }
+			      ]
+			    },
+			    "fact_RFM_segment_has_entity__measure_customer_segments_insight": {
+			      "Binding": {
+			        "ConceptualEntity": "FactRFMSegment"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_RFM_segment": {
+			          "Target": {
+			            "Entity": "fact_RFM_segment"
+			          }
+			        },
+			        "entity__measure.customer_segments_insight": {
+			          "Target": {
+			            "Entity": "entity__measure.customer_segments_insight"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_RFM_segment"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.customer_segments_insight"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_RFM_segments_have_customer_segments_insight"
+			        }
+			      ]
+			    },
+			    "fact_converting_vs_non_has_entity__measure_customer_segments_insight": {
+			      "Binding": {
+			        "ConceptualEntity": "FactConvertingVsNon"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_converting_vs_non": {
+			          "Target": {
+			            "Entity": "fact_converting_vs_non"
+			          }
+			        },
+			        "entity__measure.customer_segments_insight": {
+			          "Target": {
+			            "Entity": "entity__measure.customer_segments_insight"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_converting_vs_non"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.customer_segments_insight"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_converting_vs_nons_have_customer_segments_insight"
+			        }
+			      ]
+			    },
+			    "fact_covid_comparison_has_COVID_onset_period_formatted": {
+			      "Binding": {
+			        "ConceptualEntity": "FactCovidComparison"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_covid_comparison": {
+			          "Target": {
+			            "Entity": "fact_covid_comparison"
+			          }
+			        },
+			        "fact_covid_comparison.COVID_onset_period_formatted": {
+			          "Target": {
+			            "Entity": "fact_covid_comparison.COVID_onset_period_formatted"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_covid_comparison"
+			            },
+			            "Object": {
+			              "Role": "fact_covid_comparison.COVID_onset_period_formatted"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_covid_comparisons_have_COVID_onset_period_formatted"
+			        }
+			      ]
+			    },
+			    "fact_covid_comparison_has_COVID_preperiod_formatted": {
+			      "Binding": {
+			        "ConceptualEntity": "FactCovidComparison"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_covid_comparison": {
+			          "Target": {
+			            "Entity": "fact_covid_comparison"
+			          }
+			        },
+			        "fact_covid_comparison.COVID_preperiod_formatted": {
+			          "Target": {
+			            "Entity": "fact_covid_comparison.COVID_preperiod_formatted"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_covid_comparison"
+			            },
+			            "Object": {
+			              "Role": "fact_covid_comparison.COVID_preperiod_formatted"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_covid_comparisons_have_COVID_preperiod_formatted"
+			        }
+			      ]
+			    },
+			    "fact_converting_vs_non_has_total_sessions_grand_total": {
+			      "Binding": {
+			        "ConceptualEntity": "FactConvertingVsNon"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_converting_vs_non": {
+			          "Target": {
+			            "Entity": "fact_converting_vs_non"
+			          }
+			        },
+			        "fact_converting_vs_non.total_sessions_grand_total": {
+			          "Target": {
+			            "Entity": "fact_converting_vs_non.total_sessions_grand_total"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_converting_vs_non"
+			            },
+			            "Object": {
+			              "Role": "fact_converting_vs_non.total_sessions_grand_total"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_converting_vs_nons_have_total_sessions_grand_total"
 			        }
 			      ]
 			    },
@@ -22159,6 +22823,39 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "some_data_dictionary_measures_are_hidden_data_dictionary_measures"
+			        }
+			      ]
+			    },
+			    "dim_segment_has_fact_RFM_segment": {
+			      "Binding": {
+			        "ConceptualEntity": "DimSegment"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_segment": {
+			          "Target": {
+			            "Entity": "dim_segment"
+			          }
+			        },
+			        "fact_RFM_segment": {
+			          "Target": {
+			            "Entity": "fact_RFM_segment"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_segment"
+			            },
+			            "Object": {
+			              "Role": "fact_RFM_segment"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_segments_have_fact_RFM_segments"
 			        }
 			      ]
 			    },

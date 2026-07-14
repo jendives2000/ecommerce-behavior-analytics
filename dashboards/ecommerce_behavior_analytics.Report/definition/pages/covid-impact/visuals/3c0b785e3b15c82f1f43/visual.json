@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "1b40ae15c3740cca0e8f",
+  "name": "3c0b785e3b15c82f1f43",
   "position": {
-    "x": 93.001912045889085,
-    "y": 0,
-    "z": 0,
-    "height": 143.58189929891651,
-    "width": 325.50669216061186,
-    "tabOrder": 0
+    "x": 46.50095602294455,
+    "y": 92.186105799872522,
+    "z": 3003,
+    "height": 116.66029318036966,
+    "width": 797.85850860420646,
+    "tabOrder": 3005
   },
   "visual": {
     "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6855",
@@ -23,17 +23,16 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "COVID Lift KPI Card"
+                  "Property": "COVID Impact Insight"
                 }
               },
-              "queryRef": "_Measures.COVID Lift KPI Card",
-              "nativeQueryRef": "COVID Lift KPI Card"
+              "queryRef": "_Measures.COVID Impact Insight",
+              "nativeQueryRef": "COVID Impact Insight"
             }
           ]
         }
       }
     },
     "drillFilterOtherVisuals": true
-  },
-  "parentGroupName": "fd5ae7a3d3391c4926e5"
+  }
 }
