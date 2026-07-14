@@ -7,6 +7,9 @@ table DimSegment
 		lineageTag: dbf27c05-6386-4370-aacb-40ef4d2d9699
 		summarizeBy: none
 		sourceColumn: Segment
+		sortByColumn: SortOrder
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 

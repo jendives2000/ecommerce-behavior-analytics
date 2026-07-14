@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "258a954764773e095649",
+  "position": {
+    "x": 23.405714285714286,
+    "y": 89.234285714285718,
+    "z": 7003,
+    "height": 100.20571428571428,
+    "width": 1232.4571428571428,
+    "tabOrder": 3005
+  },
+  "visual": {
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6855",
+    "query": {
+      "queryState": {
+        "content": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Customer Segments Insight"
+                }
+              },
+              "queryRef": "_Measures.Customer Segments Insight",
+              "nativeQueryRef": "Customer Segments Insight"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

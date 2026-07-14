@@ -14,7 +14,7 @@ table FactCategoryPerformance
 		lineageTag: 846cd9d4-c537-4ed1-a2b6-2a296fec4942
 
 	/// Hex color for the 'Revenue by Category' bar chart - amber for whichever category carries the TaxonomyMislabeledFlag, otherwise the theme's default bar blue. Bind via Format visual > Bars > Colors > fx > Format by: Field value, so the flagged category's known data-quality issue is visible on the chart itself, not just in a caption.
-	measure 'Category Revenue Bar Color' = IF(SELECTEDVALUE(DimCategory[TaxonomyMislabeledFlag]) = "Y", "#E67E22", "#70B0E0")
+	measure 'Category Revenue Bar Color' = IF(SELECTEDVALUE(DimCategory[TaxonomyMislabeledFlag]) = "Y", "#E67E22", "#385870")
 		displayFolder: Category & Brand\Chart Colors
 		lineageTag: b078fea6-d2db-4699-bbe3-4afb7dd7d5d1
 

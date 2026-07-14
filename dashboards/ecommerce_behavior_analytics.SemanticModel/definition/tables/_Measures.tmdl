@@ -128,7 +128,7 @@ table _Measures
 			    "<div style='font-family:Segoe UI,sans-serif;text-align:center;padding:12px;'>" &
 			        "<div style='font-size:12px;color:#9B9BA8;text-transform:uppercase;letter-spacing:0.5px;'>Month-1 Retention Avg</div>" &
 			        "<div style='font-size:32px;font-weight:700;color:#FFFFFF;margin-top:4px;'>" & RetentionValue & "</div>" &
-			        "<div style='display:inline-block;margin-top:8px;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600;color:white;background-color:" & BadgeColor & ";'>" & PositionText & "</div>" &
+			        "<div style='display:inline-block;margin-top:8px;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:400;color:black;background-color:" & BadgeColor & ";'>" & PositionText & "</div>" &
 			    "</div>"
 		displayFolder: HTML Cards
 		lineageTag: e9cf188e-6674-4aee-9dc7-6ea8e5c46f75
@@ -148,7 +148,7 @@ table _Measures
 			    )
 			VAR InsightText = ConvRate & " of views convert and " & AbandonRate & " of carts are abandoned; first-month retention lands at " & RetentionRate & ", " & RetentionFraming & "."
 			RETURN
-			    "<div style='font-family:Segoe UI,sans-serif;color:#FFFFFF;font-size:20px;'>" & InsightText & "</div>"
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:20px;'>" & InsightText & "</div>"
 		displayFolder: Insights\Overview
 		lineageTag: 709af52b-ac37-4ed3-807f-9eb8ac924e30
 
@@ -171,7 +171,7 @@ table _Measures
 			        ""
 			    )
 			RETURN
-			    "<div style='font-family:Segoe UI,sans-serif;color:#FFFFFF;font-size:15px;text-align:justify;'><p style='margin:0;'>" & MainParagraph & "</p>" & CaveatParagraph & "</div>"
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:15px;text-align:justify;'><p style='margin:0;'>" & MainParagraph & "</p>" & CaveatParagraph & "</div>"
 		displayFolder: Insights\Funnel
 		lineageTag: 7e44e649-7356-471c-8c8f-cc7ad0f3ca6a
 
@@ -200,9 +200,29 @@ table _Measures
 			        "<p style='margin:0;'>" & TopCategoryDisplayName & " alone accounts for " & CategoryShare & " of the category revenue shown here, and " & TopBrandDisplayName & " a similar " & BrandShare & " of brand revenue - a handful of players carry most of the weight on this page, not a broad spread across categories or brands.</p>"
 			    )
 			RETURN
-			    "<div style='font-family:Segoe UI,sans-serif;color:#FFFFFF;font-size:13px;text-align:justify;'>" & MainParagraph & "</div>"
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:13px;text-align:justify;'>" & MainParagraph & "</div>"
 		displayFolder: Insights\Category & Brand
 		lineageTag: a64934ed-8a48-4e36-9a0a-960172c018ae
+
+	/// Single dynamic insight for the Customer Segments page - dynamically finds whichever RFM segment currently ranks #1 by revenue share and contrasts its user share vs revenue share, then pairs it with the converting-vs-non-converting session behavior gap from FactConvertingVsNon. Bind to an HTML Content visual's data role.
+	measure 'Customer Segments Insight' =
+			VAR TopSegmentTable =
+			    TOPN(1, SUMMARIZE(FactRFMSegment, FactRFMSegment[Segment], "Rev", CALCULATE(SUM(FactRFMSegment[PctRevenue]))), [Rev], DESC)
+			VAR TopSegmentName = MAXX(TopSegmentTable, FactRFMSegment[Segment])
+			VAR TopSegmentRevShare = MAXX(TopSegmentTable, [Rev])
+			VAR TopSegmentUserShare = CALCULATE(SUM(FactRFMSegment[PctUsers]), FactRFMSegment[Segment] = TopSegmentName)
+			VAR RevMultiple = FORMAT(DIVIDE(TopSegmentRevShare, TopSegmentUserShare), "0.0")
+			VAR RevSharePct = FORMAT(TopSegmentRevShare, "0%")
+			VAR UserSharePct = FORMAT(TopSegmentUserShare, "0%")
+			VAR ConvEvents = CALCULATE(AVERAGE(FactConvertingVsNon[AvgEvents]), FactConvertingVsNon[SessionType] = "Converting")
+			VAR NonConvEvents = CALCULATE(AVERAGE(FactConvertingVsNon[AvgEvents]), FactConvertingVsNon[SessionType] = "Non-Converting")
+			VAR ConvCarts = CALCULATE(AVERAGE(FactConvertingVsNon[AvgCarts]), FactConvertingVsNon[SessionType] = "Converting")
+			VAR MainParagraph = TopSegmentName & " customers are just " & UserSharePct & " of the base but generate " & RevSharePct & " of all revenue - " & RevMultiple & "x their fair share, and the clearest signal for where retention effort should concentrate."
+			VAR SecondaryParagraph = "The same gap shows up in behavior: a converting session averages " & FORMAT(ConvEvents, "0.0") & " events and " & FORMAT(ConvCarts, "0.0") & " cart-adds, versus " & FORMAT(NonConvEvents, "0.0") & " events and barely any cart activity for one that does not - buyers engage differently, not just longer."
+			RETURN
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:15px;text-align:justify;'><p style='margin:0;'>" & MainParagraph & "</p><p style='margin:8px 0 0 0;'>" & SecondaryParagraph & "</p></div>"
+		displayFolder: Insights\Customer Segments
+		lineageTag: ba20ed7c-59ca-4ba0-8db1-78e7a5853170
 
 	column Value
 		lineageTag: a861b4e5-d496-4bae-9bed-e7872af11c91

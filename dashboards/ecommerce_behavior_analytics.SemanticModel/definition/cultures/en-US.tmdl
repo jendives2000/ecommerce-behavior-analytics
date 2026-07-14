@@ -3905,6 +3905,16 @@ cultureInfo en-US
 			            },
 			            "Weight": 0.475
 			          }
+			        },
+			        {
+			          "Avg Events": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -4034,6 +4044,16 @@ cultureInfo en-US
 			            },
 			            "Weight": 0.485
 			          }
+			        },
+			        {
+			          "Median Events": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -4146,6 +4166,16 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "Avg Carts": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -15841,9 +15871,499 @@ cultureInfo en-US
 			          }
 			        }
 			      ]
+			    },
+			    "fact_category_performance.category_purchase_volume_median": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactCategoryPerformance",
+			          "ConceptualProperty": "Category Purchase Volume Median"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "category purchase volume median": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "volume median": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "purchase volume median": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "classification purchase volume median": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "class purchase volume median": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.599
+			          }
+			        },
+			        {
+			          "group purchase volume median": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.599
+			          }
+			        },
+			        {
+			          "type purchase volume median": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.599
+			          }
+			        },
+			        {
+			          "grouping purchase volume median": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.599
+			          }
+			        },
+			        {
+			          "kind purchase volume median": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.599
+			          }
+			        },
+			        {
+			          "category purchase volume norm": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.489
+			          }
+			        },
+			        {
+			          "category purchase volume nucleus": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.489
+			          }
+			        },
+			        {
+			          "category purchase volume midpoint": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.489
+			          }
+			        },
+			        {
+			          "purchase volume norm": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        }
+			      ]
+			    },
+			    "fact_category_performance.category_revenue_bar_color": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactCategoryPerformance",
+			          "ConceptualProperty": "Category Revenue Bar Color"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "category revenue bar color": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "color": {
+			            "Type": "Noun",
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "bar color": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "revenue bar color": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "revenue": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "category revenue": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "category income bar color": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.771
+			          }
+			        },
+			        {
+			          "income bar color": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.762
+			          }
+			        },
+			        {
+			          "category income": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "category profit bar color": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        },
+			        {
+			          "category turnover bar color": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        },
+			        {
+			          "category yield bar color": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        },
+			        {
+			          "profit bar color": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "turnover bar color": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "yield bar color": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "income": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        }
+			      ]
+			    },
+			    "entity__measure.category_brand_insight": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Measures",
+			          "ConceptualProperty": "Category Brand Insight"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "category brand insight": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "insight": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "brand insight": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "classification brand insight": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "class brand insight": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "group brand insight": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "type brand insight": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "grouping brand insight": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "kind brand insight": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "category brand awareness": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "category brand intuition": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "category brand perception": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "category brand acumen": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        }
+			      ]
+			    },
+			    "fact_converting_vs_non.median_session_duration_mmss": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "FactConvertingVsNon",
+			          "ConceptualProperty": "Median Session Duration (mm:ss)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "median session duration (mm:ss)": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "median session duration": {
+			            "State": "Generated",
+			            "Weight": 0.75
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
+			    "dim_segment_has_fact_RFM_segment": {
+			      "Binding": {
+			        "ConceptualEntity": "DimSegment"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_segment": {
+			          "Target": {
+			            "Entity": "dim_segment"
+			          }
+			        },
+			        "fact_RFM_segment": {
+			          "Target": {
+			            "Entity": "fact_RFM_segment"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_segment"
+			            },
+			            "Object": {
+			              "Role": "fact_RFM_segment"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_segments_have_fact_RFM_segments"
+			        }
+			      ]
+			    },
+			    "dim_segment_has_fact_RFM_monetary_dist": {
+			      "Binding": {
+			        "ConceptualEntity": "DimSegment"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_segment": {
+			          "Target": {
+			            "Entity": "dim_segment"
+			          }
+			        },
+			        "fact_RFM_monetary_dist": {
+			          "Target": {
+			            "Entity": "fact_RFM_monetary_dist"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_segment"
+			            },
+			            "Object": {
+			              "Role": "fact_RFM_monetary_dist"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_segments_have_fact_RFM_monetary_dists"
+			        }
+			      ]
+			    },
 			    "dim_month_since_first_has_fact_retention_curve": {
 			      "Binding": {
 			        "ConceptualEntity": "DimMonthsSinceFirst"
@@ -16072,6 +16592,224 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "dim_brands_have_fact_funnel_by_brand"
+			        }
+			      ]
+			    },
+			    "fact_converting_vs_non_has_median_session_duration_mmss": {
+			      "Binding": {
+			        "ConceptualEntity": "FactConvertingVsNon"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_converting_vs_non": {
+			          "Target": {
+			            "Entity": "fact_converting_vs_non"
+			          }
+			        },
+			        "fact_converting_vs_non.median_session_duration_mmss": {
+			          "Target": {
+			            "Entity": "fact_converting_vs_non.median_session_duration_mmss"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_converting_vs_non"
+			            },
+			            "Object": {
+			              "Role": "fact_converting_vs_non.median_session_duration_mmss"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_converting_vs_nons_have_median_session_duration_mmss"
+			        }
+			      ]
+			    },
+			    "fact_top_brand_has_entity__measure_category_brand_insight": {
+			      "Binding": {
+			        "ConceptualEntity": "FactTopBrands"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_top_brand": {
+			          "Target": {
+			            "Entity": "fact_top_brand"
+			          }
+			        },
+			        "entity__measure.category_brand_insight": {
+			          "Target": {
+			            "Entity": "entity__measure.category_brand_insight"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_top_brand"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.category_brand_insight"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_top_brands_have_category_brand_insight"
+			        }
+			      ]
+			    },
+			    "fact_category_performance_has_entity__measure_category_brand_insight": {
+			      "Binding": {
+			        "ConceptualEntity": "FactCategoryPerformance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_category_performance": {
+			          "Target": {
+			            "Entity": "fact_category_performance"
+			          }
+			        },
+			        "entity__measure.category_brand_insight": {
+			          "Target": {
+			            "Entity": "entity__measure.category_brand_insight"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_category_performance"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.category_brand_insight"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_category_performances_have_category_brand_insight"
+			        }
+			      ]
+			    },
+			    "dim_category_has_entity__measure_category_brand_insight": {
+			      "Binding": {
+			        "ConceptualEntity": "DimCategory"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_category": {
+			          "Target": {
+			            "Entity": "dim_category"
+			          }
+			        },
+			        "entity__measure.category_brand_insight": {
+			          "Target": {
+			            "Entity": "entity__measure.category_brand_insight"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_category"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.category_brand_insight"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_categories_have_category_brand_insight"
+			        }
+			      ]
+			    },
+			    "dim_category_has_fact_category_performance_category_revenue_bar_color": {
+			      "Binding": {
+			        "ConceptualEntity": "DimCategory"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_category": {
+			          "Target": {
+			            "Entity": "dim_category"
+			          }
+			        },
+			        "fact_category_performance.category_revenue_bar_color": {
+			          "Target": {
+			            "Entity": "fact_category_performance.category_revenue_bar_color"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_category"
+			            },
+			            "Object": {
+			              "Role": "fact_category_performance.category_revenue_bar_color"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_categories_have_category_revenue_bar_color"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "dim_category"
+			            },
+			            "Prepositions": [
+			              {
+			                "bar": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "fact_category_performance.category_revenue_bar_color"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_categories_are_bar_category_revenue_bar_color"
+			        }
+			      ]
+			    },
+			    "fact_category_performance_has_category_purchase_volume_median": {
+			      "Binding": {
+			        "ConceptualEntity": "FactCategoryPerformance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_category_performance": {
+			          "Target": {
+			            "Entity": "fact_category_performance"
+			          }
+			        },
+			        "fact_category_performance.category_purchase_volume_median": {
+			          "Target": {
+			            "Entity": "fact_category_performance.category_purchase_volume_median"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_category_performance"
+			            },
+			            "Object": {
+			              "Role": "fact_category_performance.category_purchase_volume_median"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_category_performances_have_category_purchase_volume_median"
 			        }
 			      ]
 			    },
@@ -21421,72 +22159,6 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "some_data_dictionary_measures_are_hidden_data_dictionary_measures"
-			        }
-			      ]
-			    },
-			    "dim_segment_has_fact_RFM_monetary_dist": {
-			      "Binding": {
-			        "ConceptualEntity": "DimSegment"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_segment": {
-			          "Target": {
-			            "Entity": "dim_segment"
-			          }
-			        },
-			        "fact_RFM_monetary_dist": {
-			          "Target": {
-			            "Entity": "fact_RFM_monetary_dist"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_segment"
-			            },
-			            "Object": {
-			              "Role": "fact_RFM_monetary_dist"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_segments_have_fact_RFM_monetary_dists"
-			        }
-			      ]
-			    },
-			    "dim_segment_has_fact_RFM_segment": {
-			      "Binding": {
-			        "ConceptualEntity": "DimSegment"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_segment": {
-			          "Target": {
-			            "Entity": "dim_segment"
-			          }
-			        },
-			        "fact_RFM_segment": {
-			          "Target": {
-			            "Entity": "fact_RFM_segment"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_segment"
-			            },
-			            "Object": {
-			              "Role": "fact_RFM_segment"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_segments_have_fact_RFM_segments"
 			        }
 			      ]
 			    },

@@ -172,7 +172,18 @@
             "borderShow": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
+                }
+              }
+            },
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E67E22'"
+                    }
+                  }
                 }
               }
             }

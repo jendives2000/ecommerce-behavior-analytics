@@ -1,6 +1,22 @@
 table FactConvertingVsNon
 	lineageTag: 5d52df32-3950-4096-80f6-896282b77b9d
 
+	/// Median session duration formatted as minutes and seconds (e.g. '4m 23s') instead of raw decimal minutes, which read ambiguously in the Converting vs. Non-Converting table (4.38 looks like it could mean 4 minutes 38 seconds rather than its actual value of 4 minutes 23 seconds). Use this measure in place of the raw MedianDurationMin column in any visual.
+	measure 'Median Session Duration (mm:ss)' =
+			VAR TotalMinutes = AVERAGE(FactConvertingVsNon[MedianDurationMin])
+			VAR TotalSeconds = ROUND(TotalMinutes * 60, 0)
+			VAR WholeMinutes = INT(TotalSeconds / 60)
+			VAR RemainingSeconds = MOD(TotalSeconds, 60)
+			RETURN WholeMinutes & "m " & FORMAT(RemainingSeconds, "00") & "s"
+		displayFolder: Customer Segments
+		lineageTag: 547af219-3803-49f7-8818-94917b6bb89a
+
+	/// Combined session count across both Converting and Non-Converting, ignoring the row-level SessionType filter so every row sees the same grand total. Built to bind as the Maximum value on the Total Sessions column's Data bar conditional formatting, so each row's bar length represents its true share of all sessions rather than an arbitrary per-row scale.
+	measure 'Total Sessions Grand Total' = CALCULATE(SUM(FactConvertingVsNon[Sessions]), ALL(FactConvertingVsNon[SessionType]))
+		formatString: #,##0
+		displayFolder: Customer Segments
+		lineageTag: 903d57cd-951e-4488-87b7-7d8569bc4ea7
+
 	/// Either 'Converting' (session included a purchase) or 'Non-Converting'.
 	column SessionType
 		dataType: string
