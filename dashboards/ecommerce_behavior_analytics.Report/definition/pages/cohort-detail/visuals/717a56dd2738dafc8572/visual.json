@@ -40,6 +40,17 @@
           "selector": {
             "id": "cohort-detail"
           }
+        },
+        {
+          "properties": {
+            "showHiddenPages": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
         }
       ],
       "fill": [

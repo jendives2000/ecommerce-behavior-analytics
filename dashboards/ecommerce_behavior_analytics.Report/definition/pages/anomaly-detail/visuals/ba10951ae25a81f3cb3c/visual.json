@@ -40,6 +40,17 @@
           "selector": {
             "id": "anomaly-detail"
           }
+        },
+        {
+          "properties": {
+            "showHiddenPages": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
         }
       ],
       "fill": [

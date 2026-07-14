@@ -264,12 +264,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "category": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "dim classification": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -277,16 +271,6 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "classification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
 			          }
 			        },
 			        {
@@ -338,36 +322,6 @@ cultureInfo en-US
 			            },
 			            "Weight": 0.727
 			          }
-			        },
-			        {
-			          "class": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.714
-			          }
-			        },
-			        {
-			          "grouping": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.714
-			          }
-			        },
-			        {
-			          "kind": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.714
-			          }
 			        }
 			      ]
 			    },
@@ -383,12 +337,6 @@ cultureInfo en-US
 			        {
 			          "category code": {
 			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "code": {
-			            "State": "Generated",
-			            "Weight": 0.97
 			          }
 			        },
 			        {
@@ -478,8 +426,7 @@ cultureInfo en-US
 			            "Weight": 0.582
 			          }
 			        }
-			      ],
-			      "NameType": "Identifier"
+			      ]
 			    },
 			    "dim_category.display_name": {
 			      "Definition": {
@@ -6188,6 +6135,16 @@ cultureInfo en-US
 			            },
 			            "Weight": 0.582
 			          }
+			        },
+			        {
+			          "Category": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -6847,6 +6804,16 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "Outlier %": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -13036,12 +13003,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "category": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "data classification": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -13049,16 +13010,6 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "classification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
 			          }
 			        },
 			        {
@@ -13102,36 +13053,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "class": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.714
-			          }
-			        },
-			        {
-			          "grouping": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.714
-			          }
-			        },
-			        {
-			          "kind": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.714
-			          }
-			        },
-			        {
 			          "information category": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -13139,6 +13060,46 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "fact category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "info category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "statistic category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "document category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
 			          }
 			        }
 			      ]
@@ -13880,12 +13841,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "category": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "data classification": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -13893,16 +13848,6 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "classification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
 			          }
 			        },
 			        {
@@ -13946,36 +13891,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "class": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.714
-			          }
-			        },
-			        {
-			          "grouping": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.714
-			          }
-			        },
-			        {
-			          "kind": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.714
-			          }
-			        },
-			        {
 			          "information category": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -13983,6 +13898,46 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "fact category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "info category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "statistic category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "document category": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
 			          }
 			        }
 			      ]
@@ -16764,6 +16719,105 @@ cultureInfo en-US
 			    }
 			  },
 			  "Relationships": {
+			    "fact_category_performance_has_dim_category": {
+			      "Binding": {
+			        "ConceptualEntity": "FactCategoryPerformance"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_category_performance": {
+			          "Target": {
+			            "Entity": "fact_category_performance"
+			          }
+			        },
+			        "dim_category": {
+			          "Target": {
+			            "Entity": "dim_category"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_category_performance"
+			            },
+			            "Object": {
+			              "Role": "dim_category"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_category_performances_have_dim_categories"
+			        }
+			      ]
+			    },
+			    "fact_category_mix_shift_has_dim_category": {
+			      "Binding": {
+			        "ConceptualEntity": "FactCategoryMixShift"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_category_mix_shift": {
+			          "Target": {
+			            "Entity": "fact_category_mix_shift"
+			          }
+			        },
+			        "dim_category": {
+			          "Target": {
+			            "Entity": "dim_category"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_category_mix_shift"
+			            },
+			            "Object": {
+			              "Role": "dim_category"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_category_mix_shifts_have_dim_categories"
+			        }
+			      ]
+			    },
+			    "dim_segment_has_fact_RFM_segment": {
+			      "Binding": {
+			        "ConceptualEntity": "DimSegment"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_segment": {
+			          "Target": {
+			            "Entity": "dim_segment"
+			          }
+			        },
+			        "fact_RFM_segment": {
+			          "Target": {
+			            "Entity": "fact_RFM_segment"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_segment"
+			            },
+			            "Object": {
+			              "Role": "fact_RFM_segment"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_segments_have_fact_RFM_segments"
+			        }
+			      ]
+			    },
 			    "dim_segment_has_fact_RFM_monetary_dist": {
 			      "Binding": {
 			        "ConceptualEntity": "DimSegment"
@@ -22532,19 +22586,6 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "dim_categories_have_category_codes"
-			        },
-			        {
-			          "Name": {
-			            "Subject": {
-			              "Role": "dim_category"
-			            },
-			            "Name": {
-			              "Role": "dim_category.category_code"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "category_codes_are_names_IDs_of_dim_categories"
 			        }
 			      ]
 			    },
@@ -22823,105 +22864,6 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "some_data_dictionary_measures_are_hidden_data_dictionary_measures"
-			        }
-			      ]
-			    },
-			    "dim_segment_has_fact_RFM_segment": {
-			      "Binding": {
-			        "ConceptualEntity": "DimSegment"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_segment": {
-			          "Target": {
-			            "Entity": "dim_segment"
-			          }
-			        },
-			        "fact_RFM_segment": {
-			          "Target": {
-			            "Entity": "fact_RFM_segment"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_segment"
-			            },
-			            "Object": {
-			              "Role": "fact_RFM_segment"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_segments_have_fact_RFM_segments"
-			        }
-			      ]
-			    },
-			    "fact_category_mix_shift_has_dim_category": {
-			      "Binding": {
-			        "ConceptualEntity": "FactCategoryMixShift"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_category_mix_shift": {
-			          "Target": {
-			            "Entity": "fact_category_mix_shift"
-			          }
-			        },
-			        "dim_category": {
-			          "Target": {
-			            "Entity": "dim_category"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_category_mix_shift"
-			            },
-			            "Object": {
-			              "Role": "dim_category"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fact_category_mix_shifts_have_dim_categories"
-			        }
-			      ]
-			    },
-			    "fact_category_performance_has_dim_category": {
-			      "Binding": {
-			        "ConceptualEntity": "FactCategoryPerformance"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_category_performance": {
-			          "Target": {
-			            "Entity": "fact_category_performance"
-			          }
-			        },
-			        "dim_category": {
-			          "Target": {
-			            "Entity": "dim_category"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_category_performance"
-			            },
-			            "Object": {
-			              "Role": "dim_category"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fact_category_performances_have_dim_categories"
 			        }
 			      ]
 			    },

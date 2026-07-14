@@ -19,7 +19,7 @@ table FactPriceOutliers
 	/// Total number of purchases in this category, used as the base for the outlier percentage.
 	column TotalPurchases
 		dataType: int64
-		formatString: 0
+		formatString: #,0
 		lineageTag: 3aceafdd-4c32-4c4f-bce5-3609f69b1cca
 		summarizeBy: sum
 		sourceColumn: TotalPurchases
@@ -62,24 +62,22 @@ table FactPriceOutliers
 	/// The outlier detection threshold for this category (Q3 + 1.5 x IQR, the standard statistical rule of thumb). Any purchase above this price is flagged as a statistical outlier.
 	column UpperFence
 		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
 		lineageTag: 074952fe-f340-4b29-98b3-080b1d32fe45
 		summarizeBy: none
 		sourceColumn: UpperFence
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	/// Highest purchase price recorded in this category. In almost every category this is exactly $2,574.07 - a platform-wide price ceiling, not genuine price variation. See the README's Data Quality Findings for the full explanation.
 	column MaxPrice
 		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
 		lineageTag: 700408d2-95f3-459e-b85d-5bab99c02779
 		summarizeBy: none
 		sourceColumn: MaxPrice
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	/// Number of purchases in this category priced above the UpperFence threshold.
 	column OutlierCount

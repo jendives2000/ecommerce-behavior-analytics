@@ -168,6 +168,18 @@
                   "Value": "'Auto'"
                 }
               }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0.4
+                    }
+                  }
+                }
+              }
             }
           },
           "selector": {
@@ -385,5 +397,98 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "76b98958dcc4a85058db",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactConvertingVsNon"
+              }
+            },
+            "Property": "SessionType"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "09b7322c3c4d691bea6b",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "FactConvertingVsNon"
+                  }
+                },
+                "Property": "Sessions"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c354eaedd5918b1a325a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactConvertingVsNon"
+              }
+            },
+            "Property": "Median Session Duration (mm:ss)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8ec1300e4f2465c1e43b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactConvertingVsNon"
+              }
+            },
+            "Property": "MedianEvents"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a1bd6a89f66c23aced81",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactConvertingVsNon"
+              }
+            },
+            "Property": "AvgEvents"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "01a567bfbb2247d534fd",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactConvertingVsNon"
+              }
+            },
+            "Property": "AvgCarts"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }
