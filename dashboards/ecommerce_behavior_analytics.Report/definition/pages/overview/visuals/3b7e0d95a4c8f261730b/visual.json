@@ -1,111 +1,47 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "a942e29e66934f0e44ea",
+  "name": "3b7e0d95a4c8f261730b",
   "position": {
-    "x": 734.63828612826421,
-    "y": 328.53961856165705,
-    "z": 2000,
-    "height": 110.0990099009901,
-    "width": 266.13861386138615,
-    "tabOrder": 1000
+    "x": 20.405797101449274,
+    "y": 522.20289855072463,
+    "z": 13000,
+    "height": 181.79710144927537,
+    "width": 1239.1884057971015,
+    "tabOrder": 13000
   },
   "visual": {
-    "visualType": "cardVisual",
-    "query": {
-      "queryState": {
-        "Data": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
-                    }
-                  },
-                  "Property": "Champion Revenue Share"
-                }
-              },
-              "queryRef": "_Measures.Champion Revenue Share",
-              "nativeQueryRef": "Champion Revenue Share"
-            }
-          ]
-        }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Measure": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "_Measures"
-                  }
-                },
-                "Property": "Champion Revenue Share"
-              }
-            },
-            "direction": "Descending"
-          }
-        ],
-        "isDefaultSort": true
-      }
-    },
+    "visualType": "shape",
     "objects": {
-      "accentBar": [
+      "shape": [
         {
           "properties": {
-            "show": {
+            "tileShape": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "'rectangle'"
                 }
               }
             },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 1,
-                      "Percent": 0.4
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
-          }
-        }
-      ],
-      "fillCustom": [
-        {
-          "properties": {
-            "show": {
+            "roundEdge": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "25L"
                 }
               }
             }
           }
         }
       ],
-      "layout": [
+      "rotation": [
         {
           "properties": {
-            "backgroundShow": {
+            "shapeAngle": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "0L"
                 }
               }
             }
-          },
-          "selector": {
-            "id": "default"
           }
         }
       ],
@@ -119,21 +55,18 @@
                 }
               }
             }
-          },
-          "selector": {
-            "id": "default"
           }
         }
       ],
-      "value": [
+      "fill": [
         {
           "properties": {
-            "fontColor": {
+            "fillColor": {
               "solid": {
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 0,
+                      "ColorId": 1,
                       "Percent": 0
                     }
                   }
@@ -161,22 +94,6 @@
           }
         }
       ],
-      "spacing": [
-        {
-          "properties": {
-            "verticalSpacing": {
-              "expr": {
-                "Literal": {
-                  "Value": "2D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
-          }
-        }
-      ],
       "background": [
         {
           "properties": {
@@ -201,7 +118,20 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "100D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "keepLayerOrder": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }
@@ -224,6 +154,13 @@
       "visualHeader": [
         {
           "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
             "background": {
               "solid": {
                 "color": {

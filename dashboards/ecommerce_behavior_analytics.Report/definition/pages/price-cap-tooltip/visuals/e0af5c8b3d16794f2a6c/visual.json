@@ -1,0 +1,87 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "e0af5c8b3d16794f2a6c",
+  "position": {
+    "x": 18.717948717948719,
+    "y": 26.666666666666668,
+    "z": 0,
+    "height": 263.84615384615387,
+    "width": 362.5641025641026,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Platform Price Cap — $2,574.07",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "fontSize": "13pt",
+                      "fontWeight": "bold",
+                      "color": "#FFFFFF"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "IQR outlier analysis flags a hard ceiling on purchase price across every major category — likely a currency-conversion transaction limit (~1,000,000 KZT), not fraud or a data error. High outlier rates here mean \"hit the ceiling,\" not \"suspicious activity.\" ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "10pt",
+                      "color": "#CCCCCC"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "See ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "10pt",
+                      "color": "#CCCCCC"
+                    }
+                  },
+                  {
+                    "value": "Data Quality Findings",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "10pt",
+                      "color": "#CCCCCC"
+                    },
+                    "url": "https://github.com/jendives2000/ecommerce-behavior-analytics/blob/main/README.md"
+                  },
+                  {
+                    "value": " (item 3) in the project's repo for the full research trail.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "10pt",
+                      "color": "#CCCCCC"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

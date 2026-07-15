@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "98cfdce7dbdbbe0156da",
   "position": {
-    "x": 680.38240917782025,
-    "y": 250.45251752708731,
+    "x": 663.38461538461536,
+    "y": 240.61538461538461,
     "z": 4000,
-    "height": 469.08859145952835,
-    "width": 575.14340344168261,
+    "height": 478.76923076923077,
+    "width": 607.38461538461536,
     "tabOrder": 4000
   },
   "visual": {
@@ -75,7 +75,7 @@
             "jsonSpec": {
               "expr": {
                 "Literal": {
-                  "Value": "'{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v5.json\",\n  \"data\": { \"name\": \"dataset\" },\n  \"height\": 290,\n  \"title\": {\n    \"text\": \"Category Mix Shift\",\n    \"subtitle\": [\n      \"Revenue share by category, before vs. after COVID onset\",\n      \"DIY / Home Improvement excluded - its swing reflects a Dec 2019 taxonomy reclassification, not a COVID effect\"\n    ],\n    \"anchor\": \"start\",\n    \"color\": \"#666666\",\n    \"subtitleColor\": \"#666666\",\n    \"fontSize\": 22,\n    \"fontWeight\": \"normal\",\n    \"subtitleFontSize\": 12,\n    \"offset\": 24\n  },\n  \"transform\": [\n    { \"fold\": [\"PreCovidSharePct\", \"CovidSharePct\"], \"as\": [\"Period\", \"SharePct\"] },\n    { \"calculate\": \"datum.Period === ''PreCovidSharePct'' ? ''Pre-COVID'' : ''COVID Onset''\", \"as\": \"PeriodLabel\" }\n  ],\n  \"layer\": [\n    {\n      \"mark\": { \"type\": \"line\", \"point\": true, \"strokeWidth\": 2 },\n      \"encoding\": {\n        \"x\": { \"field\": \"PeriodLabel\", \"type\": \"ordinal\", \"sort\": [\"Pre-COVID\", \"COVID Onset\"], \"title\": null },\n        \"y\": { \"field\": \"SharePct\", \"type\": \"quantitative\", \"title\": \"Revenue Share\", \"axis\": { \"format\": \"%\" } },\n        \"detail\": { \"field\": \"DisplayName\" },\n        \"color\": {\n          \"field\": \"DisplayName\", \"type\": \"nominal\", \"legend\": null,\n          \"scale\": {\n            \"domain\": [\"Apparel\", \"Appliances\", \"Computers & Peripherals\", \"Electronics\", \"Sports & Outdoor\", \"Unknown / No Category\"],\n            \"range\": [\"#70B0E0\", \"#FCB714\", \"#0EB194\", \"#2878BD\", \"#AF916D\", \"#7F8C8D\"]\n          }\n        },\n        \"tooltip\": [\n          { \"field\": \"DisplayName\", \"type\": \"nominal\", \"title\": \"Category\" },\n          { \"field\": \"PeriodLabel\", \"type\": \"nominal\", \"title\": \"Period\" },\n          { \"field\": \"SharePct\", \"type\": \"quantitative\", \"format\": \".1%\", \"title\": \"Revenue Share\" }\n        ]\n      }\n    },\n    {\n      \"mark\": { \"type\": \"text\", \"align\": \"left\", \"dx\": 8, \"fontSize\": 11 },\n      \"transform\": [\n        { \"filter\": \"datum.PeriodLabel === ''COVID Onset''\" },\n        {\n          \"calculate\": \"datum.DisplayName === ''Computers & Peripherals'' ? 0.005 : datum.DisplayName === ''Sports & Outdoor'' ? 0.022 : datum.DisplayName === ''Unknown / No Category'' ? 0.040 : datum.DisplayName === ''Apparel'' ? 0.058 : datum.SharePct\",\n          \"as\": \"LabelY\"\n        }\n      ],\n      \"encoding\": {\n        \"x\": { \"field\": \"PeriodLabel\", \"type\": \"ordinal\", \"sort\": [\"Pre-COVID\", \"COVID Onset\"] },\n        \"y\": { \"field\": \"LabelY\", \"type\": \"quantitative\" },\n        \"text\": { \"field\": \"DisplayName\" },\n        \"color\": {\n          \"field\": \"DisplayName\", \"type\": \"nominal\", \"legend\": null,\n          \"scale\": {\n            \"domain\": [\"Apparel\", \"Appliances\", \"Computers & Peripherals\", \"Electronics\", \"Sports & Outdoor\", \"Unknown / No Category\"],\n            \"range\": [\"#70B0E0\", \"#FCB714\", \"#0EB194\", \"#2878BD\", \"#AF916D\", \"#7F8C8D\"]\n          }\n        }\n      }\n    }\n  ]\n}'"
+                  "Value": "'{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v5.json\",\n  \"data\": { \"name\": \"dataset\" },\n  \"height\": 290,\n  \"title\": {\n    \"text\": \"Category Mix Shift\",\n    \"subtitle\": [\n      \"Revenue share by category, before vs. after COVID onset\",\n      \"DIY / Home Improvement excluded - its swing reflects a Dec 2019 taxonomy reclassification, not a COVID effect\",\n      \"Feb 27, 2020 also excluded from the pre-COVID baseline - a platform logging outage dropped ~90% of that day's events\"\n    ],\n    \"anchor\": \"start\",\n    \"color\": \"#666666\",\n    \"subtitleColor\": \"#666666\",\n    \"fontSize\": 22,\n    \"fontWeight\": \"normal\",\n    \"subtitleFontSize\": 12,\n    \"offset\": 24\n  },\n  \"transform\": [\n    { \"fold\": [\"PreCovidSharePct\", \"CovidSharePct\"], \"as\": [\"Period\", \"SharePct\"] },\n    { \"calculate\": \"datum.Period === ''PreCovidSharePct'' ? ''Pre-COVID'' : ''COVID Onset''\", \"as\": \"PeriodLabel\" }\n  ],\n  \"layer\": [\n    {\n      \"mark\": { \"type\": \"line\", \"point\": true, \"strokeWidth\": 2 },\n      \"encoding\": {\n        \"x\": { \"field\": \"PeriodLabel\", \"type\": \"ordinal\", \"sort\": [\"Pre-COVID\", \"COVID Onset\"], \"title\": null },\n        \"y\": { \"field\": \"SharePct\", \"type\": \"quantitative\", \"title\": \"Revenue Share\", \"axis\": { \"format\": \"%\" } },\n        \"detail\": { \"field\": \"DisplayName\" },\n        \"color\": {\n          \"field\": \"DisplayName\", \"type\": \"nominal\", \"legend\": null,\n          \"scale\": {\n            \"domain\": [\"Apparel\", \"Appliances\", \"Computers & Peripherals\", \"Electronics\", \"Sports & Outdoor\", \"Unknown / No Category\"],\n            \"range\": [\"#70B0E0\", \"#FCB714\", \"#0EB194\", \"#2878BD\", \"#AF916D\", \"#7F8C8D\"]\n          }\n        },\n        \"tooltip\": [\n          { \"field\": \"DisplayName\", \"type\": \"nominal\", \"title\": \"Category\" },\n          { \"field\": \"PeriodLabel\", \"type\": \"nominal\", \"title\": \"Period\" },\n          { \"field\": \"SharePct\", \"type\": \"quantitative\", \"format\": \".1%\", \"title\": \"Revenue Share\" }\n        ]\n      }\n    },\n    {\n      \"mark\": { \"type\": \"text\", \"align\": \"left\", \"dx\": 8, \"fontSize\": 11 },\n      \"transform\": [\n        { \"filter\": \"datum.PeriodLabel === ''COVID Onset''\" },\n        {\n          \"calculate\": \"datum.DisplayName === ''Computers & Peripherals'' ? 0.005 : datum.DisplayName === ''Sports & Outdoor'' ? 0.022 : datum.DisplayName === ''Unknown / No Category'' ? 0.040 : datum.DisplayName === ''Apparel'' ? 0.058 : datum.SharePct\",\n          \"as\": \"LabelY\"\n        }\n      ],\n      \"encoding\": {\n        \"x\": { \"field\": \"PeriodLabel\", \"type\": \"ordinal\", \"sort\": [\"Pre-COVID\", \"COVID Onset\"] },\n        \"y\": { \"field\": \"LabelY\", \"type\": \"quantitative\" },\n        \"text\": { \"field\": \"DisplayName\" },\n        \"color\": {\n          \"field\": \"DisplayName\", \"type\": \"nominal\", \"legend\": null,\n          \"scale\": {\n            \"domain\": [\"Apparel\", \"Appliances\", \"Computers & Peripherals\", \"Electronics\", \"Sports & Outdoor\", \"Unknown / No Category\"],\n            \"range\": [\"#70B0E0\", \"#FCB714\", \"#0EB194\", \"#2878BD\", \"#AF916D\", \"#7F8C8D\"]\n          }\n        }\n      }\n    }\n  ]\n}'"
                 }
               }
             },
@@ -144,14 +144,14 @@
             "viewportHeight": {
               "expr": {
                 "Literal": {
-                  "Value": "459.08859145952835D"
+                  "Value": "468.7692307692308D"
                 }
               }
             },
             "viewportWidth": {
               "expr": {
                 "Literal": {
-                  "Value": "565.1434034416826D"
+                  "Value": "597.3846153846154D"
                 }
               }
             }

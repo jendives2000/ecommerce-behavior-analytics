@@ -9,8 +9,9 @@
     "data-dictionary",
     "cohort-detail",
     "anomaly-detail",
-    "funnel-floor-bias-tooltip"
+    "funnel-floor-bias-tooltip",
+    "price-cap-tooltip"
   ],
-  "activePageName": "data-dictionary",
+  "activePageName": "anomaly-detail",
   "landingPageName": "overview"
 }

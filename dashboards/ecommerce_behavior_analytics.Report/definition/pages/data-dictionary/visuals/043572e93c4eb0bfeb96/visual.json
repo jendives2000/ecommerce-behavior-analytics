@@ -441,62 +441,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "e82d3341dbc9af22a736",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DataDictionary_Columns"
-              }
-            },
-            "Property": "Name"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "3e3332794aaf6dcd96f9",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DataDictionary_Columns"
-              }
-            },
-            "Property": "DataType"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "fc614b7db20354dc4db3",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DataDictionary_Columns"
-              }
-            },
-            "Property": "Description"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "f77f83588008a65764c8",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DataDictionary_Columns"
-              }
-            },
-            "Property": "IsKey"
-          }
-        },
-        "type": "Categorical"
       }
     ]
   }
