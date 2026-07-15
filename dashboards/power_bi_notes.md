@@ -71,3 +71,29 @@ The Data Dictionary is **not** a manually maintained table — a hand-typed list
 | Used On | Which report page(s) reference it | No — manual |
 
 Same transparency intent as the equivalent Data Dictionary page in Project 1 (TechFlow), but implemented so the dictionary is guaranteed to reflect the model's actual current state rather than a snapshot that can go stale.
+
+---
+
+## Tooling Evolution: From a Hand-Built Bridge Script to Microsoft's Official Authoring Skill
+
+**Every page in this report — all 6 visible pages plus the 3 hidden drillthrough/tooltip pages — was built before this project adopted any AI-specific Power BI authoring skill.** The entire build ran on a general-purpose coding agent (Claude Code), direct TMDL/PBIR file edits, and a single custom Python script (`tools/pbi_desktop_bridge_client.py`) that speaks JSON-RPC directly to Power BI Desktop's native named-pipe Desktop Bridge — a Microsoft preview feature, documented in [`dashboards/documentation/desktop_bridge.md`](documentation/desktop_bridge.md) — for live status checks, report reloads, and screenshot-based visual review.
+
+That ordering was deliberate, not incidental. It demonstrates that this report-build workflow never depended on a purpose-built AI skill existing: a documented protocol, a coding agent, and careful file-level engineering were enough to build a full multi-page report with drillthrough pages, a tooltip page, custom Deneb visuals, dynamic HTML insight cards, and a self-documenting Data Dictionary — using nothing Power BI–specific beyond what Microsoft already ships in Desktop itself.
+
+**Only after the report was complete** did this project install Microsoft's official [`powerbi-authoring`](https://github.com/microsoft/skills-for-fabric/tree/main/plugins/powerbi-authoring) plugin — specifically the [`powerbi-report-authoring`](https://github.com/microsoft/skills-for-fabric/blob/main/plugins/powerbi-authoring/skills/powerbi-report-authoring/SKILL.md) skill within it — for two reasons:
+
+1. **Audit the already-built report.** The skill ships an offline PBIR validator (`powerbi-report-author validate`) and a metadata-lookup CLI (`catalog describe`, `formatting describe-object`) that check things the hand-built workflow had no systematic way to check: deprecated visual types, malformed role bindings, missing selectors, invalid formatting enum values. Running it against an already-complete report is a genuine quality check against a real baseline, not a rebuild.
+2. **Raise the ceiling for future work.** The skill adds a capability the hand-built workflow deliberately avoided: creating brand-new visual containers directly rather than only editing containers placed by hand in Desktop, backed by that same offline validator as a safety net.
+
+**Why the order matters:** this project treats *evaluating and adopting* AI tooling as a skill worth demonstrating in its own right — not "used an AI report builder to make a dashboard," but "shipped the work first on fundamentals, then deliberately layered in official tooling to save time and go deeper, evaluating it against a real, already-working baseline rather than taking it on faith." That evaluation habit — knowing when a tool earns its place in the workflow versus when it's just novel — is part of what this project is meant to show a reviewer, alongside the analytics work itself.
+
+**Practical note on why the Python script stays in the repo.** `tools/pbi_desktop_bridge_client.py` is checked into version control — it works on any machine that clones this repo and has the Desktop Bridge preview feature enabled in Power BI Desktop, no extra install required. The skill's CLIs (`powerbi-report-author`, `powerbi-desktop`) are global npm packages installed at the user's machine level, outside the repo — they won't exist for anyone who clones this project without separately installing the skill. The script remains the more portable, dependency-free option and stays in the repo for that reason, even though live Desktop interaction going forward uses the skill's CLI instead.
+
+**Installing the skill** (Claude Code):
+
+```bash
+/plugin marketplace add microsoft/skills-for-fabric
+/plugin install powerbi-authoring@fabric-collection
+```
+
+Source: [`skills-for-fabric`](https://github.com/microsoft/skills-for-fabric/tree/main) (parent marketplace, install instructions for the focused bundle) · [`powerbi-report-authoring/SKILL.md`](https://github.com/microsoft/skills-for-fabric/blob/main/plugins/powerbi-authoring/skills/powerbi-report-authoring/SKILL.md) (the specific skill used here).
