@@ -3,9 +3,9 @@
   "name": "043572e93c4eb0bfeb96",
   "position": {
     "x": 0,
-    "y": 486.84109763880031,
+    "y": 228,
     "z": 5000,
-    "height": 232.80153158902363,
+    "height": 488,
     "width": 1280,
     "tabOrder": 5000
   },
@@ -369,62 +369,6 @@
         }
       },
       {
-        "name": "20407a4c4eb6066b4f54",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DataDictionary_Columns"
-              }
-            },
-            "Property": "Name"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "de2bfe93f9361887b361",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DataDictionary_Columns"
-              }
-            },
-            "Property": "DataType"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "ca1ed90f30a9de399af3",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DataDictionary_Columns"
-              }
-            },
-            "Property": "Description"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "bee4226614a3af836eb2",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DataDictionary_Columns"
-              }
-            },
-            "Property": "IsKey"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
         "name": "781c59d04e8462f4f2b0",
         "field": {
           "Column": {
@@ -449,35 +393,110 @@
           "Where": [
             {
               "Condition": {
-                "In": {
-                  "Expressions": [
-                    {
-                      "Column": {
-                        "Expression": {
-                          "SourceRef": {
-                            "Source": "d"
+                "Not": {
+                  "Expression": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "d"
+                              }
+                            },
+                            "Property": "IsHidden"
                           }
-                        },
-                        "Property": "IsHidden"
-                      }
-                    }
-                  ],
-                  "Values": [
-                    [
-                      {
-                        "Literal": {
-                          "Value": "false"
                         }
-                      }
-                    ]
-                  ]
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "true"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
                 }
               }
             }
           ]
         },
         "howCreated": "User",
-        "isLockedInViewMode": true
+        "isLockedInViewMode": true,
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "e82d3341dbc9af22a736",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DataDictionary_Columns"
+              }
+            },
+            "Property": "Name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "3e3332794aaf6dcd96f9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DataDictionary_Columns"
+              }
+            },
+            "Property": "DataType"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "fc614b7db20354dc4db3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DataDictionary_Columns"
+              }
+            },
+            "Property": "Description"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f77f83588008a65764c8",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DataDictionary_Columns"
+              }
+            },
+            "Property": "IsKey"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

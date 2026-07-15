@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "d7a8fb5aa7bf8b337ab3",
   "position": {
-    "x": 292.7372766187828,
-    "y": 415.71318825233305,
-    "z": 5001,
-    "height": 63.7141033822591,
-    "width": 300.59987236758138,
-    "tabOrder": 5001
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "height": 80,
+    "width": 300,
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "slicer",
@@ -76,22 +76,5 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "73e67c429441b3f76b9a",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DataDictionary_Columns"
-              }
-            },
-            "Property": "Table"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
-  }
+  "parentGroupName": "34193620b3b0f84ab409"
 }

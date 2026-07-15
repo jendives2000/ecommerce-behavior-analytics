@@ -1,0 +1,563 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "All Columns",
+  "name": "c6b0f4a8e3d17925ab6f",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "2ba3d57d2ecd633e99da",
+      "d7a8fb5aa7bf8b337ab3",
+      "a0338fa3b282e97a453e",
+      "1a4187ec08e871600657",
+      "34193620b3b0f84ab409",
+      "a3be533dba05b4103b1b",
+      "043572e93c4eb0bfeb96",
+      "0ffb6aa078cc10eace0f"
+    ]
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "data-dictionary",
+    "sections": {
+      "data-dictionary": {
+        "visualContainers": {
+          "02021de29957a79860eb": {
+            "singleVisual": {
+              "visualType": "pageNavigator",
+              "objects": {}
+            }
+          },
+          "043572e93c4eb0bfeb96": {
+            "filters": {
+              "byName": {
+                "f3ff743ec830c61bafc3": {
+                  "name": "f3ff743ec830c61bafc3",
+                  "type": "Categorical",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "d",
+                        "Entity": "DataDictionary_Columns",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Not": {
+                            "Expression": {
+                              "In": {
+                                "Expressions": [
+                                  {
+                                    "Column": {
+                                      "Expression": {
+                                        "SourceRef": {
+                                          "Source": "d"
+                                        }
+                                      },
+                                      "Property": "Table"
+                                    }
+                                  }
+                                ],
+                                "Values": [
+                                  [
+                                    {
+                                      "Literal": {
+                                        "Value": "'DataDictionary_Columns'"
+                                      }
+                                    }
+                                  ],
+                                  [
+                                    {
+                                      "Literal": {
+                                        "Value": "'DataDictionary_Measures'"
+                                      }
+                                    }
+                                  ]
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Columns"
+                        }
+                      },
+                      "Property": "Table"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                "781c59d04e8462f4f2b0": {
+                  "name": "781c59d04e8462f4f2b0",
+                  "type": "Categorical",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "d",
+                        "Entity": "DataDictionary_Columns",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Not": {
+                            "Expression": {
+                              "In": {
+                                "Expressions": [
+                                  {
+                                    "Column": {
+                                      "Expression": {
+                                        "SourceRef": {
+                                          "Source": "d"
+                                        }
+                                      },
+                                      "Property": "IsHidden"
+                                    }
+                                  }
+                                ],
+                                "Values": [
+                                  [
+                                    {
+                                      "Literal": {
+                                        "Value": "true"
+                                      }
+                                    }
+                                  ]
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Columns"
+                        }
+                      },
+                      "Property": "IsHidden"
+                    }
+                  },
+                  "howCreated": 1
+                }
+              },
+              "byExpr": [
+                {
+                  "name": "7dd37c0a4ee27a47bf52",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Columns"
+                        }
+                      },
+                      "Property": "Name"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "a3e4499a5eca5bf242e1",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Columns"
+                        }
+                      },
+                      "Property": "DataType"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "9d6c662de65051d4bbb4",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Columns"
+                        }
+                      },
+                      "Property": "Description"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "4a9c4cf772ec466f13b7",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Columns"
+                        }
+                      },
+                      "Property": "IsKey"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "tableEx",
+              "objects": {}
+            }
+          },
+          "0ffb6aa078cc10eace0f": {
+            "filters": {
+              "byName": {
+                "eb9927d3e853d7a4a0fa": {
+                  "name": "eb9927d3e853d7a4a0fa",
+                  "type": "Categorical",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "d",
+                        "Entity": "DataDictionary_Measures",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "In": {
+                            "Expressions": [
+                              {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Source": "d"
+                                    }
+                                  },
+                                  "Property": "IsHidden"
+                                }
+                              }
+                            ],
+                            "Values": [
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "false"
+                                  }
+                                }
+                              ]
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Measures"
+                        }
+                      },
+                      "Property": "IsHidden"
+                    }
+                  },
+                  "howCreated": 1
+                }
+              },
+              "byExpr": [
+                {
+                  "name": "980b5d76fc997892a085",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Measures"
+                        }
+                      },
+                      "Property": "Table"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "6d03c9401f90338eb02d",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Measures"
+                        }
+                      },
+                      "Property": "Name"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "54f45f980592fd3da8d4",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Measures"
+                        }
+                      },
+                      "Property": "DisplayFolder"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "0fbec04c80b0ff7ce47b",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Measures"
+                        }
+                      },
+                      "Property": "Description"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "dd47dac81ad665bb14b0",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Measures"
+                        }
+                      },
+                      "Property": "FormatString"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "tableEx",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "1a4187ec08e871600657": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Measures"
+                        }
+                      },
+                      "Property": "DisplayFolder"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "2ba3d57d2ecd633e99da": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "8d98ce2788442484bd5f",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Columns"
+                        }
+                      },
+                      "Property": "Name"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "textSlicer",
+              "objects": {}
+            }
+          },
+          "a0338fa3b282e97a453e": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "cfca4a6f4cc966c3ca2f",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Measures"
+                        }
+                      },
+                      "Property": "Name"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "textSlicer",
+              "objects": {}
+            }
+          },
+          "ac7db16ac90064efee76": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "b046f663ddb8e3e7b8ed": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "be3073d3bd91fb1f3836": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "d7a8fb5aa7bf8b337ab3": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "355d25e280a354f88bf7",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Columns"
+                        }
+                      },
+                      "Property": "Table"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DataDictionary_Columns"
+                        }
+                      },
+                      "Property": "Table"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "2f29ee427ad2ba584af4": {
+            "singleVisual": {
+              "visualType": "bookmarkNavigator",
+              "objects": {}
+            }
+          }
+        },
+        "visualContainerGroups": {
+          "a3be533dba05b4103b1b": {
+            "isHidden": true
+          },
+          "34193620b3b0f84ab409": {
+            "isHidden": false
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

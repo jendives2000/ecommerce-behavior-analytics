@@ -2,13 +2,21 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmarksMetadata/1.0.0/schema.json",
   "items": [
     {
-      "name": "dc601c73b32e963c72e1"
+      "name": "4dca620dc5fe2137d390",
+      "displayName": "Funnel",
+      "children": [
+        "dc601c73b32e963c72e1",
+        "32d75f4708e135cd13ad",
+        "d491f4af103d5c7042fb"
+      ]
     },
     {
-      "name": "32d75f4708e135cd13ad"
-    },
-    {
-      "name": "d491f4af103d5c7042fb"
+      "name": "3e660591db257eecb90d",
+      "displayName": "Data Dict",
+      "children": [
+        "a3f7e2c9b1d84506f2ce",
+        "c6b0f4a8e3d17925ab6f"
+      ]
     }
   ]
 }

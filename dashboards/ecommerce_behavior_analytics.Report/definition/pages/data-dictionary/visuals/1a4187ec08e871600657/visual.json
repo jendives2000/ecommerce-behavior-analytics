@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "1a4187ec08e871600657",
   "position": {
-    "x": 296.66606728790561,
-    "y": 71.851488829421115,
-    "z": 5002,
-    "height": 63.7141033822591,
-    "width": 300.59987236758138,
-    "tabOrder": 5002
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "height": 80,
+    "width": 300,
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "slicer",
@@ -174,6 +174,7 @@
     },
     "drillFilterOtherVisuals": true
   },
+  "parentGroupName": "a3be533dba05b4103b1b",
   "filterConfig": {
     "filters": [
       {
@@ -189,49 +190,6 @@
           }
         },
         "type": "Categorical",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "d",
-              "Entity": "DataDictionary_Measures",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "Not": {
-                  "Expression": {
-                    "In": {
-                      "Expressions": [
-                        {
-                          "Column": {
-                            "Expression": {
-                              "SourceRef": {
-                                "Source": "d"
-                              }
-                            },
-                            "Property": "DisplayFolder"
-                          }
-                        }
-                      ],
-                      "Values": [
-                        [
-                          {
-                            "Literal": {
-                              "Value": "null"
-                            }
-                          }
-                        ]
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        },
         "isLockedInViewMode": true,
         "objects": {
           "general": [

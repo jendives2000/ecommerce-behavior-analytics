@@ -3,9 +3,9 @@
   "name": "0ffb6aa078cc10eace0f",
   "position": {
     "x": 0,
-    "y": 142.9483088704531,
+    "y": 228.06629834254142,
     "z": 4000,
-    "height": 241.78685386088068,
+    "height": 492.37569060773478,
     "width": 1280,
     "tabOrder": 4000
   },
@@ -87,23 +87,6 @@
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "DataDictionary_Measures"
-                  }
-                },
-                "Property": "Table"
-              }
-            },
-            "direction": "Ascending"
-          }
-        ]
       }
     },
     "objects": {
@@ -175,6 +158,21 @@
         }
       ]
     },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Measures Table'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "drillFilterOtherVisuals": true
   },
   "filterConfig": {
@@ -231,78 +229,10 @@
             }
           ]
         },
-        "howCreated": "User"
-      },
-      {
-        "name": "20dfb02770699011a0fe",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DataDictionary_Measures"
-              }
-            },
-            "Property": "Table"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "43c7f0b4bcf0016fe4c2",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DataDictionary_Measures"
-              }
-            },
-            "Property": "Name"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "b6f47395829ddea3d193",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DataDictionary_Measures"
-              }
-            },
-            "Property": "DisplayFolder"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "d8641ea5a0391b3921c6",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DataDictionary_Measures"
-              }
-            },
-            "Property": "Description"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "3c7c8d721cece7dc7087",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DataDictionary_Measures"
-              }
-            },
-            "Property": "FormatString"
-          }
-        },
-        "type": "Categorical"
+        "howCreated": "User",
+        "isLockedInViewMode": true
       }
     ]
-  }
+  },
+  "isHidden": true
 }
