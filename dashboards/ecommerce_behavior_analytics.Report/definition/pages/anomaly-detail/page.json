@@ -70,8 +70,6 @@
       {
         "name": "5307de66bfd9e7e67708",
         "boundFilter": "ef9c4010e13eba27883b",
-        "asAggregation": false,
-        "qnaSingleSelectRequired": false,
         "fieldExpr": {
           "Column": {
             "Expression": {

@@ -4,10 +4,10 @@
   "position": {
     "x": 307.93142857142857,
     "y": 232.59428571428572,
-    "z": 7000,
+    "z": 3000,
     "height": 127.26857142857143,
     "width": 664.13714285714286,
-    "tabOrder": 3002
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "tableEx",
@@ -397,98 +397,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "76b98958dcc4a85058db",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactConvertingVsNon"
-              }
-            },
-            "Property": "SessionType"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "09b7322c3c4d691bea6b",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "FactConvertingVsNon"
-                  }
-                },
-                "Property": "Sessions"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "c354eaedd5918b1a325a",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactConvertingVsNon"
-              }
-            },
-            "Property": "Median Session Duration (mm:ss)"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "8ec1300e4f2465c1e43b",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactConvertingVsNon"
-              }
-            },
-            "Property": "MedianEvents"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "a1bd6a89f66c23aced81",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactConvertingVsNon"
-              }
-            },
-            "Property": "AvgEvents"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "01a567bfbb2247d534fd",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactConvertingVsNon"
-              }
-            },
-            "Property": "AvgCarts"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

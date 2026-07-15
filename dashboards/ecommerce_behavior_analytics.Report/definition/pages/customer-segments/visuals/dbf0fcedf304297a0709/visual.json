@@ -7,7 +7,7 @@
     "z": 5000,
     "height": 284.52571428571429,
     "width": 627.56571428571431,
-    "tabOrder": 3000
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -269,61 +269,5 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "bd398ca10d9e2eea2ff4",
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "bd2d582b8d7c9aadfb85",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimSegment"
-              }
-            },
-            "Property": "Segment"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "b4aba22dfa7196a4df22",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "FactRFMSegment"
-                  }
-                },
-                "Property": "PctUsers"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "92452d556f1013a26bd7",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "FactRFMSegment"
-                  }
-                },
-                "Property": "PctRevenue"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
-  }
+  "parentGroupName": "bd398ca10d9e2eea2ff4"
 }

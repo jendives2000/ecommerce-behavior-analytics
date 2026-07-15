@@ -4,10 +4,10 @@
   "position": {
     "x": 0,
     "y": 154.30539609644089,
-    "z": 2002,
+    "z": 4000,
     "height": 565.7864523536166,
     "width": 608.40413318025264,
-    "tabOrder": 2002
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "tableEx",
@@ -688,117 +688,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "0debcce01131eb5fd385",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactPriceOutliers"
-              }
-            },
-            "Property": "CategoryCode"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "695c533bed692baa1942",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactPriceOutliers"
-              }
-            },
-            "Property": "UpperFence"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "5d45f4cab4544df8069b",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactPriceOutliers"
-              }
-            },
-            "Property": "MaxPrice"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "dd57e530c06cfba3bb20",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactPriceOutliers"
-              }
-            },
-            "Property": "MaxToFenceRatio"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "bea0ae484da1bbac9ccc",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "FactPriceOutliers"
-                  }
-                },
-                "Property": "TotalPurchases"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "1750cdaef419893121d0",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "FactPriceOutliers"
-                  }
-                },
-                "Property": "OutlierCount"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "7cdb91466eeaabebde9c",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactPriceOutliers"
-              }
-            },
-            "Property": "Weighted Outlier Rate"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

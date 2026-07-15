@@ -4,10 +4,10 @@
   "position": {
     "x": 640,
     "y": 154.30539609644089,
-    "z": 2001,
+    "z": 3000,
     "height": 277.01492537313436,
     "width": 640,
-    "tabOrder": 2001
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "tableEx",
@@ -667,37 +667,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "963a8b5bb042eac8cebf",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactAnomalyFindings"
-              }
-            },
-            "Property": "Finding"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "98a79de96ce2029fb30c",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactAnomalyFindings"
-              }
-            },
-            "Property": "Detail"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

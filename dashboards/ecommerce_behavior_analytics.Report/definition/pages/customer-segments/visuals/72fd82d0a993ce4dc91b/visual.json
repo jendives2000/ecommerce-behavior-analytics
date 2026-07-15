@@ -7,7 +7,7 @@
     "z": 6000,
     "height": 280.86857142857144,
     "width": 490.7885714285714,
-    "tabOrder": 3001
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "deneb7E15AEF80B9E4D4F8E12924291ECE89A",
@@ -225,84 +225,5 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "baaeb34b352b09d99089",
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "03de42112e8be442f311",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactRFMMonetaryDist"
-              }
-            },
-            "Property": "Segment"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "7790a98138e800cc7b08",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactRFMMonetaryDist"
-              }
-            },
-            "Property": "P25"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "a2324586e8b0ae246336",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactRFMMonetaryDist"
-              }
-            },
-            "Property": "Median"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "b64965c6efe57ea900cf",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "FactRFMMonetaryDist"
-              }
-            },
-            "Property": "P75"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "3f05980adceee7d71a6f",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "DimSegment"
-                  }
-                },
-                "Property": "SortOrder"
-              }
-            },
-            "Function": 0
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
-  }
+  "parentGroupName": "baaeb34b352b09d99089"
 }

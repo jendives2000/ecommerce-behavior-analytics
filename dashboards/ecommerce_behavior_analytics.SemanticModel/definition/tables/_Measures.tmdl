@@ -251,6 +251,7 @@ table _Measures
 		lineageTag: c2b93446-1913-4d37-a72d-40501e5584f0
 
 	column Value
+		isHidden
 		lineageTag: a861b4e5-d496-4bae-9bed-e7872af11c91
 		isNameInferred
 		sourceColumn: [Value]

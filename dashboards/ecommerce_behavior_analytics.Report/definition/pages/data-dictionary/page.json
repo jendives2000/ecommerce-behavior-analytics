@@ -1,8 +1,95 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
   "name": "data-dictionary",
   "displayName": "Data Dictionary",
   "displayOption": "FitToPage",
   "height": 720,
-  "width": 1280
+  "width": 1280,
+  "objects": {
+    "outspacePane": [
+      {
+        "properties": {
+          "width": {
+            "expr": {
+              "Literal": {
+                "Value": "313L"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "a0338fa3b282e97a453e",
+      "target": "043572e93c4eb0bfeb96",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a0338fa3b282e97a453e",
+      "target": "2ba3d57d2ecd633e99da",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a0338fa3b282e97a453e",
+      "target": "d7a8fb5aa7bf8b337ab3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "1a4187ec08e871600657",
+      "target": "d7a8fb5aa7bf8b337ab3",
+      "type": "NoFilter"
+    },
+    {
+      "source": "1a4187ec08e871600657",
+      "target": "2ba3d57d2ecd633e99da",
+      "type": "NoFilter"
+    },
+    {
+      "source": "1a4187ec08e871600657",
+      "target": "043572e93c4eb0bfeb96",
+      "type": "NoFilter"
+    },
+    {
+      "source": "d7a8fb5aa7bf8b337ab3",
+      "target": "1a4187ec08e871600657",
+      "type": "NoFilter"
+    },
+    {
+      "source": "d7a8fb5aa7bf8b337ab3",
+      "target": "b046f663ddb8e3e7b8ed",
+      "type": "DataFilter"
+    },
+    {
+      "source": "d7a8fb5aa7bf8b337ab3",
+      "target": "a0338fa3b282e97a453e",
+      "type": "NoFilter"
+    },
+    {
+      "source": "d7a8fb5aa7bf8b337ab3",
+      "target": "0ffb6aa078cc10eace0f",
+      "type": "NoFilter"
+    },
+    {
+      "source": "2ba3d57d2ecd633e99da",
+      "target": "a0338fa3b282e97a453e",
+      "type": "NoFilter"
+    },
+    {
+      "source": "1a4187ec08e871600657",
+      "target": "be3073d3bd91fb1f3836",
+      "type": "DataFilter"
+    },
+    {
+      "source": "2ba3d57d2ecd633e99da",
+      "target": "1a4187ec08e871600657",
+      "type": "NoFilter"
+    },
+    {
+      "source": "2ba3d57d2ecd633e99da",
+      "target": "0ffb6aa078cc10eace0f",
+      "type": "NoFilter"
+    }
+  ]
 }
