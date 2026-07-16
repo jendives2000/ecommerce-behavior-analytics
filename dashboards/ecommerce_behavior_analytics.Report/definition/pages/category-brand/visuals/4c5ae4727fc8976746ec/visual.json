@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "DimCategory.DisplayName",
-              "nativeQueryRef": "DisplayName"
+              "nativeQueryRef": "Category",
+              "displayName": "Category"
             }
           ]
         },
@@ -50,7 +51,8 @@
                 }
               },
               "queryRef": "Sum(FactCategoryPerformance.TotalRevenue)",
-              "nativeQueryRef": "Sum of TotalRevenue"
+              "nativeQueryRef": "Total Revenue",
+              "displayName": "Total Revenue"
             }
           ]
         },
@@ -114,6 +116,13 @@
               "expr": {
                 "Literal": {
                   "Value": "9D"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bottom'"
                 }
               }
             }
@@ -190,6 +199,34 @@
               "expr": {
                 "Literal": {
                   "Value": "75D"
+                }
+              }
+            },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "roundRange": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "start": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "end": {
+              "expr": {
+                "Literal": {
+                  "Value": "3000000D"
                 }
               }
             }
@@ -361,7 +398,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "100D"
                 }
               }
             },
@@ -396,7 +433,7 @@
             "shadeTransparency": {
               "expr": {
                 "Literal": {
-                  "Value": "95D"
+                  "Value": "98D"
                 }
               }
             },
@@ -437,6 +474,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'Name'"
+                }
+              }
+            },
+            "shadeRegion": {
+              "expr": {
+                "Literal": {
+                  "Value": "'after'"
                 }
               }
             }
@@ -634,7 +678,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "100D"
                 }
               }
             },
@@ -669,7 +713,7 @@
             "shadeTransparency": {
               "expr": {
                 "Literal": {
-                  "Value": "95D"
+                  "Value": "97D"
                 }
               }
             },
@@ -696,6 +740,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'Name'"
+                }
+              }
+            },
+            "shadeRegion": {
+              "expr": {
+                "Literal": {
+                  "Value": "'after'"
                 }
               }
             }
@@ -1042,6 +1093,64 @@
               "expr": {
                 "Literal": {
                   "Value": "18D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'with median lines separating the 4 areas'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#666666'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "spacing": [
+        {
+          "properties": {
+            "verticalSpacing": {
+              "expr": {
+                "Literal": {
+                  "Value": "5D"
+                }
+              }
+            },
+            "customizeSpacing": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "spaceBelowSubTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
                 }
               }
             }

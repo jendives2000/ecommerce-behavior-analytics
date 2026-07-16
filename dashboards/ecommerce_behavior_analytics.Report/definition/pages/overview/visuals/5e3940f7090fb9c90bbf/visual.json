@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "5e3940f7090fb9c90bbf",
   "position": {
     "x": 712.871287128713,
@@ -145,6 +145,26 @@
             "id": "default"
           }
         }
+      ],
+      "label": [
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#757575'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
       ]
     },
     "visualContainerObjects": {
@@ -263,5 +283,23 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "9094dabb17e300b9b7bd"
+  "parentGroupName": "9094dabb17e300b9b7bd",
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "39236731fbc364057640",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Total Revenue"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
 }

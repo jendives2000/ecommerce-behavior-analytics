@@ -40,7 +40,7 @@ table FactCategoryPerformance
 	/// Total purchase events for this category.
 	column Purchases
 		dataType: int64
-		formatString: 0
+		formatString: #,0
 		lineageTag: 37788b1c-9cab-432f-a406-cc0e4e3a842f
 		summarizeBy: sum
 		sourceColumn: Purchases
@@ -50,7 +50,7 @@ table FactCategoryPerformance
 	/// Total revenue from this category, in US dollars.
 	column TotalRevenue
 		dataType: int64
-		formatString: 0
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
 		lineageTag: b95406cd-d9de-4202-9a10-bb0d501d7fd5
 		summarizeBy: sum
 		sourceColumn: TotalRevenue

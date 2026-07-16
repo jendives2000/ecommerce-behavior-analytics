@@ -12,6 +12,6 @@
     "funnel-floor-bias-tooltip",
     "price-cap-tooltip"
   ],
-  "activePageName": "anomaly-detail",
+  "activePageName": "overview",
   "landingPageName": "overview"
 }

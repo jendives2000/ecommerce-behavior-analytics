@@ -29,7 +29,7 @@ table FactTopBrands
 	/// Total revenue from this brand, in US dollars.
 	column TotalRevenue
 		dataType: int64
-		formatString: 0
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
 		lineageTag: d1f77856-a6af-45ff-9e1b-30747ac3108f
 		summarizeBy: sum
 		sourceColumn: TotalRevenue

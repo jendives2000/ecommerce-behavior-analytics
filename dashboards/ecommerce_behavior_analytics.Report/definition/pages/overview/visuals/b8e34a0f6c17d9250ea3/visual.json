@@ -4,10 +4,10 @@
   "position": {
     "x": 976,
     "y": 534,
-    "z": 20000,
+    "z": 17000,
     "height": 158,
     "width": 270,
-    "tabOrder": 20000
+    "tabOrder": 17000
   },
   "visual": {
     "visualType": "textbox",
@@ -24,7 +24,7 @@
                       "fontWeight": "bold",
                       "fontFamily": "DIN",
                       "fontSize": "12pt",
-                      "color": "#666666"
+                      "color": "#999999"
                     }
                   }
                 ]
@@ -43,7 +43,7 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "10pt",
-                      "color": "#666666"
+                      "color": "#999999"
                     }
                   }
                 ]
@@ -55,7 +55,7 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "10pt",
-                      "color": "#666666"
+                      "color": "#999999"
                     }
                   },
                   {
@@ -63,7 +63,7 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "10pt",
-                      "color": "#666666"
+                      "color": "#999999"
                     },
                     "url": "https://github.com/jendives2000/ecommerce-behavior-analytics/blob/main/README.md"
                   },
@@ -72,7 +72,7 @@
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "10pt",
-                      "color": "#666666"
+                      "color": "#999999"
                     }
                   }
                 ]

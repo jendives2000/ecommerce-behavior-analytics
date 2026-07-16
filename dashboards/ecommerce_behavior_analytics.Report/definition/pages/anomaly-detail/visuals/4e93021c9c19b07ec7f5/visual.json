@@ -393,9 +393,8 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 1,
-                      "Percent": 0.4
+                    "Literal": {
+                      "Value": "'#757575'"
                     }
                   }
                 }
@@ -572,6 +571,23 @@
           },
           "selector": {
             "metadata": "FactPriceOutliers.Weighted Outlier Rate"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#757575'"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       ]
