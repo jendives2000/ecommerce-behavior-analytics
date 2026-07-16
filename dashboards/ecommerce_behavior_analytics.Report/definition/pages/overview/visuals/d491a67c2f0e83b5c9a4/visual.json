@@ -2,12 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "d491a67c2f0e83b5c9a4",
   "position": {
-    "x": 662,
-    "y": 534,
-    "z": 16000,
+    "x": 658.47483192554535,
+    "y": 19.108451625682097,
+    "z": 3000,
     "height": 158,
-    "width": 270,
-    "tabOrder": 16000
+    "width": 270
   },
   "visual": {
     "visualType": "textbox",
@@ -22,7 +21,7 @@
                     "value": "Platform Price Cap — $2,574.07",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontFamily": "DIN",
+                      "fontFamily": "DIN Light",
                       "fontSize": "12pt",
                       "color": "#999999"
                     }
@@ -41,8 +40,8 @@
                   {
                     "value": "A hard ceiling on purchase price appears across every major category — likely a currency-conversion transaction limit. Outlier flags near this value reflect the cap, not fraud. ",
                     "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "10pt",
+                      "fontFamily": "DIN Light",
+                      "fontSize": "12pt",
                       "color": "#999999"
                     }
                   }
@@ -53,16 +52,16 @@
                   {
                     "value": "See ",
                     "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "10pt",
+                      "fontFamily": "DIN Light",
+                      "fontSize": "12pt",
                       "color": "#999999"
                     }
                   },
                   {
                     "value": "Data Quality Findings",
                     "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "10pt",
+                      "fontFamily": "DIN Light",
+                      "fontSize": "12pt",
                       "color": "#999999"
                     },
                     "url": "https://github.com/jendives2000/ecommerce-behavior-analytics/blob/main/README.md"
@@ -70,8 +69,8 @@
                   {
                     "value": " (item 3) in the project's repo for details. ",
                     "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "10pt",
+                      "fontFamily": "DIN Light",
+                      "fontSize": "12pt",
                       "color": "#999999"
                     }
                   }
@@ -201,5 +200,6 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  }
+  },
+  "parentGroupName": "6f327b75430f3a6d5b6c"
 }

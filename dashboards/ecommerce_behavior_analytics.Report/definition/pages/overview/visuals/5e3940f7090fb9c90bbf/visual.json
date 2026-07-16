@@ -283,23 +283,5 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "9094dabb17e300b9b7bd",
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "39236731fbc364057640",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Total Revenue"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
-  }
+  "parentGroupName": "9094dabb17e300b9b7bd"
 }

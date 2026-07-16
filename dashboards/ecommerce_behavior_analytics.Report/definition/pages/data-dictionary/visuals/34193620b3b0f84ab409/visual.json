@@ -7,11 +7,10 @@
     "z": 8000,
     "height": 80.44198895027624,
     "width": 570.16574585635351,
-    "tabOrder": 9000
+    "tabOrder": 7000
   },
   "visualGroup": {
     "displayName": "Group 2",
     "groupMode": "ScaleMode"
-  },
-  "isHidden": true
+  }
 }

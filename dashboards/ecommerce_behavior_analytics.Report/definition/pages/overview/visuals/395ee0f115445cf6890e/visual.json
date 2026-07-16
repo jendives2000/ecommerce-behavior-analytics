@@ -303,23 +303,5 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "9094dabb17e300b9b7bd",
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "504abc28122dec65a930",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Overall Conversion Rate"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
-  }
+  "parentGroupName": "9094dabb17e300b9b7bd"
 }
