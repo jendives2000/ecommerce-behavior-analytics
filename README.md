@@ -60,12 +60,11 @@ The key portfolio signal: **event-level behavioral data in BigQuery**. GA4, Ampl
 
 ## Platform
 
-**Google BigQuery Sandbox** — free tier, no credit card required.
+**Google BigQuery** — billing-enabled project. Modules 1–7 were built entirely on BigQuery Sandbox's free tier (no credit card, 10 GB active storage, 1 TB query processing/month, public datasets exempt from quota). Billing was enabled afterward specifically to unlock BigQuery ML for Module 8 (Purchase Propensity) — `CREATE MODEL` is not available in the Sandbox tier.
 
-- 10 GB free active storage
-- 1 TB free query processing per month
-- Public datasets don't count against quota
-- Sandbox tables expire after 60 days (re-load from local CSVs if needed)
+- Standard on-demand pricing still includes 1 TB of free query processing per month; usage beyond that is billed
+- No more 60-day table expiry (that was a Sandbox-only limitation)
+- Public datasets still don't count against quota
 
 See `workflows/01_bigquery_setup.md` for setup and loading instructions.
 
