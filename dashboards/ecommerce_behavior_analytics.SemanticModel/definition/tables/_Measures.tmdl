@@ -240,15 +240,27 @@ table _Measures
 		lineageTag: e6cee53e-6503-4cfb-9214-3e779f156c8b
 
 	measure 'Funnel Floor Bias Tooltip' = ```
-			
+
 			VAR OverallRate = FORMAT([Overall Conversion Rate], "0.0%")
 			VAR MainParagraph = "Every conversion rate in this report - including the overall " & OverallRate & " - is measured from first product view onward. This dataset has no event for a raw site visit, search, or homepage browse that never touched a product page."
 			VAR SecondaryParagraph = "About 214,000 sessions have a cart or purchase event but zero logged views - proof there's real traffic above 'viewed a product' this data simply can't see. True top-of-funnel conversion is almost certainly lower than " & OverallRate & ", but isn't computable from this data."
 			RETURN
 			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:13px;text-align:justify;'><p style='margin:0;'>" & MainParagraph & "</p><p style='margin:8px 0 0 0;'>" & SecondaryParagraph & "</p></div>"
-			
+
 			```
 		lineageTag: c2b93446-1913-4d37-a72d-40501e5584f0
+
+	/// Explainability tooltip for the Total Events KPI card - definition pulled live from the Data Dictionary, paired with a per-purchasing-user ratio for scale. Bind to an HTML Content visual on the 'overview-total-events-tooltip' page.
+	measure 'Total Events Tooltip' =
+			VAR Def = LOOKUPVALUE(DataDictionary_Measures[Description], DataDictionary_Measures[Name], "Total Events")
+			VAR EventsPerBuyer = FORMAT(DIVIDE([Total Events], [Purchasing Users]), "0")
+			RETURN
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:13px;text-align:justify;'>" &
+			        "<p style='margin:0;'>" & Def & "</p>" &
+			        "<p style='margin:8px 0 0 0;'>That works out to roughly " & EventsPerBuyer & " tracked events for every user who went on to purchase.</p>" &
+			    "</div>"
+		displayFolder: Tooltips\Overview
+		lineageTag: 31a57712-ade3-4b0f-9726-3cd631c6df72
 
 	column Value
 		isHidden

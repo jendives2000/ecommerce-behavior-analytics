@@ -10,7 +10,8 @@
     "cohort-detail",
     "anomaly-detail",
     "funnel-floor-bias-tooltip",
-    "price-cap-tooltip"
+    "price-cap-tooltip",
+    "overview-total-events-tooltip"
   ],
   "activePageName": "overview",
   "landingPageName": "overview"
