@@ -262,6 +262,18 @@ table _Measures
 		displayFolder: Tooltips\Overview
 		lineageTag: 31a57712-ade3-4b0f-9726-3cd631c6df72
 
+	/// Explainability tooltip for the Purchasing Users KPI card - definition pulled live from the Data Dictionary, paired with the conversion rate these users represent. Bind to an HTML Content visual on the 'overview-purchasing-users-tooltip' page.
+	measure 'Purchasing Users Tooltip' =
+			VAR Def = LOOKUPVALUE(DataDictionary_Measures[Description], DataDictionary_Measures[Name], "Purchasing Users")
+			VAR ConvRate = FORMAT([Overall Conversion Rate], "0.0%")
+			RETURN
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:13px;text-align:justify;'>" &
+			        "<p style='margin:0;'>" & Def & "</p>" &
+			        "<p style='margin:8px 0 0 0;'>These are the users behind the " & ConvRate & " view-to-purchase rate shown elsewhere on this page.</p>" &
+			    "</div>"
+		displayFolder: Tooltips\Overview
+		lineageTag: 5256b61a-d64a-4b67-86cb-c15e12fcc1ad
+
 	column Value
 		isHidden
 		lineageTag: a861b4e5-d496-4bae-9bed-e7872af11c91

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "overview-purchasing-users-tooltip",
+  "displayName": "Purchasing Users",
+  "displayOption": "FitToPage",
+  "height": 300,
+  "width": 400,
+  "visibility": "HiddenInViewMode",
+  "type": "Tooltip"
+}
