@@ -13,7 +13,7 @@ table _Measures
 		displayFolder: 'Overview KPIs'
 		lineageTag: d6a46e5e-244e-4231-8482-fd7b3c35ad64
 
-	/// The share of all product views, across every category in the dataset, that ended in a purchase. This is a fixed snapshot number covering the full category set - it won't match a number you might calculate from just the categories shown elsewhere on this page, since those only cover the top performers.
+	/// The share of all product views, across every category in the dataset, that ended in a purchase. This is a fixed snapshot number covering the full category set - it won't match a number you might calculate from just the categories shown elsewhere in the report, since those only cover the top performers.
 	measure 'Overall Conversion Rate' = 0.0609
 		formatString: 0.0%
 		displayFolder: 'Overview KPIs'
@@ -21,7 +21,7 @@ table _Measures
 
 		annotation PBI_FormatHint = {"isCustom":true}
 
-	/// Total purchase revenue across every category in the dataset, in US dollars. Like Overall Conversion Rate, this is a fixed snapshot covering the full category set, not just the categories shown elsewhere on this page.
+	/// Total purchase revenue across every category in the dataset, in US dollars. A fixed snapshot covering all 14 categories - broader than the category/brand breakdowns shown elsewhere in the report, which focus on the top performers only.
 	measure 'Total Revenue' = 2060000000
 		formatString: "$"#,##0
 		displayFolder: 'Overview KPIs'
