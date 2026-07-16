@@ -293,7 +293,7 @@
             "section": {
               "expr": {
                 "Literal": {
-                  "Value": "'funnel-floor-bias-tooltip'"
+                  "Value": "'overview-conversion-rate-tooltip'"
                 }
               }
             }

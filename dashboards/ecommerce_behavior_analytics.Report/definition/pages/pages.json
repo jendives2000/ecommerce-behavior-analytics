@@ -12,7 +12,8 @@
     "funnel-floor-bias-tooltip",
     "price-cap-tooltip",
     "overview-total-events-tooltip",
-    "overview-purchasing-users-tooltip"
+    "overview-purchasing-users-tooltip",
+    "overview-conversion-rate-tooltip"
   ],
   "activePageName": "overview",
   "landingPageName": "overview"

@@ -274,6 +274,17 @@ table _Measures
 		displayFolder: Tooltips\Overview
 		lineageTag: 5256b61a-d64a-4b67-86cb-c15e12fcc1ad
 
+	/// Explainability tooltip for the Overall Conversion Rate KPI card - hand-written short-form text per user request (shorter/less technical than the Data Dictionary description), with only the percentage value kept live. Bind to an HTML Content visual on the 'overview-conversion-rate-tooltip' page.
+	measure 'Overall Conversion Rate Tooltip' =
+			VAR OverallRate = FORMAT([Overall Conversion Rate], "0.0%")
+			RETURN
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:17px;text-align:justify;'>" &
+			        "<p style='margin:0;'>The share of all product views that led to a purchase, across every tracked category. A fixed snapshot number, not something that changes as you filter.</p>" &
+			        "<p style='margin:8px 0 0 0;'>It's measured from product views onward, not raw site visits, so the true top-of-funnel rate is likely a bit lower than " & OverallRate & ". See Data Quality Notes for detail.</p>" &
+			    "</div>"
+		displayFolder: Tooltips\Overview
+		lineageTag: c86b68d3-2aaf-4374-91aa-f58f4b2d934d
+
 	column Value
 		isHidden
 		lineageTag: a861b4e5-d496-4bae-9bed-e7872af11c91
