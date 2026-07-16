@@ -265,11 +265,11 @@ table _Measures
 	/// Explainability tooltip for the Purchasing Users KPI card - definition pulled live from the Data Dictionary, paired with the conversion rate these users represent. Bind to an HTML Content visual on the 'overview-purchasing-users-tooltip' page.
 	measure 'Purchasing Users Tooltip' =
 			VAR Def = LOOKUPVALUE(DataDictionary_Measures[Description], DataDictionary_Measures[Name], "Purchasing Users")
-			VAR ConvRate = FORMAT([Overall Conversion Rate], "0.0%")
+			VAR RevPerBuyer = FORMAT(DIVIDE([Total Revenue], [Purchasing Users]), "$#,##0")
 			RETURN
 			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:13px;text-align:justify;'>" &
 			        "<p style='margin:0;'>" & Def & "</p>" &
-			        "<p style='margin:8px 0 0 0;'>These are the users behind the " & ConvRate & " view-to-purchase rate shown elsewhere on this page.</p>" &
+			        "<p style='margin:8px 0 0 0;'>On average, each of these customers generated about " & RevPerBuyer & " in revenue over the tracked period.</p>" &
 			    "</div>"
 		displayFolder: Tooltips\Overview
 		lineageTag: 5256b61a-d64a-4b67-86cb-c15e12fcc1ad
