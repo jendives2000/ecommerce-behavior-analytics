@@ -340,6 +340,14 @@ table _Measures
 		displayFolder: Tooltips\Overview
 		lineageTag: a8f0783d-f5fb-470d-a048-b701715c1e26
 
+	/// Plain-text version of the Month-1 Retention Avg Tooltip measure, for binding to the invisible action button's native visualLink tooltip field (a literal text hint, not the rich HTML report-page tooltip). Same content, no HTML markup.
+	measure 'Month-1 Retention Avg Tooltip Text' =
+			VAR Def = LOOKUPVALUE(DataDictionary_Measures[Description], DataDictionary_Measures[Name], "Month-1 Retention Avg")
+			RETURN
+			    Def & " Each acquisition cohort is grouped by the calendar month of a customer's first purchase; M1 checks whether they returned to purchase again in their second calendar month on record."
+		displayFolder: Tooltips\Overview
+		lineageTag: b2c4d6e8-1a3f-4c5b-8e9d-7f6a2b3c4d5e
+
 	column Value
 		isHidden
 		lineageTag: a861b4e5-d496-4bae-9bed-e7872af11c91

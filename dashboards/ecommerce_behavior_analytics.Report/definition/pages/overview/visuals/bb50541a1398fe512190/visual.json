@@ -47,40 +47,6 @@
           }
         }
       ],
-      "visualLink": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "type": {
-              "expr": {
-                "Literal": {
-                  "Value": "'PageNavigation'"
-                }
-              }
-            },
-            "drillthroughSection": {
-              "expr": {
-                "Literal": {
-                  "Value": "'cohort-detail'"
-                }
-              }
-            },
-            "navigationSection": {
-              "expr": {
-                "Literal": {
-                  "Value": "'cohort-detail'"
-                }
-              }
-            }
-          }
-        }
-      ],
       "visualTooltip": [
         {
           "properties": {
