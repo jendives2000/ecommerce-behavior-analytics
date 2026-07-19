@@ -310,10 +310,10 @@
                 }
               }
             },
-            "type": {
+            "section": {
               "expr": {
                 "Literal": {
-                  "Value": "'Default'"
+                  "Value": "'overview-covid-impact-tooltip'"
                 }
               }
             }

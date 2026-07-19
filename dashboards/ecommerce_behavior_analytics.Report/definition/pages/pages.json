@@ -13,7 +13,12 @@
     "price-cap-tooltip",
     "overview-total-events-tooltip",
     "overview-purchasing-users-tooltip",
-    "overview-conversion-rate-tooltip"
+    "overview-conversion-rate-tooltip",
+    "overview-total-revenue-tooltip",
+    "overview-cart-abandonment-tooltip",
+    "overview-champion-revenue-tooltip",
+    "overview-covid-impact-tooltip",
+    "overview-retention-tooltip"
   ],
   "activePageName": "overview",
   "landingPageName": "overview"

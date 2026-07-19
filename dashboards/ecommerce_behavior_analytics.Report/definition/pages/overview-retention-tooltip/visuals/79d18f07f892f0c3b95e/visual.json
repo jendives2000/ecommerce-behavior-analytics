@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "79d18f07f892f0c3b95e",
+  "position": {
+    "x": 18.717948717948719,
+    "y": 26.666666666666668,
+    "z": 0,
+    "height": 263.84615384615387,
+    "width": 362.5641025641026,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6855",
+    "query": {
+      "queryState": {
+        "content": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Month-1 Retention Avg Tooltip"
+                }
+              },
+              "queryRef": "_Measures.Month-1 Retention Avg Tooltip",
+              "nativeQueryRef": "Month-1 Retention Avg Tooltip"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
