@@ -285,60 +285,55 @@ table _Measures
 		displayFolder: Tooltips\Overview
 		lineageTag: c86b68d3-2aaf-4374-91aa-f58f4b2d934d
 
-	/// Explainability tooltip for the Total Revenue KPI card - definition pulled live from the Data Dictionary, paired with the Champion segment's share of it. Bind to an HTML Content visual on the 'overview-total-revenue-tooltip' page.
 	measure 'Total Revenue Tooltip' =
 			VAR Def = LOOKUPVALUE(DataDictionary_Measures[Description], DataDictionary_Measures[Name], "Total Revenue")
 			VAR ChampShare = FORMAT([Champion Revenue Share], "0.0%")
 			RETURN
-			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:15px;text-align:justify;'>" &
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:18px;text-align:justify;'>" &
 			        "<p style='margin:0;'>" & Def & "</p>" &
 			        "<p style='margin:8px 0 0 0;'>Champion segment customers alone account for " & ChampShare & " of this total, despite being a small fraction of the user base.</p>" &
 			    "</div>"
 		displayFolder: Tooltips\Overview
 		lineageTag: f1537f7f-c842-4e0f-bbb0-46467eed3548
 
-	/// Explainability tooltip for the Cart Abandonment Rate KPI card - definition pulled live from the Data Dictionary, contrasted with the overall conversion rate. Bind to an HTML Content visual on the 'overview-cart-abandonment-tooltip' page.
 	measure 'Cart Abandonment Rate Tooltip' =
 			VAR Def = LOOKUPVALUE(DataDictionary_Measures[Description], DataDictionary_Measures[Name], "Cart Abandonment Rate")
 			VAR ConvRate = FORMAT([Overall Conversion Rate], "0.0%")
 			RETURN
-			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:18px;text-align:justify;'>" &
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:20px;text-align:justify;'>" &
 			        "<p style='margin:0;'>" & Def & "</p>" &
 			        "<p style='margin:8px 0 0 0;'>Elsewhere on this page, " & ConvRate & " of all views convert - most cart-adds still don't finish, even among visitors who got this far.</p>" &
 			    "</div>"
 		displayFolder: Tooltips\Overview
 		lineageTag: d483ffea-e9e7-48aa-8246-53d2e5360f33
 
-	/// Explainability tooltip for the Champion Revenue Share KPI card - definition pulled live from the Data Dictionary, paired with a live-computed concentration multiple (revenue share vs. user share) for the Champion segment specifically. Bind to an HTML Content visual on the 'overview-champion-revenue-tooltip' page.
 	measure 'Champion Revenue Share Tooltip' =
 			VAR Def = LOOKUPVALUE(DataDictionary_Measures[Description], DataDictionary_Measures[Name], "Champion Revenue Share")
 			VAR ChampUserShare = CALCULATE(SUM(FactRFMSegment[PctUsers]), FactRFMSegment[Segment] = "Champion")
 			VAR Multiple = FORMAT(DIVIDE([Champion Revenue Share], ChampUserShare), "0.0")
 			VAR UserSharePct = FORMAT(ChampUserShare, "0%")
 			RETURN
-			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:14px;text-align:justify;'>" &
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:17px;text-align:justify;'>" &
 			        "<p style='margin:0;'>" & Def & "</p>" &
 			        "<p style='margin:8px 0 0 0;'>Champions make up just " & UserSharePct & " of the customer base but generate this share of revenue - " & Multiple & "x their proportional share.</p>" &
 			    "</div>"
 		displayFolder: Tooltips\Overview
 		lineageTag: 0f20a30b-d035-411b-ac00-7f426338ea5d
 
-	/// Explainability tooltip for the COVID Impact on Conversion KPI card - definition pulled live from the Data Dictionary for the underlying COVID Session Conversion Lift measure, plus the Logging Gap data quality tie-in since it directly affects the pre-COVID baseline this measure compares against. Bind to an HTML Content visual on the 'overview-covid-impact-tooltip' page.
 	measure 'COVID Impact on Conversion Tooltip' =
 			VAR Def = LOOKUPVALUE(DataDictionary_Measures[Description], DataDictionary_Measures[Name], "COVID Session Conversion Lift")
 			RETURN
-			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:13px;text-align:justify;'>" &
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:17px;text-align:justify;'>" &
 			        "<p style='margin:0;'>" & Def & "</p>" &
 			        "<p style='margin:8px 0 0 0;'>Note: Feb 27, 2020 is excluded from the pre-COVID baseline used here due to a platform logging outage that dropped roughly 90% of that day's events - see Data Quality Notes for detail.</p>" &
 			    "</div>"
 		displayFolder: Tooltips\Overview
 		lineageTag: 3501e3ce-7389-42f7-9b1b-0497b0c2e5bd
 
-	/// Explainability tooltip for the Month-1 Retention Avg KPI card - definition pulled live from the Data Dictionary, plus a cohort-timing clarification. Deliberately does not repeat the historical-position badge text already shown on this card's own HTML content. Bind to an HTML Content visual on the 'overview-retention-tooltip' page.
 	measure 'Month-1 Retention Avg Tooltip' =
 			VAR Def = LOOKUPVALUE(DataDictionary_Measures[Description], DataDictionary_Measures[Name], "Month-1 Retention Avg")
 			RETURN
-			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:15px;text-align:justify;'>" &
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:18px;text-align:justify;'>" &
 			        "<p style='margin:0;'>" & Def & "</p>" &
 			        "<p style='margin:8px 0 0 0;'>Each acquisition cohort is grouped by the calendar month of a customer's first purchase; M1 checks whether they returned to purchase again in their second calendar month on record.</p>" &
 			    "</div>"

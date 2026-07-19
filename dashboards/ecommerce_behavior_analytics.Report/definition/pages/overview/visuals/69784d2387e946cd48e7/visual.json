@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "69784d2387e946cd48e7",
   "position": {
-    "x": 41.079862967034749,
-    "y": 309.78850108947142,
+    "x": 41.17581808097615,
+    "y": 302.42928452579031,
     "z": 9000,
-    "height": 148.07563959955505,
-    "width": 304.69410456062292,
+    "height": 155.47420965058237,
+    "width": 304.5590682196339,
     "tabOrder": 11000
   },
   "visual": {
@@ -122,6 +122,26 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "section": {
+              "expr": {
+                "Literal": {
+                  "Value": "'overview-retention-tooltip'"
                 }
               }
             }

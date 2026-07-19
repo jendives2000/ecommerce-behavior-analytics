@@ -169,6 +169,13 @@
       "label": [
         {
           "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
             "fontColor": {
               "solid": {
                 "color": {
@@ -177,6 +184,22 @@
                       "Value": "'#757575'"
                     }
                   }
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "cardImage": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
@@ -313,7 +336,7 @@
             "section": {
               "expr": {
                 "Literal": {
-                  "Value": "'overview-covid-impact-tooltip'"
+                  "Value": "'overview-total-events-tooltip'"
                 }
               }
             }
