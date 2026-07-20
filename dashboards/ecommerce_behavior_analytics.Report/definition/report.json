@@ -40,7 +40,7 @@
           "expanded": {
             "expr": {
               "Literal": {
-                "Value": "true"
+                "Value": "false"
               }
             }
           }
@@ -69,38 +69,8 @@
       "type": "RegisteredResources",
       "items": [
         {
-          "name": "Innovate9456186699251292.json",
-          "path": "Innovate9456186699251292.json",
-          "type": "CustomTheme"
-        },
-        {
           "name": "activity1784188128.svg",
           "path": "activity1784188128.svg",
-          "type": "Image"
-        },
-        {
-          "name": "target-arrow1784188128.svg",
-          "path": "target-arrow1784188128.svg",
-          "type": "Image"
-        },
-        {
-          "name": "coin1784188128.svg",
-          "path": "coin1784188128.svg",
-          "type": "Image"
-        },
-        {
-          "name": "shopping-cart-off1784188128.svg",
-          "path": "shopping-cart-off1784188128.svg",
-          "type": "Image"
-        },
-        {
-          "name": "trophy1784188128.svg",
-          "path": "trophy1784188128.svg",
-          "type": "Image"
-        },
-        {
-          "name": "question-mark1784188128.svg",
-          "path": "question-mark1784188128.svg",
           "type": "Image"
         },
         {
@@ -109,28 +79,8 @@
           "type": "Image"
         },
         {
-          "name": "credit-card1784188128.svg",
-          "path": "credit-card1784188128.svg",
-          "type": "Image"
-        },
-        {
           "name": "category1784188128.svg",
           "path": "category1784188128.svg",
-          "type": "Image"
-        },
-        {
-          "name": "device-desktop1784188128.svg",
-          "path": "device-desktop1784188128.svg",
-          "type": "Image"
-        },
-        {
-          "name": "clock1784188128.svg",
-          "path": "clock1784188128.svg",
-          "type": "Image"
-        },
-        {
-          "name": "click1784188128.svg",
-          "path": "click1784188128.svg",
           "type": "Image"
         },
         {
@@ -139,8 +89,58 @@
           "type": "Image"
         },
         {
+          "name": "click1784188128.svg",
+          "path": "click1784188128.svg",
+          "type": "Image"
+        },
+        {
+          "name": "clock1784188128.svg",
+          "path": "clock1784188128.svg",
+          "type": "Image"
+        },
+        {
+          "name": "coin1784188128.svg",
+          "path": "coin1784188128.svg",
+          "type": "Image"
+        },
+        {
+          "name": "credit-card1784188128.svg",
+          "path": "credit-card1784188128.svg",
+          "type": "Image"
+        },
+        {
+          "name": "device-desktop1784188128.svg",
+          "path": "device-desktop1784188128.svg",
+          "type": "Image"
+        },
+        {
+          "name": "Innovate9456186699251292.json",
+          "path": "Innovate9456186699251292.json",
+          "type": "CustomTheme"
+        },
+        {
+          "name": "question-mark1784188128.svg",
+          "path": "question-mark1784188128.svg",
+          "type": "Image"
+        },
+        {
+          "name": "shopping-cart-off1784188128.svg",
+          "path": "shopping-cart-off1784188128.svg",
+          "type": "Image"
+        },
+        {
           "name": "shopping-cart1784188128.svg",
           "path": "shopping-cart1784188128.svg",
+          "type": "Image"
+        },
+        {
+          "name": "target-arrow1784188128.svg",
+          "path": "target-arrow1784188128.svg",
+          "type": "Image"
+        },
+        {
+          "name": "trophy1784188128.svg",
+          "path": "trophy1784188128.svg",
           "type": "Image"
         }
       ]

@@ -316,7 +316,7 @@
             "section": {
               "expr": {
                 "Literal": {
-                  "Value": "'overview-total-events-tooltip'"
+                  "Value": "'overview-total-revenue-tooltip'"
                 }
               }
             }

@@ -1,0 +1,496 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Cust Seg hide",
+  "name": "e628506c7e30a3b57d11",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "996c038e2d599e88731a",
+      "88d7f1b1c17f5feb5adb",
+      "9a51158a90a46edabae5",
+      "ea5639d20e647dd87ef8",
+      "f8ac69cf40f098fe679a",
+      "258a954764773e095649",
+      "7076e8039ec9b704bf20"
+    ]
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "customer-segments",
+    "sections": {
+      "customer-segments": {
+        "visualContainers": {
+          "0bd78a8be5ff8d502811": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "fd2af8b4cc6c5ec9c291",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactConvertingVsNon"
+                        }
+                      },
+                      "Property": "SessionType"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "8df2db0385d322e452c1",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "FactConvertingVsNon"
+                            }
+                          },
+                          "Property": "Sessions"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "eb7038669ab6dd7c2c5f",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactConvertingVsNon"
+                        }
+                      },
+                      "Property": "Median Session Duration (mm:ss)"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "7df15ed9011915f92453",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactConvertingVsNon"
+                        }
+                      },
+                      "Property": "MedianEvents"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "796bd94dc0a3defed0b3",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactConvertingVsNon"
+                        }
+                      },
+                      "Property": "AvgEvents"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "578625620609eee2c265",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactConvertingVsNon"
+                        }
+                      },
+                      "Property": "AvgCarts"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "tableEx",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactConvertingVsNon"
+                        }
+                      },
+                      "Property": "SessionType"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "0d72da2bbab64df0510a": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "258a954764773e095649": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "06e1eeb5103bf050c7de",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Measures"
+                        }
+                      },
+                      "Property": "Customer Segments Insight"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6855",
+              "objects": {}
+            }
+          },
+          "2bd0e6658fe6e0e57ed8": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "3a32d77c107d8091ae12": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "423b2c95011006a2f389": {
+            "singleVisual": {
+              "visualType": "pageNavigator",
+              "objects": {}
+            }
+          },
+          "53acb264202854d1ecbf": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "625c56d666b67d02ed80": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "6a7850618f729d3fe8a4": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "7076e8039ec9b704bf20": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "7d2862193a9986109f19": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "9a4ffbde93ce0ef8334d": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "0114155c3ee3f8be59b1": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "72fd82d0a993ce4dc91b": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "9eac4696b38f1487bcf3",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactRFMMonetaryDist"
+                        }
+                      },
+                      "Property": "Segment"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "019b65a36dd976557cd6",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactRFMMonetaryDist"
+                        }
+                      },
+                      "Property": "P25"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "170ee45e2e3a7b5c4242",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactRFMMonetaryDist"
+                        }
+                      },
+                      "Property": "Median"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "997de7afff6f0df50404",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactRFMMonetaryDist"
+                        }
+                      },
+                      "Property": "P75"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "6cc61147cb342c887b7f",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "DimSegment"
+                            }
+                          },
+                          "Property": "SortOrder"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "deneb7E15AEF80B9E4D4F8E12924291ECE89A",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactRFMMonetaryDist"
+                        }
+                      },
+                      "Property": "Segment"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "daa6117bafa857baa00c": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "dbf0fcedf304297a0709": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2c6168bfe29aae63c140",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimSegment"
+                        }
+                      },
+                      "Property": "Segment"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "f5b3b7fe36143b3fdcd2",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "FactRFMSegment"
+                            }
+                          },
+                          "Property": "PctUsers"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "336f06c92659228af1c9",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "FactRFMSegment"
+                            }
+                          },
+                          "Property": "PctRevenue"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredColumnChart",
+              "objects": {},
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DimSegment"
+                        }
+                      },
+                      "Property": "Segment"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "cbbf14c0a552ae22bccc": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "f3a8c2d5e0b1974a6c3d": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "996c038e2d599e88731a": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "f8ac69cf40f098fe679a": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "88d7f1b1c17f5feb5adb": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "9a51158a90a46edabae5": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "ea5639d20e647dd87ef8": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

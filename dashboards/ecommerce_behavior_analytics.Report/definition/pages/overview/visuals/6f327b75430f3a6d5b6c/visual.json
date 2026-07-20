@@ -2,14 +2,16 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "6f327b75430f3a6d5b6c",
   "position": {
-    "x": 3.755868544600939,
-    "y": 519.06103286384973,
-    "z": 21000,
-    "height": 201.31455399061034,
-    "width": 1276.2441314553989
+    "x": 4.8207132804249566,
+    "y": 539.49377537109331,
+    "z": 18000,
+    "height": 180.7726409119696,
+    "width": 1275.1361621279291,
+    "tabOrder": 23000
   },
   "visualGroup": {
-    "displayName": "Group 4",
+    "displayName": "Bottom notes",
     "groupMode": "ScaleMode"
-  }
+  },
+  "isHidden": true
 }

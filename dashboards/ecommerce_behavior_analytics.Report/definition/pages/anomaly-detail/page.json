@@ -49,7 +49,7 @@
                     [
                       {
                         "Literal": {
-                          "Value": "'DIY / Home Improvement'"
+                          "Value": "'Electronics'"
                         }
                       }
                     ]
@@ -59,6 +59,21 @@
             }
           ]
         },
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "6b421779f85b201cacfd",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactCategoryPerformance"
+              }
+            },
+            "Property": "TotalRevenue"
+          }
+        },
+        "type": "Categorical",
         "howCreated": "Drillthrough"
       }
     ]
@@ -78,6 +93,21 @@
               }
             },
             "Property": "DisplayName"
+          }
+        }
+      },
+      {
+        "name": "6168332edd75370e9196",
+        "boundFilter": "6b421779f85b201cacfd",
+        "asAggregation": true,
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactCategoryPerformance"
+              }
+            },
+            "Property": "TotalRevenue"
           }
         }
       }

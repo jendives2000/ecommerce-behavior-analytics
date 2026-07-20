@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "a942e29e66934f0e44ea",
   "position": {
-    "x": 734.42782651465359,
-    "y": 329.49341885971995,
+    "x": 751.24822810888043,
+    "y": 345.69043515074344,
     "z": 2000,
     "height": 110.0990099009901,
     "width": 266.13861386138615,
@@ -316,7 +316,7 @@
             "section": {
               "expr": {
                 "Literal": {
-                  "Value": "'overview-total-events-tooltip'"
+                  "Value": "'overview-champion-revenue-tooltip'"
                 }
               }
             }

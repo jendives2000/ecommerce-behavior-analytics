@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "53ae272b3af66b6b3426",
+  "position": {
+    "x": 964.21293646250717,
+    "y": 460.12593016599891,
+    "z": 22000,
+    "height": 24.178591871780196,
+    "width": 315.05437893531769,
+    "tabOrder": 20000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Data as of Apr 2020 · Static snapshot, not live · Jean-Yves Tran",
+                    "textStyle": {
+                      "fontFamily": "DIN Light",
+                      "color": "#666666"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -134,7 +134,7 @@ table _Measures
 		lineageTag: e9cf188e-6674-4aee-9dc7-6ea8e5c46f75
 
 	/// Single dynamic sentence synthesizing the Overview page's core story - conversion rate, cart abandonment, and month-1 retention - recalculated live from the model so it never goes stale if someone filters the page differently. Not a static caption; reuses the Retention Position Ratio logic already built for the retention KPI card. Bind directly to a text-based visual (Card, HTML Content, or a text box referencing this measure).
-	measure 'Overview Insight' =
+	measure 'Overview Insight' = ```
 			VAR ConvRate = FORMAT ( [Overall Conversion Rate], "0.0%" )
 			VAR AbandonRate = FORMAT ( [Cart Abandonment Rate], "0.0%" )
 			VAR RetentionRate = FORMAT ( [Month-1 Retention Avg], "0.0%" )
@@ -146,9 +146,15 @@ table _Measures
 			        "High", "toward the stronger end of the historical range",
 			        "roughly mid-range historically"
 			    )
-			VAR InsightText = ConvRate & " of views convert and " & AbandonRate & " of carts are abandoned; first-month retention lands at " & RetentionRate & ", " & RetentionFraming & "."
+			VAR OpportunityValue = "$" & FORMAT(DIVIDE([Cart Abandonment Opportunity], 1000000000), "0.00") & "B"
+			VAR MainParagraph = ConvRate & " of views convert and " & AbandonRate & " of carts are abandoned - beating Adobe's 2.3-3.1% average by ~2x and clearing Littledata's top-10% bar (4.7%). First-month retention lands at " & RetentionRate & ", " & RetentionFraming & ". Recovering abandoned carts at typical order value could be worth an estimated " & OpportunityValue 
+			VAR PriorityParagraph = "<span style='color:#118C3A;font-weight:600;'>Priority:</span> put marketing budget toward winning those carts back (retargeting, reminder emails) rather than acquiring new visitors."
 			RETURN
-			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:20px;'>" & InsightText & "</div>"
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:15px;text-align:justify;'>" &
+			        "<p style='margin:0;'>" & MainParagraph & "</p>" &
+			        "<p style='margin:8px 0 0 0;'>" & PriorityParagraph & "</p>" &
+			    "</div>"
+			```
 		displayFolder: Insights\Overview
 		lineageTag: 709af52b-ac37-4ed3-807f-9eb8ac924e30
 
@@ -200,7 +206,7 @@ table _Measures
 			        "<p style='margin:0;'>" & TopCategoryDisplayName & " alone accounts for " & CategoryShare & " of the category revenue shown here, and " & TopBrandDisplayName & " a similar " & BrandShare & " of brand revenue - a handful of players carry most of the weight on this page, not a broad spread across categories or brands.</p>"
 			    )
 			RETURN
-			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:13px;text-align:justify;'>" & MainParagraph & "</div>"
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:14px;text-align:justify;'>" & MainParagraph & "</div>"
 		displayFolder: Insights\Category & Brand
 		lineageTag: a64934ed-8a48-4e36-9a0a-960172c018ae
 
@@ -299,10 +305,12 @@ table _Measures
 	measure 'Cart Abandonment Rate Tooltip' =
 			VAR Def = LOOKUPVALUE(DataDictionary_Measures[Description], DataDictionary_Measures[Name], "Cart Abandonment Rate")
 			VAR ConvRate = FORMAT([Overall Conversion Rate], "0.0%")
+			VAR OpportunityValue = "$" & FORMAT(DIVIDE([Cart Abandonment Opportunity], 1000000000), "0.00") & "B"
 			RETURN
-			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:20px;text-align:justify;'>" &
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:15px;text-align:justify;'>" &
 			        "<p style='margin:0;'>" & Def & "</p>" &
 			        "<p style='margin:8px 0 0 0;'>Elsewhere on this page, " & ConvRate & " of all views convert - most cart-adds still don't finish, even among visitors who got this far.</p>" &
+			        "<p style='margin:8px 0 0 0;'>If abandoned carts converted at the same average order value as completed purchases, that's an estimated " & OpportunityValue & " left on the table - a ceiling, not a forecast, since people who abandon a cart often behave differently than people who complete one.</p>" &
 			    "</div>"
 		displayFolder: Tooltips\Overview
 		lineageTag: d483ffea-e9e7-48aa-8246-53d2e5360f33
@@ -312,10 +320,11 @@ table _Measures
 			VAR ChampUserShare = CALCULATE(SUM(FactRFMSegment[PctUsers]), FactRFMSegment[Segment] = "Champion")
 			VAR Multiple = FORMAT(DIVIDE([Champion Revenue Share], ChampUserShare), "0.0")
 			VAR UserSharePct = FORMAT(ChampUserShare, "0%")
+			VAR ChampRevenueDollars = FORMAT([Champion Revenue Share] * [Total Revenue], "$#,##0,,""M""")
 			RETURN
-			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:17px;text-align:justify;'>" &
+			    "<div style='font-family:""Segoe UI Light"",""Segoe UI"",sans-serif;font-weight:300;color:#FFFFFF;font-size:16px;text-align:justify;'>" &
 			        "<p style='margin:0;'>" & Def & "</p>" &
-			        "<p style='margin:8px 0 0 0;'>Champions make up just " & UserSharePct & " of the customer base but generate this share of revenue - " & Multiple & "x their proportional share.</p>" &
+			        "<p style='margin:8px 0 0 0;'>Champions make up just " & UserSharePct & " of the customer base but generate this share of revenue - " & Multiple & "x their proportional share, worth roughly " & ChampRevenueDollars & " of total revenue.</p>" &
 			    "</div>"
 		displayFolder: Tooltips\Overview
 		lineageTag: 0f20a30b-d035-411b-ac00-7f426338ea5d
@@ -340,13 +349,22 @@ table _Measures
 		displayFolder: Tooltips\Overview
 		lineageTag: a8f0783d-f5fb-470d-a048-b701715c1e26
 
-	/// Plain-text version of the Month-1 Retention Avg Tooltip measure, for binding to the invisible action button's native visualLink tooltip field (a literal text hint, not the rich HTML report-page tooltip). Same content, no HTML markup.
 	measure 'Month-1 Retention Avg Tooltip Text' =
 			VAR Def = LOOKUPVALUE(DataDictionary_Measures[Description], DataDictionary_Measures[Name], "Month-1 Retention Avg")
 			RETURN
 			    Def & " Each acquisition cohort is grouped by the calendar month of a customer's first purchase; M1 checks whether they returned to purchase again in their second calendar month on record."
 		displayFolder: Tooltips\Overview
 		lineageTag: b2c4d6e8-1a3f-4c5b-8e9d-7f6a2b3c4d5e
+
+	/// Estimated dollar value of abandoned-cart sessions if they had converted at the same average order value as completed purchases - a ceiling, not a forecast.
+	measure 'Cart Abandonment Opportunity' =
+			VAR AbandonedSessions = 5795411
+			VAR TotalPurchaseSessions = 5449933
+			VAR AvgRevenuePerSession = DIVIDE([Total Revenue], TotalPurchaseSessions)
+			RETURN AbandonedSessions * AvgRevenuePerSession
+		formatString: "$"#,##0
+		displayFolder: Insights\Overview
+		lineageTag: d5a7e251-0d76-4d15-887c-ebe2bdf45b0a
 
 	column Value
 		isHidden

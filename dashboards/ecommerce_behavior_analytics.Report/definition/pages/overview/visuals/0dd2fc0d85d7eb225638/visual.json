@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "0dd2fc0d85d7eb225638",
   "position": {
-    "x": 1016.4080245344568,
-    "y": 329.49341885971995,
+    "x": 1033.2284261286836,
+    "y": 345.69043515074344,
     "z": 4000,
     "height": 110.0990099009901,
     "width": 247.12871287128715,
@@ -336,7 +336,7 @@
             "section": {
               "expr": {
                 "Literal": {
-                  "Value": "'overview-total-events-tooltip'"
+                  "Value": "'overview-covid-impact-tooltip'"
                 }
               }
             }
@@ -345,23 +345,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "591b68a66ed2c8fc0412",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "COVID Session Conversion Lift"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }
