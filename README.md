@@ -1,66 +1,71 @@
 # E-Commerce Behavior Analytics
 
-> **411 million real behavioral events.**   
-**One question: what separates a browser from a buyer?**  
-> Most visitors view products and leave. Only ~6% actually purchase. This project identifies the behavioral signals that predict who converts — and what drives the gap — through funnel analysis, cohort retention, RFM segmentation, anomaly detection, and a COVID-onset quasi-experiment on real e-commerce data in Google BigQuery.
+> **Only 6.1% of product views become a purchase, and 54.1% of the carts that make it that far are abandoned anyway.** This project follows that browser-to-buyer gap through funnel breakdown, cohort retention, RFM segmentation, anomaly detection, and a COVID-onset quasi-experiment, all built directly on Google BigQuery.
 
-![BigQuery](https://img.shields.io/badge/BigQuery-Sandbox-4285F4?logo=googlecloud&logoColor=white)
+![BigQuery](https://img.shields.io/badge/BigQuery-Data%20Warehouse-4285F4?logo=googlecloud&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)
 ![SQL](https://img.shields.io/badge/SQL-CTEs%20%7C%20Window%20Functions-336791?logo=postgresql&logoColor=white)
+![scipy](https://img.shields.io/badge/scipy-stats-8CAAE6?logo=scipy&logoColor=white)
 ![Power BI](https://img.shields.io/badge/Power%20BI-Dashboard-F2C811?logo=powerbi&logoColor=black)
+![Excel](https://img.shields.io/badge/Excel-Automated-217346?logo=microsoftexcel&logoColor=white)
+
+<details>
+<summary>Table of Contents</summary>
+
+- [E-Commerce Behavior Analytics](#e-commerce-behavior-analytics)
+  - [Key Findings](#key-findings)
+  - [Dataset](#dataset)
+  - [Platform](#platform)
+  - [Analytics Deliverables](#analytics-deliverables)
+  - [Data Quality Findings](#data-quality-findings)
+  - [Dashboard](#dashboard)
+  - [Stack](#stack)
+  - [How to Start](#how-to-start)
+  - [Why This Project Exists](#why-this-project-exists)
+  - [Quick Links](#quick-links)
+
+</details>
 
 ---
 
-## Why This Project Exists
+## Key Findings
 
-This is the second portfolio project in a two-project strategy:
+| Metric | Value |
+|---|---|
+| Total Revenue | $2.06B |
+| Overall Conversion Rate | 6.1% |
+| Cart Abandonment Rate | 54.1% |
+| Champion Revenue Share | 41% (13% of customers) |
 
-| Project | Dataset | Domain | What it covers |
-|---------|---------|--------|----------------|
-| [Project 1 — TechFlow](../project1_saas_analytics/) | IBM Telco (7,043 records) | SaaS subscription | Churn, LTV, A/B test, Excel automation |
-| **Project 2 — This project** | REES46 (411M events) | E-commerce behavior | Funnel, retention cohorts, RFM, anomaly detection |
+**1. Cart abandonment is the single largest recoverable opportunity in the funnel.** 54.1% of carts abandon before purchase. If those carts converted at the same average order value as completed purchases, that's roughly $2.19B sitting on the table, more than any realistic gain from acquiring new traffic. Treat that number as a ceiling rather than a promise; behavior on an abandoned cart won't automatically match a completed one.
 
-Project 1 speaks to fintech/B2B SaaS roles. This project speaks to product analytics, gaming, e-commerce, and modern data stack roles — specifically the gap companies like Moon Active, Ashley Digital, and Nespresso represent in the Israeli job market.
+**2. A small customer segment carries most of the revenue, and most of the risk.** Champions make up just 13% of the customer base but generate 41% of revenue, about three times their proportional share. Holding onto that group matters more than chasing new customers at the same pace.
 
-The key portfolio signal: **event-level behavioral data in BigQuery**. GA4, Amplitude, and Mixpanel all produce the same structure (event_time, event_type, user_id, session_id). Knowing how to query it is the transferable skill.
+**3. COVID-19 pushed more people to buy, but each one spent less.** Session conversion rose 18.0% and browsing depth rose 25.3% (events per session), while average order value fell 11.7%. That combination fits a broader pattern of buyers trading down under economic uncertainty.
 
 ---
 
 ## Dataset
 
-**Source:** [eCommerce Behavior Data from Multi Category Store](https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store) — Kaggle / REES46 Open CDP
+**Source:** [eCommerce Behavior Data from Multi Category Store](https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store), Kaggle (REES46 Open CDP)
 
-**Nature:** Real behavioral clickstream telemetry from a large live e-commerce platform. REES46 is a B2B SaaS Customer Data Platform — it does not operate a store. This data comes from an anonymous retail client that integrated REES46's tracking script. The client's identity is not publicly disclosed; domain research identifies the market as Kazakhstan / CIS based on brand inventory (Artel, Cordiant, Redmond, Vitek, Polaris, ARG).
+**Nature:** Real behavioral clickstream telemetry from a large live e-commerce platform. REES46 is a B2B SaaS Customer Data Platform, not the retailer itself; this dataset comes from an anonymous client of theirs. The client's identity was never disclosed, but domain research points to Kazakhstan or the wider CIS market, based on the brand inventory in the data (Artel, Cordiant, Redmond, Vitek, Polaris, ARG).
 
-**Category note:** Category codes are machine-translated from Russian retail schemas. `construction` = DIY & Home Improvement; `country_yard` = Garden & Dacha (outdoor/seasonal). This context is required to correctly interpret conversion rates by category.
+**Category note:** Category codes are machine-translated from Russian retail schemas. `construction` = DIY & Home Improvement; `country_yard` = Garden & Dacha (outdoor/seasonal).
 
-**Scale:** 411 million events across 7 months (October 2019 – April 2020)
+**Scale:** 411 million events across 7 months (October 2019 – April 2020). Flat schema, one row per event; full field-level definitions live in the report's self-updating Data Dictionary page.
 
-**Schema (flat, one row = one event):**
+**Event scope note:** This schema tracks only product-level interactions (`view` / `cart` / `purchase`), with no event for a raw site visit or search that never touched a product. Every conversion rate here is measured from first product view onward, not total site traffic (see [Data Quality Findings](#data-quality-findings)).
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `event_time` | TIMESTAMP | UTC timestamp of event |
-| `event_type` | STRING | `view` / `cart` / `purchase` |
-| `product_id` | INTEGER | Product identifier |
-| `category_id` | INTEGER | Category identifier |
-| `category_code` | STRING | Dot-separated category path (e.g. `electronics.smartphone`) |
-| `brand` | STRING | Brand name |
-| `price` | FLOAT | Product price at time of event |
-| `user_id` | INTEGER | Persistent user identifier |
-| `user_session` | STRING | Session UUID (resets per browsing session) |
+**Time span significance:** Oct 2019 – Feb 2020 is the pre-COVID baseline; Mar–Apr 2020 is the COVID-onset period. Kazakhstan's lockdown began March 16, 2020, so the dataset captures the exact week the country shut down, an unusually clean natural experiment.
 
-**Event scope note:** This schema tracks only product-level interactions (`view` / `cart` / `purchase`) — there is no event for raw site visits, searches, or homepage browsing that never touches a specific product. Every conversion rate in this project is measured from first product view onward, not from total site traffic (see Data Quality Findings below).
-
-**Time span significance:** Oct 2019 – Feb 2020 = pre-COVID baseline. Mar–Apr 2020 = COVID-onset period. Kazakhstan's first confirmed case was March 13, 2020; national lockdown began March 16. The dataset captures the behavioral shock from the exact week the country shut down — a unusually clean natural experiment.
-
-**Files on Kaggle:** One CSV per month (Oct 2019, Nov 2019, Dec 2019, Jan 2020, Feb 2020, Mar 2020, Apr 2020). Each file ~5–6 GB uncompressed.
+**Files on Kaggle:** One CSV per month (Oct 2019 – Apr 2020), ~5–6 GB uncompressed each.
 
 ---
 
 ## Platform
 
-**Google BigQuery** — billing-enabled project. Modules 1–7 were built entirely on BigQuery Sandbox's free tier (no credit card, 10 GB active storage, 1 TB query processing/month, public datasets exempt from quota). Billing was enabled afterward specifically to unlock BigQuery ML for Module 8 (Purchase Propensity) — `CREATE MODEL` is not available in the Sandbox tier.
+**Google BigQuery**, on a billing-enabled project. Modules 1–7 were built entirely on BigQuery Sandbox's free tier (no credit card, 10 GB active storage, 1 TB query processing per month). Billing was turned on afterward, specifically to unlock BigQuery ML for Module 8 (Purchase Propensity), since `CREATE MODEL` isn't available on the Sandbox tier.
 
 - Standard on-demand pricing still includes 1 TB of free query processing per month; usage beyond that is billed
 - No more 60-day table expiry (that was a Sandbox-only limitation)
@@ -72,116 +77,143 @@ See `workflows/01_bigquery_setup.md` for setup and loading instructions.
 
 ## Analytics Deliverables
 
-### 1. Funnel Analysis
+<details>
+<summary><strong>1. Funnel Analysis</strong></summary>
+
+*SQL: `sql/01_funnel_analysis.sql` · Dashboard: [Funnel page](dashboards/screenshots/02_funnel.png)*
+
 **Question:** What is the conversion rate from view → cart → purchase, and where does it break down?
-- Overall funnel conversion (view → cart → purchase)
-- Funnel by category (which categories convert best/worst)
-- Funnel by brand
-- Cart abandonment rate: added to cart but never purchased
 
-### 2. Session Analytics
+</details>
+
+<details>
+<summary><strong>2. Session Analytics</strong></summary>
+
+*SQL: `sql/02_session_analytics.sql` · Dashboard: [Funnel page](dashboards/screenshots/02_funnel.png), Session Depth toggle*
+
 **Question:** How do users browse before they buy?
-- Events per session distribution
-- Session-to-purchase conversion
-- Time between first view and purchase within session
 
-### 3. RFM Segmentation
-**Question:** Who are the best customers?
-- Recency: days since last purchase per user
-- Frequency: number of purchase events per user
-- Monetary: total spend per user (sum of price where event_type = 'purchase')
-- Customer tier classification: Champions / Loyal / At-Risk / Lost
+</details>
 
-### 4. Cohort Retention
-**Question:** Do customers come back?
-- Monthly acquisition cohorts (first purchase month)
-- 1-month, 2-month, 3-month, 6-month retention rates
-- Retention heatmap by cohort
+<details>
+<summary><strong>3. RFM Segmentation</strong></summary>
 
-### 5. Category & Brand Performance
+*SQL: `sql/03_rfm_segmentation.sql` · Notebook: [03_rfm_segmentation.ipynb](notebooks/03_rfm_segmentation.ipynb) · Dashboard: [Customer Segments page](dashboards/screenshots/03_customer_segments.png)*
+
+**Question:** Who are the best customers? Segmented on recency, frequency, and monetary value into Champions / Loyal / At-Risk / Lost.
+
+</details>
+
+<details>
+<summary><strong>4. Cohort Retention</strong></summary>
+
+*SQL: `sql/04_cohort_retention.sql` · Notebook: [04_cohort_retention.ipynb](notebooks/04_cohort_retention.ipynb) · Dashboard: Cohort Detail page (drillthrough from Customer Segments)*
+
+**Question:** Do customers come back? Monthly acquisition cohorts, tracked at 1/2/3/6-month retention.
+
+</details>
+
+<details>
+<summary><strong>5. Category & Brand Performance</strong></summary>
+
+*SQL: `sql/05_category_brand_performance.sql` · Dashboard: [Category & Brand page](dashboards/screenshots/04_category_brand.png)*
+
 **Question:** What drives revenue?
-- Revenue by top-level category (split `category_code` on first dot)
-- View-to-purchase ratio by category (demand signal vs conversion)
-- Top brands by purchase volume and by conversion rate
 
-### 6. Anomaly Detection
-**Question:** What purchase patterns look suspicious or unusual?
-- Price outliers by category (IQR method)
-- Sessions with unusually high event volume
-- User-level purchase frequency anomalies (potential bot/fraud signal)
+</details>
 
-### 7. COVID Quasi-Experiment
-**Question:** Did the COVID-19 onset (March 2020) measurably change purchasing behavior?
-- Pre-COVID baseline: Oct 2019 – Feb 2020 (5 months)
-- COVID onset: Mar–Apr 2020 (2 months)
-- Measure: conversion rate, AOV (average order value), category mix, session frequency
-- Statistical test: two-proportion z-test on purchase conversion rate before vs after
+<details>
+<summary><strong>6. Anomaly Detection</strong></summary>
+
+*SQL: `sql/06_anomaly_detection.sql` · Dashboard: Anomaly Detail page (drillthrough from Overview)*
+
+**Question:** What purchase patterns look suspicious or unusual? Price outliers (IQR method), high-volume sessions, and purchase-frequency anomalies (potential bot/fraud signal).
+
+</details>
+
+<details>
+<summary><strong>7. COVID Quasi-Experiment</strong></summary>
+
+*SQL: `sql/07_covid_experiment.sql` · Notebook: [07_covid_experiment.ipynb](notebooks/07_covid_experiment.ipynb) · Dashboard: [COVID Impact page](dashboards/screenshots/05_covid_impact.png)*
+
+**Question:** Did the COVID-19 onset (March 2020) measurably change purchasing behavior? Tested via two-proportion z-test, pre-COVID (Oct 2019 – Feb 2020) vs. onset (Mar–Apr 2020).
+
+</details>
 
 ---
 
 ## Data Quality Findings
 
-Four significant data quality issues were surfaced during analysis. Each is documented here because they affect how results should be interpreted — and because real-world analytics work requires knowing what to do when data breaks.
+Four significant data quality issues turned up during analysis, each affecting how the results should be interpreted. Full evidence trail: [`data_quality_findings.md`](data_quality_findings.md).
+
+<details>
+<summary><strong>1. Category Taxonomy Anomaly:</strong> <code>construction</code> ≠ DIY</summary>
+
+From December 2019 onward, the `construction` category ("DIY / Home Improvement") is mostly reclassified Apple, Samsung, and Xiaomi electronics rather than real DIY products, so category figures after that date should be read as directional rather than exact. ([Full detail →](data_quality_findings.md#1-category-taxonomy-anomaly-construction--diy))
+
+</details>
+
+<details>
+<summary><strong>2. Logging Gap:</strong> February 27, 2020</summary>
+
+February 27, 2020 logged over 90% fewer events than any other day, a platform-side collection failure rather than a real signal, so it's excluded from the COVID pre-period baseline. ([Full detail →](data_quality_findings.md#2-logging-gap-february-27-2020))
+
+</details>
+
+<details>
+<summary><strong>3. Platform Price Cap:</strong> $2,574.07</summary>
+
+Every major category tops out at the exact same maximum purchase price, $2,574.07, almost certainly a platform-level ceiling (likely a round 1,000,000 KZT transaction limit) rather than fraud or a data error. IQR outlier flags at the dataset's edges mostly reflect that ceiling rather than genuinely suspicious pricing. ([Full detail →](data_quality_findings.md#3-platform-price-cap-257407), full research trail in [`price_ceiling_research.md`](price_ceiling_research.md))
+
+</details>
+
+<details>
+<summary><strong>4. Funnel Floor Bias:</strong> No Raw Site-Visit Event</summary>
+
+This dataset only logs `view`, `cart`, and `purchase` events, with no event for a raw site visit or search that never touched a product. Every conversion rate here, including the 6.1% headline figure, is measured from first product view onward, so true top-of-funnel conversion is almost certainly lower but not something this data can compute. ([Full detail →](data_quality_findings.md#4-funnel-floor-bias-no-raw-site-visit-event))
+
+</details>
 
 ---
 
-### 1. Category Taxonomy Anomaly — `construction` ≠ DIY
+## Dashboard
 
-**What was found:**
-The raw category code `construction` ranked as the #1 revenue category at 49% of platform revenue (~1B out of ~2.06B). Its top three brands are Apple, Samsung, and Xiaomi — with Apple averaging $868 per purchase inside "DIY / Home Improvement." In October and November 2019, `construction` revenue was under $1.1M/month. In the week of December 2, 2019, it jumped to $35.3M in a single week — while `electronics` simultaneously collapsed from $36M to $3.7M/week. The switch was near-instantaneous.
+<details>
+<summary><strong>Overview:</strong> headline KPIs, dynamic insight text, and the top action priority</summary>
 
-**What this means:**
-This is not a genuine DIY surge. Smartphones and consumer electronics that were previously tagged as `electronics` began appearing under `construction` starting December 2019 — a platform-side taxonomy event. The `construction` bucket functions as a misclassified electronics catch-all from December 2019 onward. The display name "DIY / Home Improvement" is misleading for this period.
+![Overview](dashboards/screenshots/01_overview.png)
 
-**How it's handled:**
-SQL queries and visualizations flag this explicitly. Category-level metrics treat `construction` as directional at best after December 2019. The data is not altered — the anomaly is disclosed, not corrected. Category analysis in Module 5 and Module 7 should be interpreted with this in mind.
+</details>
 
-**Real-world note:**
-A "corrected" copy of this data — recoding the affected rows back to `electronics` — is technically easy to build (e.g., flip any `construction` row from Apple/Samsung/Xiaomi dated on or after Dec 2, 2019). It was deliberately not built. The aggregate evidence for *something* being wrong is airtight, but a row-level correction requires row-level ground truth this project doesn't have — the brand/date heuristic above is still an inference, not a confirmed mapping. Presenting a heuristic recode as clean data would erase the difference between "verified" and "well-evidenced guess" for anyone downstream. In a production environment, this is the kind of finding an analyst escalates rather than silently patches: REES46 is a third-party CDP sitting between the retailer and this dataset, so the real fix requires confirmation from whichever side owns the category mapping — REES46's data integration team (if their ingestion pipeline mis-tagged the feed) or the retailer's own product/catalog system (if the reclassification happened upstream, before REES46 ever saw it). The analyst's role is to surface, quantify, and disclose; correcting the source-of-truth taxonomy belongs to the team that owns it.
+<details>
+<summary><strong>Funnel:</strong> category and brand conversion rates, session depth vs. conversion</summary>
 
----
+![Funnel](dashboards/screenshots/02_funnel.png)
 
-### 2. Logging Gap — February 27, 2020
+</details>
 
-**What was found:**
-On February 27, 2020, the platform logged 197,047 events. Every other day in the dataset averages 1.8–2.2 million events. This is a 90%+ drop. The 7-day rolling z-score is **-18.84** — physically impossible as organic human behavior. Approximately 1.8 million events are missing for that date.
+<details>
+<summary><strong>Customer Segments:</strong> RFM segment size vs. revenue contribution, converting vs. non-converting session behavior</summary>
 
-**What this means:**
-Something failed in the data collection pipeline on that day: a logging service crash, ingestion pipeline failure, or network partition. The data for February 27 is effectively absent from the dataset. It is not a real behavioral signal.
+![Customer Segments](dashboards/screenshots/03_customer_segments.png)
 
-**How it's handled in analysis:**
-February 27 is excluded from the Module 7 COVID quasi-experiment pre-period baseline via an explicit `WHERE DATE(event_time) != '2020-02-27'` filter. Including it would artificially lower the pre-COVID average and distort the before/after comparison.
+</details>
 
-**Real-world note:**
-In a production environment, a gap of this magnitude would trigger an immediate escalation to the data engineering or platform operations team. An analyst's role is to surface and quantify the gap — root cause diagnosis (server crash, pipeline failure, infrastructure issue) belongs to the team that owns the logging infrastructure. In practice, the analyst would typically already be informed through incident reporting channels before discovering the anomaly in query output. The response is: flag it, scope the impact, exclude from affected analyses, and reference the incident ticket in documentation.
+<details>
+<summary><strong>Category & Brand:</strong> revenue concentration by category and brand, price vs. purchase volume</summary>
 
----
+![Category & Brand](dashboards/screenshots/04_category_brand.png)
 
-### 3. Platform Price Cap — $2,574.07
+</details>
 
-**What was found:**
-IQR outlier analysis (Module 6) identified a hard ceiling on purchase prices across all major categories: exactly **$2,574.07**. All 100 flagged outlier transactions sit at or within $0.03 of this value — across electronics, appliances, computers, accessories, and construction. The maximum price in every major category is the same number.
+<details>
+<summary><strong>COVID Impact:</strong> pre/onset behavioral shift and category mix change</summary>
 
-**What this means:**
-This is a platform-level price ceiling, not genuine price fraud or data error. The most likely mechanism: a round 1,000,000 Kazakhstani Tenge (KZT) transaction limit, converted to USD using the exchange rate in effect around October 2019 (~388.5 KZT/USD — very close to the real historical rate of ~383–390 KZT/USD for that period). This explanation is independently corroborated by a third party's separate analysis of this same dataset, which reports the identical minimum ($0.79) and maximum ($2,574.07) prices, and by other users on the dataset's own Kaggle discussion board who noticed this same anomaly years ago. The exact business mechanism behind the 1,000,000 KZT figure (a specific bank's transaction limit, an AML regulatory threshold, or an arbitrary round number chosen by the merchant's own systems) remains unconfirmed — see [`price_ceiling_research.md`](price_ceiling_research.md) for the full research trail, including claims that were checked and did *not* hold up. IQR outlier flags in this dataset reflect transactions hitting that ceiling, not anomalous pricing behavior. Outlier rates should be interpreted as "high-value transactions at the ceiling," not as suspicious activity.
+![COVID Impact](dashboards/screenshots/05_covid_impact.png)
 
-A follow-up question was tested directly against the data: could $2,574.07 be only the *first installment* of a larger split payment, with the remainder unlogged elsewhere? `sql/06_anomaly_detection.sql` Query 6 checked whether the same user+product repeatedly hits the cap on a regular, installment-like cadence — it doesn't. Repeats cluster on the same day/session (consistent with buying multiple units in one order) or show irregular, unrelated gaps, not the evenly-spaced pattern an installment plan would produce. **$2,574.07 should be treated as the true, final recorded price, not a partial payment** (full test detail in `price_ceiling_research.md`).
+</details>
 
-**How it's handled:**
-Outlier analysis in Module 6 documents this finding and adjusts interpretation accordingly. Price outlier counts by category remain useful for understanding which categories sell at maximum price points most frequently.
-
----
-
-### 4. Funnel Floor Bias — No Raw Site-Visit Event
-
-**What was found:**
-This dataset's `events` table has exactly three `event_type` values: `view`, `cart`, `purchase` — every row is tied to a specific `product_id`. There is no event representing a generic site visit, a search, or homepage browsing that never touches a product page. A small gap confirms this: Module 2's total session count (89,693,595, counted from any event at all) is 213,976 sessions higher than Module 1's "sessions with a view" count (89,479,619) — meaning ~214K sessions have a cart or purchase event but zero logged product views.
-
-**What this means:**
-Every conversion rate reported in this project (6.09% overall, and all category/brand conversion rates) is measured **from first product view onward**, not from raw site arrival. There is an invisible layer of traffic above "viewed a product" — visitors who searched, browsed the homepage, or bounced without ever opening a product page — that this dataset cannot see or measure at all. The true top-of-funnel conversion rate (site arrival → purchase) is almost certainly lower than 6.09%, but it isn't computable from this data.
-
-**How it's handled:**
-This is a tracking-scope limitation, not a data error — REES46's tracking script is scoped to product-level interactions because that's what its core product (recommendations, cart-abandonment remarketing) needs, not general web analytics. The fix is interpretive, not corrective: every conversion metric in this repo should be read as "of people who engaged with a product, what fraction bought" — never as "of all site traffic."
+Every page pairs its data with a **Priority** action (what to do about it) behind a **Why?** toggle (the reasoning behind it). The full report has 6 visible pages plus a self-updating Data Dictionary, and 3 hidden drillthrough and tooltip pages that add depth without cluttering the nav. See [`dashboards/power_bi_notes.md`](dashboards/power_bi_notes.md) for the complete page architecture and build notes.
 
 ---
 
@@ -195,38 +227,58 @@ This is a tracking-scope limitation, not a data error — REES46's tracking scri
 | Python | pandas, SciPy, matplotlib | RFM scoring, cohort matrix, statistical tests |
 | Notebook | Jupyter / Google Colab | Reproducible analysis |
 | BI | Power BI Desktop + Service | Report (.pbix) + live-alert Dashboard; Looker Studio optional |
-| Reporting | Excel (openpyxl) | Stakeholder-facing workbook — same KPIs as Power BI, no tooling required |
+| Reporting | Excel (openpyxl) | Stakeholder-facing workbook, same KPIs as Power BI, no tooling required |
 
-**Real-world note on the Excel workbook:** every figure in `dashboards/ecommerce_analytics.xlsx` is hardcoded from verified query results, not a live query. In a real corporate environment, this workbook would typically be wired to BigQuery through a live connection (e.g. the BigQuery ODBC/JDBC driver, or Power Query's native BigQuery connector) so it refreshes automatically as new data lands. That live-refresh model was deliberately not used here: a portfolio artifact needs to keep working and stay inspectable indefinitely, including long after any live BigQuery connection stops being available — self-contained and static beats current and fragile for this specific purpose.
-
-**Real-world note on the Power BI report:** the report also uses Import mode rather than a live/DirectQuery connection to BigQuery, for the same self-contained-artifact reasoning as the Excel workbook above, plus Power BI–specific factors (VertiPaq performance, full DAX feature support, and the fact that this dataset is permanently frozen so a live connection has no freshness benefit to offer). Full reasoning and the report's page architecture: [`dashboards/power_bi_notes.md`](dashboards/power_bi_notes.md).
-
-**Real-world note on the Power BI Service Dashboard:** the original analytics plan (see `workflows/02_analytics_plan.md`) called for a second artifact beyond the Report — a Power BI Service Dashboard with pinned KPI tiles and Data Alerts (conversion rate floor, cart abandonment ceiling, revenue anomaly, and similar thresholds), notifying the relevant team the moment a number crosses a line. That layer was deliberately not built here. Power BI Data Alerts only fire to recipients who hold a Power BI license inside the organization's own Fabric/Power BI tenancy — every person in the alert loop needs one. This project is a portfolio artifact disconnected from any real organization: there is no licensed tenancy and no actual stakeholder to notify, so standing up the alerting layer would mean configuring infrastructure with nobody on the other end. The right time to build it is once there's a real deployment with genuine KPI-monitoring needs and licensed recipients to notify — not before.
+Both the Excel workbook and the Power BI report use static, hardcoded data rather than a live BigQuery connection, and the planned Power BI Service Dashboard (live KPI alerts) was deliberately left unbuilt. All three were deliberate calls, not shortcuts: full reasoning for each lives in [`dashboards/power_bi_notes.md`](dashboards/power_bi_notes.md).
 
 ---
 
 ## How to Start
 
-**New to this project? Start here:**
+<details>
+<summary><strong>New to this project? Start here</strong></summary>
 
-1. Read `workflows/01_bigquery_setup.md` — BigQuery sandbox setup + dataset loading
-2. Read `workflows/02_analytics_plan.md` — what to build, in what order, with what SQL patterns
+1. Read `workflows/01_bigquery_setup.md`, covering BigQuery sandbox setup and dataset loading
+2. Read `workflows/02_analytics_plan.md`, covering what to build, in what order, with what SQL patterns
 3. Tools will be built during execution and stored in `tools/`
 
-**Current state:** BigQuery loaded and verified — 411,709,736 events across 7 months. Modules 1–7 complete (Funnel, Session, RFM, Cohort Retention, Category & Brand, Anomaly Detection, COVID Quasi-Experiment). Module 8 (Purchase Propensity) SQL is written; execution against live BigQuery is pending. Power BI report complete across all 8 pages, with explainability tooltips and data-quality disclosures throughout.
+**Current state:** BigQuery is loaded and verified: 411,709,736 events across 7 months. Modules 1–7 are complete; Module 8 (Purchase Propensity) SQL is written but not yet run against live BigQuery. The Power BI report is complete across all 8 pages, with explainability tooltips and data-quality disclosures throughout.
+
+</details>
 
 ---
 
-## Portfolio Targeting
+## Why This Project Exists
 
-This project is designed to speak to roles that TechFlow cannot:
+<details>
+<summary><strong>Two-project portfolio strategy, and where this one fits</strong></summary>
 
-| Company type | What this project shows |
+This is the second portfolio project in a two-project strategy:
+
+| Project | Dataset | Domain | What it covers |
+|---------|---------|--------|----------------|
+| [Project 1: TechFlow](../project1_saas_analytics/) | IBM Telco (7,043 records) | SaaS subscription | Churn, LTV, A/B test, Excel automation |
+| **Project 2: this project** | REES46 (411M events) | E-commerce behavior | Funnel, retention cohorts, RFM, anomaly detection |
+
+Project 1 speaks to fintech and B2B SaaS roles. This project speaks to product analytics, gaming, e-commerce, and modern data stack roles. The key signal: **event-level behavioral data in BigQuery**, the same structure GA4, Amplitude, and Mixpanel all use, so querying it is a transferable skill.
+
+</details>
+
+---
+
+## Quick Links
+
+| Resource | Link |
 |---|---|
-| Gaming / product analytics (Moon Active) | Event-level behavioral data, funnel analytics, session analysis |
-| E-commerce platforms (Ashley Digital, Resident Home) | BigQuery SQL, behavioral segmentation, AI-assisted workflow |
-| Consumer brands / CRM (Nespresso) | RFM segmentation, cohort retention, customer lifecycle |
-| Fintech / fraud detection (Checkout.com) | Anomaly detection, behavioral risk signals |
-| Any modern data stack company | BigQuery fluency, event table querying, cloud SQL |
-
-Resume headline: *"Queried 411 million behavioral events in Google BigQuery — funnel analysis, cohort retention, RFM segmentation, and COVID-onset quasi-experiment on real e-commerce data."*
+| Power BI Report | [dashboards/ecommerce_behavior_analytics.pbip](dashboards/ecommerce_behavior_analytics.pbip) |
+| Power BI Build Notes | [dashboards/power_bi_notes.md](dashboards/power_bi_notes.md) |
+| Excel Dashboard | [dashboards/ecommerce_analytics.xlsx](dashboards/ecommerce_analytics.xlsx) |
+| RFM Segmentation Notebook | [notebooks/03_rfm_segmentation.ipynb](notebooks/03_rfm_segmentation.ipynb) |
+| Cohort Retention Notebook | [notebooks/04_cohort_retention.ipynb](notebooks/04_cohort_retention.ipynb) |
+| COVID Experiment Notebook | [notebooks/07_covid_experiment.ipynb](notebooks/07_covid_experiment.ipynb) |
+| SQL Modules (1–8) | [sql/](sql/) |
+| Data Quality Findings (full detail) | [data_quality_findings.md](data_quality_findings.md) |
+| Price Cap Research | [price_ceiling_research.md](price_ceiling_research.md) |
+| BigQuery Setup SOP | [workflows/01_bigquery_setup.md](workflows/01_bigquery_setup.md) |
+| Analytics Plan | [workflows/02_analytics_plan.md](workflows/02_analytics_plan.md) |
+| Dataset (Kaggle source) | [REES46 eCommerce Behavior Data](https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store) |

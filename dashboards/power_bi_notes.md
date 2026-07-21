@@ -10,13 +10,29 @@ The report uses **Import mode** — a static snapshot of each module's verified 
 
 **1. Freshness — the entire reason live connections exist — has zero value here.** DirectQuery/live is the right call when the underlying data keeps changing and stakeholders need current numbers. This dataset is permanently frozen (Oct 2019 – Apr 2020); no new rows will ever land in `rees46.events` again. There is no fresher number a live connection could ever surface. Choosing live mode here would mean paying all its costs for a benefit that structurally cannot exist.
 
-**2. Portability.** A live/DirectQuery `.pbix` needs an authenticated BigQuery connection every time it's opened. A recruiter or interviewer opening the file on their own machine either hits a failure or an authentication prompt they can't satisfy. Import mode bakes a snapshot directly into the file — it opens and renders fully offline, on anyone's machine, indefinitely. Same underlying constraint already documented for the Excel workbook in the main README.
+**2. Portability.** A live/DirectQuery `.pbix` needs an authenticated BigQuery connection every time it's opened. A recruiter or interviewer opening the file on their own machine either hits a failure or an authentication prompt they can't satisfy. Import mode bakes a snapshot directly into the file — it opens and renders fully offline, on anyone's machine, indefinitely. Same underlying constraint documented for the Excel workbook below.
 
 **3. Performance and DAX capability.** Import mode runs against Power BI's in-memory VertiPaq columnar engine — near-instant slicer/cross-filter interactions. DirectQuery translates every interaction into a live SQL query sent to BigQuery in real time, and Power BI restricts a meaningful chunk of DAX under DirectQuery (certain iterators, calculated columns, some time-intelligence patterns) specifically to prevent pathological query generation. Given the DAX planned here (retention curves, rolling z-score-driven alert flags, revenue-share measures), Import gives the full DAX surface with nothing to work around.
 
 **4. The concrete trap specific to this dataset.** DirectQuery pointed at the raw `rees46.events` table means every visual interaction fires a query against 411M rows — slow, and it burns through BigQuery quota fast. Making DirectQuery viable at all would require first materializing pre-aggregated summary tables in BigQuery (exactly what the 7 SQL files already compute), then DirectQuerying *those* small tables instead. But once the data is already reduced to a few dozen–few hundred rows per module, there's no real benefit left to keeping a live dependency — you'd be keeping the fragility without the freshness.
 
 **Conclusion:** live connection is the right default in general, but every condition that makes it worth its cost — changing data, an audience needing current numbers, willingness to maintain a live dependency — is absent here. Import mode isn't the lazy option in this case; it has the stronger argument on every axis.
+
+---
+
+## Excel Workbook: Static Snapshot vs. Live Connection
+
+Every figure in `dashboards/ecommerce_analytics.xlsx` is hardcoded from verified query results rather than pulled live. In a real corporate environment, this workbook would typically be wired to BigQuery through a live connection (the BigQuery ODBC/JDBC driver, or Power Query's native BigQuery connector), so it refreshes automatically as new data lands.
+
+That live-refresh model was deliberately skipped here, for the same reasoning as the Import mode decision above: a portfolio artifact needs to keep working and stay inspectable indefinitely, long after any live BigQuery connection stops being available. A self-contained static file beats something current but fragile for this particular purpose.
+
+---
+
+## Power BI Service Dashboard: Why It Wasn't Built
+
+The original analytics plan (see `workflows/02_analytics_plan.md`) called for a second artifact beyond the Report: a Power BI Service Dashboard with pinned KPI tiles and Data Alerts (conversion rate floor, cart abandonment ceiling, revenue anomaly, and similar thresholds) that would notify the relevant team the moment a number crosses a line.
+
+That layer was deliberately left unbuilt. Power BI Data Alerts only fire to recipients who hold a Power BI license inside the organization's own Fabric or Power BI tenancy, and everyone in the alert loop needs one. This project is a portfolio artifact disconnected from any real organization, so there's no licensed tenancy and no actual stakeholder to notify; standing up the alerting layer would just mean configuring infrastructure with nobody on the other end. The right time to build it is once there's a real deployment with genuine KPI-monitoring needs and licensed recipients to notify.
 
 ---
 
