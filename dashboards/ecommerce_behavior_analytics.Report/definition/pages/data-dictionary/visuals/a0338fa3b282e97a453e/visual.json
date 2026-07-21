@@ -179,5 +179,23 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "a3be533dba05b4103b1b"
+  "parentGroupName": "a3be533dba05b4103b1b",
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "6d85aa80803abca5ac06",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DataDictionary_Measures"
+              }
+            },
+            "Property": "Name"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
 }

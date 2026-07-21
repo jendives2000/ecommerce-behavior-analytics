@@ -1,6 +1,9 @@
 # E-Commerce Behavior Analytics
 
 > **Only 6.1% of product views become a purchase, and 54.1% of the carts that make it that far are abandoned anyway.** This project follows that browser-to-buyer gap through funnel breakdown, cohort retention, RFM segmentation, anomaly detection, and a COVID-onset quasi-experiment, all built directly on Google BigQuery.
+> 
+
+[View Interactive Report](https://app.powerbi.com/view?r=eyJrIjoiZDcxYTY4YWItYTllMC00NjAyLWFhMzgtNmRiNTNkMDM1ZDI0IiwidCI6ImM5YTM3Nzk4LTFjNGQtNDY2Ni04YTczLTMzY2M2MzE0ZmVmZSJ9&pageName=overview)
 
 ![BigQuery](https://img.shields.io/badge/BigQuery-Data%20Warehouse-4285F4?logo=googlecloud&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)

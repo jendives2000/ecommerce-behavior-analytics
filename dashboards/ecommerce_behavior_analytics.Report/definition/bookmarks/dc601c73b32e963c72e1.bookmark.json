@@ -15,7 +15,7 @@
             "filters": {
               "byExpr": [
                 {
-                  "name": "12665ddbfda63fd394e1",
+                  "name": "51c78206e4030239d5a9",
                   "type": "Categorical",
                   "expression": {
                     "Column": {
@@ -30,7 +30,7 @@
                   "howCreated": 0
                 },
                 {
-                  "name": "3089d9dbd72af48dfc42",
+                  "name": "77347a6680a34c549720",
                   "type": "Advanced",
                   "expression": {
                     "Aggregation": {
@@ -50,7 +50,7 @@
                   "howCreated": 0
                 },
                 {
-                  "name": "0d9cf8506aa92cf8dca6",
+                  "name": "6068c890215e6e95b3a5",
                   "type": "Advanced",
                   "expression": {
                     "Measure": {
@@ -111,10 +111,25 @@
               "objects": {}
             }
           },
+          "2b0cb3e71d2619888ddb": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
           "2b155765f5e514907563": {
             "singleVisual": {
               "visualType": "pageNavigator",
               "objects": {}
+            }
+          },
+          "387f2506ee6d03cfa68b": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
             }
           },
           "395f46b96ca39b6b6543": {
@@ -127,7 +142,7 @@
             "filters": {
               "byExpr": [
                 {
-                  "name": "bbef66ef95b42bb1200f",
+                  "name": "32268bcd590a8865e4e4",
                   "type": "Categorical",
                   "expression": {
                     "Column": {
@@ -142,7 +157,7 @@
                   "howCreated": 0
                 },
                 {
-                  "name": "3e86bd3aaef2cf481193",
+                  "name": "1d1f7dd04e26c06d5886",
                   "type": "Advanced",
                   "expression": {
                     "Measure": {
@@ -192,6 +207,18 @@
               }
             }
           },
+          "40a298a70b47a658daf1": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "57e889cd02bbda9e07ef": {
+            "singleVisual": {
+              "visualType": "bookmarkNavigator",
+              "objects": {}
+            }
+          },
           "6120d6dae5d215f2999a": {
             "singleVisual": {
               "visualType": "textbox",
@@ -208,7 +235,7 @@
             "filters": {
               "byExpr": [
                 {
-                  "name": "be292b3d819cfc610936",
+                  "name": "dd727bb1592b3e05a094",
                   "type": "Advanced",
                   "expression": {
                     "Aggregation": {
@@ -228,7 +255,7 @@
                   "howCreated": 0
                 },
                 {
-                  "name": "fd01aac3400ced35bf2e",
+                  "name": "c5ce7f00ca5cd8c0bba2",
                   "type": "Advanced",
                   "expression": {
                     "Aggregation": {
@@ -248,7 +275,7 @@
                   "howCreated": 0
                 },
                 {
-                  "name": "db02f5013d055a4b63fe",
+                  "name": "2cc4b370c1052b68c3de",
                   "type": "Advanced",
                   "expression": {
                     "Aggregation": {
@@ -307,7 +334,7 @@
             "filters": {
               "byExpr": [
                 {
-                  "name": "260e0f81fcb9936d4dde",
+                  "name": "1f634f24e948c000b8a2",
                   "type": "Advanced",
                   "expression": {
                     "Measure": {
@@ -334,11 +361,20 @@
               "objects": {}
             }
           },
+          "bda14da9e1e96d1285ee": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
           "d5bb9578d7ba000510f6": {
             "filters": {
               "byExpr": [
                 {
-                  "name": "937fe98308cda5f0fbc7",
+                  "name": "0cce3d813d85e00beacc",
                   "type": "Categorical",
                   "expression": {
                     "Column": {
@@ -353,7 +389,7 @@
                   "howCreated": 0
                 },
                 {
-                  "name": "badd8c2d3fe0e390f17a",
+                  "name": "1c2c4260a30d3180c40d",
                   "type": "Advanced",
                   "expression": {
                     "Measure": {
@@ -403,9 +439,15 @@
               }
             }
           },
-          "57e889cd02bbda9e07ef": {
+          "d8fc23966c8005d83b76": {
             "singleVisual": {
-              "visualType": "bookmarkNavigator",
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "efa9aa3e38d8442d121e": {
+            "singleVisual": {
+              "visualType": "actionButton",
               "objects": {}
             }
           }

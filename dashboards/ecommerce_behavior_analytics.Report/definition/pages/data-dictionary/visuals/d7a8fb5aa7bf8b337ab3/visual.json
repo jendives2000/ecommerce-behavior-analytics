@@ -75,5 +75,39 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "34193620b3b0f84ab409"
+  "parentGroupName": "34193620b3b0f84ab409",
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "dc96b331c36ca72961e1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DataDictionary_Columns"
+              }
+            },
+            "Property": "Table"
+          }
+        },
+        "type": "Categorical",
+        "isLockedInViewMode": true,
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
 }
