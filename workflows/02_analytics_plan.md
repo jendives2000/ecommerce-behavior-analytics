@@ -474,6 +474,8 @@ Connect to BigQuery using Import mode (data embedded in the file — works offli
 
 ### Power BI Service Dashboard (live alerts)
 
+**Status: not built, deliberately.** Data Alerts require every recipient in the alert loop to hold a Power BI license inside the organization's own Fabric/Power BI tenancy. This project has no real tenancy and no real stakeholders to notify, so there's no one for the alerting layer to actually serve — see the README's "Real-world note on the Power BI Service Dashboard" for the full reasoning. Revisit this section once there's an actual deployment with licensed recipients and a genuine KPI-monitoring need.
+
 After publishing the Report to Power BI Service, pin selected KPI cards to a **Dashboard** (separate from the Report — this is a canvas of tiles in the browser). Set Data Alerts on each tile so Power BI sends email notifications when values cross thresholds.
 
 **7 alert KPIs to pin and configure:**

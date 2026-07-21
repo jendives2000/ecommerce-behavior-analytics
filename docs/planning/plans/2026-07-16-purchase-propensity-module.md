@@ -12,7 +12,7 @@
 
 ## Global Constraints
 
-- Design spec: `docs/superpowers/specs/2026-07-16-purchase-propensity-design.md` — this plan implements it in full; do not deviate without updating the spec first.
+- Design spec: `docs/planning/specs/2026-07-16-purchase-propensity-design.md` — this plan implements it in full; do not deviate without updating the spec first.
 - BigQuery project/dataset: `instant-form-500912-n7.rees46` (table `events`).
 - Feature cutoff: first **3 events** per session (event-count based, not time-based — see spec for rationale).
 - Period boundaries: reuse Module 7's exact definitions for consistency — Pre-COVID = `event_time` date `<= '2020-03-12'`, COVID onset = `>= '2020-03-16'`, transition window `2020-03-13`–`2020-03-15` excluded entirely, `2020-02-27` (confirmed logging gap) excluded entirely.

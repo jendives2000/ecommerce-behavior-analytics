@@ -201,6 +201,8 @@ This is a tracking-scope limitation, not a data error — REES46's tracking scri
 
 **Real-world note on the Power BI report:** the report also uses Import mode rather than a live/DirectQuery connection to BigQuery, for the same self-contained-artifact reasoning as the Excel workbook above, plus Power BI–specific factors (VertiPaq performance, full DAX feature support, and the fact that this dataset is permanently frozen so a live connection has no freshness benefit to offer). Full reasoning and the report's page architecture: [`dashboards/power_bi_notes.md`](dashboards/power_bi_notes.md).
 
+**Real-world note on the Power BI Service Dashboard:** the original analytics plan (see `workflows/02_analytics_plan.md`) called for a second artifact beyond the Report — a Power BI Service Dashboard with pinned KPI tiles and Data Alerts (conversion rate floor, cart abandonment ceiling, revenue anomaly, and similar thresholds), notifying the relevant team the moment a number crosses a line. That layer was deliberately not built here. Power BI Data Alerts only fire to recipients who hold a Power BI license inside the organization's own Fabric/Power BI tenancy — every person in the alert loop needs one. This project is a portfolio artifact disconnected from any real organization: there is no licensed tenancy and no actual stakeholder to notify, so standing up the alerting layer would mean configuring infrastructure with nobody on the other end. The right time to build it is once there's a real deployment with genuine KPI-monitoring needs and licensed recipients to notify — not before.
+
 ---
 
 ## How to Start
@@ -211,7 +213,7 @@ This is a tracking-scope limitation, not a data error — REES46's tracking scri
 2. Read `workflows/02_analytics_plan.md` — what to build, in what order, with what SQL patterns
 3. Tools will be built during execution and stored in `tools/`
 
-**Current state:** BigQuery loaded and verified — 411,709,736 events across 7 months. Modules 1–6 complete (Funnel, Session, RFM, Cohort Retention, Category & Brand, Anomaly Detection). Module 7 (COVID Quasi-Experiment) in progress.
+**Current state:** BigQuery loaded and verified — 411,709,736 events across 7 months. Modules 1–7 complete (Funnel, Session, RFM, Cohort Retention, Category & Brand, Anomaly Detection, COVID Quasi-Experiment). Module 8 (Purchase Propensity) SQL is written; execution against live BigQuery is pending. Power BI report complete across all 8 pages, with explainability tooltips and data-quality disclosures throughout.
 
 ---
 

@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add a definitional explainability tooltip to each of the 8 KPI cards on the Overview page, following the DAX-measure-driven pattern approved in `docs/superpowers/specs/2026-07-16-explainability-tooltips-design.md`.
+**Goal:** Add a definitional explainability tooltip to each of the 8 KPI cards on the Overview page, following the DAX-measure-driven pattern approved in `docs/planning/specs/2026-07-16-explainability-tooltips-design.md`.
 
 **Architecture:** Each KPI card gets one new DAX measure (`<Card Title> Tooltip`) that pulls its definition live via `LOOKUPVALUE` against `DataDictionary_Measures`, adds a short live-computed calculation-context line, and — only where genuinely relevant — one conditional data-quality sentence. Each measure is bound to an `htmlContent` visual on its own new hidden `Tooltip`-type page, wired to the source card via the `visualTooltip` VCO. No native hover-tooltip or Sentence-format work is in this plan — that mechanism is for charts, out of scope for Overview's cards.
 
