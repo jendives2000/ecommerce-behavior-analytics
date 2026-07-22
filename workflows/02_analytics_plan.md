@@ -39,6 +39,8 @@ Module 4: Cohort Retention       ← depends on RFM user table from M3
 Module 5: Category & Brand Perf  ← independent, can run anytime after M1
 Module 6: Anomaly Detection      ← depends on price/volume baseline from M5
 Module 7: COVID Quasi-Experiment ← depends on all prior modules for context
+Module 8: Purchase Propensity    ← added later, reuses M7's period definitions and requires
+                                    billing-enabled BigQuery (BigQuery ML, not available on Sandbox)
 ```
 
 ---
@@ -429,52 +431,85 @@ print(f"Significant at α=0.05: {p_value < 0.05}")
 
 ---
 
+## Module 8: Purchase Propensity
+
+**Added after the original 7-module plan**, once billing was enabled to unlock BigQuery ML.
+
+**Business question:** Given only the first 3 events of a session, how likely is it to end in a purchase?
+
+**Status:** SQL is written in full (`sql/08_purchase_propensity.sql`, 5 queries). Execution against live BigQuery is still pending — this section documents the design, not verified output.
+
+**Design decisions:**
+- **Event-count cutoff, not time-based.** Data Quality Finding #4 (Funnel Floor Bias) established that "session start" in this dataset already means "first product view," not real site arrival — a time-based cutoff would stack an arbitrary window on top of an already-truncated start. Cutting off at the first 3 events avoids that compounding confound.
+- **Label:** does a `purchase` event occur among events ranked 4+ in the same session (sessions with 3 or fewer total events are excluded — nothing after the cutoff to predict).
+- **Train/test split is not a random holdout.** Trained on pre-COVID sessions, evaluated on COVID-onset sessions (`DATA_SPLIT_METHOD='CUSTOM'`), turning evaluation into a generalization stress-test against the exact behavioral shift Module 7 already proved happened.
+- **Model type:** `LOGISTIC_REG` for interpretability — coefficients map directly to a business-readable statement ("how much does viewing one more category raise purchase odds"), not a black box. `AUTO_CLASS_WEIGHTS = TRUE` handles the ~6% positive-class imbalance.
+- **Features:** products/categories viewed, min/max/avg price viewed, cart-in-cutoff flag, session start hour/day-of-week, plus returning-user features (prior purchase count, days since last purchase) computed strictly from history *before* the session to avoid leakage.
+- Reuses Module 7's exact period definitions (pre-COVID / transition / COVID-onset boundaries, Feb 27 exclusion) for consistency.
+
+**Query sequence:** `propensity_features` table → `propensity_model` (BQML) → `ML.EVALUATE` (precision, recall, ROC-AUC, log loss, F1) → `ML.ROC_CURVE` → decile lift table ("top N% of scored sessions captures Y% of all purchases").
+
+**Output:** Save SQL to `sql/08_purchase_propensity.sql` (done). Once run: record verified metrics, add a `dashboards/08_bqml_console.png` screenshot, and fold results into the README's Analytics Deliverables.
+
+---
+
 ## Output Artifacts
 
-By the end of all modules, the project should have:
+**Current state** (see `README.md` for the authoritative, up-to-date list — this is a snapshot as of the last workflow sync):
 
 ```
 dashboards/
-  00_data_canvas_eda.png         (screenshot of BigQuery Studio Data Canvas)
-  ecommerce_analytics.pbix       (Power BI Report — 5 pages)
-  ecommerce_analytics.xlsx       (Excel equivalent — same KPIs, static)
+  00_data_canvas_eda.png                    (screenshot of BigQuery Studio Data Canvas)
+  ecommerce_behavior_analytics.pbip         (Power BI project — PBIP format, not a single .pbix)
+  ecommerce_behavior_analytics.Report/      (report definition — pages, visuals, bookmarks)
+  ecommerce_behavior_analytics.SemanticModel/ (DAX measures, tables, relationships)
+  ecommerce_analytics.xlsx                  (stakeholder-facing Excel workbook, static)
+  powerbi_source_data.xlsx                  (staging workbook feeding the semantic model's Import mode)
+  power_bi_notes.md                         (report architecture decisions — authoritative page list)
+  screenshots/                              (5 PNGs, captured via the Desktop Bridge, used in README)
 
 sql/
-  01_funnel_analysis.sql
-  02_session_analytics.sql
-  03_rfm_segmentation.sql
-  04_cohort_retention.sql
-  05_category_brand_performance.sql
-  06_anomaly_detection.sql
-  07_covid_experiment.sql
+  01_funnel_analysis.sql … 08_purchase_propensity.sql
+  results/                                  (exported CSVs: RFM segmentation, anomaly detection queries 3–4)
 
 notebooks/
   03_rfm_segmentation.ipynb      (local Jupyter — segment charts, box plots)
   04_cohort_retention.ipynb      (local Jupyter — cohort heatmap)
   07_covid_experiment.ipynb      (local Jupyter — z-test + before/after charts)
+  figures/                       (PNGs saved from the 3 notebooks above)
+
+data_quality_findings.md         (full evidence trail for the 4 data quality findings)
+price_ceiling_research.md        (forensic research trail for the $2,574.07 price cap)
 ```
 
-**Notebook routing rationale:** Modules 1, 2, 5 are SQL-only — run queries directly in BQ Studio's SQL editor. No notebook needed; a notebook wrapping `%%bigquery` cells adds friction with no benefit over the query editor. Local Jupyter notebooks only for modules 3, 4, 7 where Python does real work: seaborn cohort heatmap, RFM box plots, z-test charts.
+**Notebook routing rationale:** Modules 1, 2, 5 are SQL-only — run queries directly in BQ Studio's SQL editor. No notebook needed; a notebook wrapping `%%bigquery` cells adds friction with no benefit over the query editor. Local Jupyter notebooks only for modules 3, 4, 7 where Python does real work: seaborn cohort heatmap, RFM box plots, z-test charts. Module 8 needed neither — BigQuery ML runs entirely in SQL.
 
 ---
 
 ## Dashboard Plan
 
-### Power BI Report (`.pbix` — built in Power BI Desktop)
+### Power BI Report (PBIP format — built in Power BI Desktop)
 
 Connect to BigQuery using Import mode (data embedded in the file — works offline and survives the 60-day sandbox table expiry).
 
-**5 pages:**
+**Originally planned as 5 pages; built as 6 visible + 3 hidden.** Two modules (Cohort Retention, Anomaly Detection) turned out to need full-depth treatment that didn't fit cleanly on a shared page, so they became drillthrough pages instead of top-level tabs — depth without cluttering the nav. A Data Dictionary page was also added for transparency, and 3 hidden tooltip/drillthrough pages support explainability elsewhere in the report. `dashboards/power_bi_notes.md` is the authoritative, current source for this architecture; the table below is a snapshot.
 
-1. **Overview** — total events, purchase count, total revenue, conversion rate KPIs
-2. **Funnel** — funnel chart (view → cart → purchase), abandonment rate, funnel by category
-3. **Customer Segments** — RFM tier distribution, revenue by segment, cohort retention heatmap
-4. **Category & Brand** — revenue ranking, view-to-purchase ratio, brand performance
-5. **COVID Impact** — before/after conversion rate, AOV trend, category mix shift
+**Visible pages (6):**
+
+| Page | Source module(s) |
+|------|-------------------|
+| Overview | Cross-module KPIs, dynamic insight text, Priority action |
+| Funnel | Module 1, with a toggle revealing Module 2 (Session Analytics) |
+| Customer Segments | Module 3 (RFM), drills through to Cohort Detail |
+| Category & Brand | Module 5 |
+| COVID Impact | Module 7 |
+| Data Dictionary | Self-updating, built from the model's own `INFO.VIEW.*` metadata |
+
+**Hidden pages (3):** Cohort Detail (drillthrough, Module 4), Anomaly Detail (drillthrough, Module 6), and a tooltip page for the Overview's conversion-rate KPI card.
 
 ### Power BI Service Dashboard (live alerts)
 
-**Status: not built, deliberately.** Data Alerts require every recipient in the alert loop to hold a Power BI license inside the organization's own Fabric/Power BI tenancy. This project has no real tenancy and no real stakeholders to notify, so there's no one for the alerting layer to actually serve. See `dashboards/power_bi_notes.md`, section "Power BI Service Dashboard: Why It Wasn't Built," for the full reasoning. Revisit this section once there's an actual deployment with licensed recipients and a genuine KPI-monitoring need.
+**Status: not built, deliberately.** Data Alerts require every recipient in the alert loop to hold a Power BI license inside the organization's own Fabric/Power BI tenancy. This project has no real tenancy and no real stakeholders to notify, so there's no one for the alerting layer to actually serve. See [`dashboards/power_bi_notes.md`](../dashboards/power_bi_notes.md), section "Power BI Service Dashboard: Why It Wasn't Built," for the full reasoning. Revisit this section once there's an actual deployment with licensed recipients and a genuine KPI-monitoring need.
 
 After publishing the Report to Power BI Service, pin selected KPI cards to a **Dashboard** (separate from the Report — this is a canvas of tiles in the browser). Set Data Alerts on each tile so Power BI sends email notifications when values cross thresholds.
 
@@ -490,6 +525,6 @@ After publishing the Report to Power BI Service, pin selected KPI cards to a **D
 | Bot session count | Sessions >500 events exceed baseline | Security / fraud team |
 | Month-1 cohort retention | Latest cohort falls below historical P25 | Growth / retention |
 
-### Excel Workbook (`ecommerce_analytics.xlsx`)
+### Excel Workbook ([`ecommerce_analytics.xlsx`](../dashboards/ecommerce_analytics.xlsx))
 
 One sheet per module — same KPIs and key findings as the Power BI report, presented as static tables and charts. Generated programmatically via `tools/generate_excel_report.py` after all BigQuery result sets are exported. For stakeholders who do not have Power BI.

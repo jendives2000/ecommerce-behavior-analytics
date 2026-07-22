@@ -54,6 +54,7 @@
 
 **Nature:** Real behavioral clickstream telemetry from a large live e-commerce platform. REES46 is a B2B SaaS Customer Data Platform, not the retailer itself; this dataset comes from an anonymous client of theirs. The client's identity was never disclosed, but domain research points to Kazakhstan or the wider CIS market, based on the brand inventory in the data (Artel, Cordiant, Redmond, Vitek, Polaris, ARG).
 
+
 **Category note:** Category codes are machine-translated from Russian retail schemas. `construction` = DIY & Home Improvement; `country_yard` = Garden & Dacha (outdoor/seasonal).
 
 **Scale:** 411 million events across 7 months (October 2019 – April 2020). Flat schema, one row per event; full field-level definitions live in the report's self-updating Data Dictionary page.
@@ -63,6 +64,8 @@
 **Time span significance:** Oct 2019 – Feb 2020 is the pre-COVID baseline; Mar–Apr 2020 is the COVID-onset period. Kazakhstan's lockdown began March 16, 2020, so the dataset captures the exact week the country shut down, an unusually clean natural experiment.
 
 **Files on Kaggle:** One CSV per month (Oct 2019 – Apr 2020), ~5–6 GB uncompressed each.
+
+For more detailed domain context on the REES46 dataset, I conducted a [Domain Context Research](./workflows/00_domain_context.md).
 
 ---
 
@@ -232,7 +235,8 @@ Every page pairs its data with a **Priority** action (what to do about it) behin
 | BI | Power BI Desktop + Service | Report (.pbix) + live-alert Dashboard; Looker Studio optional |
 | Reporting | Excel (openpyxl) | Stakeholder-facing workbook, same KPIs as Power BI, no tooling required |
 
-Both the Excel workbook and the Power BI report use static, hardcoded data rather than a live BigQuery connection, and the planned Power BI Service Dashboard (live KPI alerts) was deliberately left unbuilt. All three were deliberate calls, not shortcuts: full reasoning for each lives in [`dashboards/power_bi_notes.md`](dashboards/power_bi_notes.md).
+BigQuery is used as a data silo and an RDBMS where all the SQL queries are performed. The data warehouse is actually embodied locally.  
+As a result, both the Excel workbook and the Power BI report use static, hardcoded data rather than a live BigQuery connection, and the planned Power BI Service Dashboard (live KPI alerts) was deliberately left unbuilt. All three were deliberate calls, not shortcuts: full reasoning for each lives in [`dashboards/power_bi_notes.md`](dashboards/power_bi_notes.md).
 
 ---
 
@@ -241,7 +245,7 @@ Both the Excel workbook and the Power BI report use static, hardcoded data rathe
 <details>
 <summary><strong>New to this project? Start here</strong></summary>
 
-1. Read `workflows/01_bigquery_setup.md`, covering BigQuery sandbox setup and dataset loading
+1. Read [this document](./workflows/01_bigquery_setup.md), covering BigQuery sandbox setup and dataset loading
 2. Read `workflows/02_analytics_plan.md`, covering what to build, in what order, with what SQL patterns
 3. Tools will be built during execution and stored in `tools/`
 
@@ -263,7 +267,7 @@ This is the second portfolio project in a two-project strategy:
 | [Project 1: TechFlow](../project1_saas_analytics/) | IBM Telco (7,043 records) | SaaS subscription | Churn, LTV, A/B test, Excel automation |
 | **Project 2: this project** | REES46 (411M events) | E-commerce behavior | Funnel, retention cohorts, RFM, anomaly detection |
 
-Project 1 speaks to fintech and B2B SaaS roles. This project speaks to product analytics, gaming, e-commerce, and modern data stack roles. The key signal: **event-level behavioral data in BigQuery**, the same structure GA4, Amplitude, and Mixpanel all use, so querying it is a transferable skill.
+Project 1 speaks to fintech and B2B SaaS roles. This project speaks to product analytics, gaming, e-commerce, and modern data stack roles. The key signal: **event-level behavioral data in BigQuery**, the same structure many companies use, so querying it is a transferable skill.
 
 </details>
 

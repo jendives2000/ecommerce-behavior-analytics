@@ -1,5 +1,13 @@
 # Workflow: BigQuery Setup & Dataset Loading
 
+No real original data silo existed for this project. For this reason it was recreated using Google BigQuery. It also serves as an RDBMS.  
+
+To do so, I had to go through two main steps:  
+- acquiring the dataset (REES46)
+- loading it into BigQuery
+
+Below are the detailed instructions to do so, including hurdles encountered in BigQuery and solutions to them. 
+
 ## Objective
 Get the REES46 dataset (7 monthly CSV files, ~411M events) into Google BigQuery so SQL queries can run against the full dataset.
 

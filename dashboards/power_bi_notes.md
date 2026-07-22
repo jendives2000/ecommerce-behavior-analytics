@@ -6,7 +6,8 @@ This file documents the architecture decisions behind `dashboards/ecommerce_anal
 
 ## Data Source: Import Mode vs. Live Connection
 
-The report uses **Import mode** — a static snapshot of each module's verified query results, baked directly into the `.pbix` file — rather than a live/DirectQuery connection to BigQuery. Live connection is usually the more sophisticated-looking choice, so here's the explicit case for why it doesn't pay off for this specific project.
+The report uses **Import mode** — a static snapshot of each module's verified query results, baked directly into the `.pbix` file — rather than a live/DirectQuery connection to BigQuery. Fact and dimensions tables were queried in BigQuery, then consolidated in one single excel file: [powerbi_source_data.xlsx](powerbi_source_data.xlsx). This same file was imported using the import mode.  
+Live connection is usually the more sophisticated-looking choice, so here's the explicit case for why it doesn't pay off for this specific project.
 
 **1. Freshness — the entire reason live connections exist — has zero value here.** DirectQuery/live is the right call when the underlying data keeps changing and stakeholders need current numbers. This dataset is permanently frozen (Oct 2019 – Apr 2020); no new rows will ever land in `rees46.events` again. There is no fresher number a live connection could ever surface. Choosing live mode here would mean paying all its costs for a benefit that structurally cannot exist.
 
@@ -22,7 +23,7 @@ The report uses **Import mode** — a static snapshot of each module's verified 
 
 ## Excel Workbook: Static Snapshot vs. Live Connection
 
-Every figure in `dashboards/ecommerce_analytics.xlsx` is hardcoded from verified query results rather than pulled live. In a real corporate environment, this workbook would typically be wired to BigQuery through a live connection (the BigQuery ODBC/JDBC driver, or Power Query's native BigQuery connector), so it refreshes automatically as new data lands.
+Every figure in [`dashboards/ecommerce_analytics.xlsx`](ecommerce_analytics.xlsx) is hardcoded from verified query results rather than pulled live. In a real corporate environment, this workbook would typically be wired to BigQuery through a live connection (the BigQuery ODBC/JDBC driver, or Power Query's native BigQuery connector), so it refreshes automatically as new data lands.
 
 That live-refresh model was deliberately skipped here, for the same reasoning as the Import mode decision above: a portfolio artifact needs to keep working and stay inspectable indefinitely, long after any live BigQuery connection stops being available. A self-contained static file beats something current but fragile for this particular purpose.
 
