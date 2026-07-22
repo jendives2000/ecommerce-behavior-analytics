@@ -235,8 +235,39 @@ Every page pairs its data with a **Priority** action (what to do about it) behin
 | BI | Power BI Desktop + Service | Report (.pbix) + live-alert Dashboard; Looker Studio optional |
 | Reporting | Excel (openpyxl) | Stakeholder-facing workbook, same KPIs as Power BI, no tooling required |
 
-BigQuery is used as a data silo and an RDBMS where all the SQL queries are performed. The data warehouse is actually embodied locally.  
-As a result, both the Excel workbook and the Power BI report use static, hardcoded data rather than a live BigQuery connection, and the planned Power BI Service Dashboard (live KPI alerts) was deliberately left unbuilt. All three were deliberate calls, not shortcuts: full reasoning for each lives in [`dashboards/power_bi_notes.md`](dashboards/power_bi_notes.md).
+BigQuery serves as this project's data warehouse: events are transformed, aggregated, and segmented via SQL there, and Module 8's propensity model is trained there too. Those results feed a small data mart ([`powerbi_source_data.xlsx`](dashboards/powerbi_source_data.xlsx)) that Power BI imports. Both the Excel workbook and the Power BI report sit downstream of that mart on static, hardcoded data rather than a live BigQuery connection, and the planned Power BI Service Dashboard (live KPI alerts) was deliberately left unbuilt. All three were deliberate calls, not shortcuts: full reasoning for each lives in [`dashboards/power_bi_notes.md`](dashboards/power_bi_notes.md).
+
+```mermaid
+flowchart LR
+    subgraph WH["Data Warehouse"]
+        RAW[("rees46.events<br/>411M rows")]
+        SQL["BigQuery SQL<br/>Modules 1-8<br/>+ BQML model"]
+        RAW --> SQL
+    end
+
+    subgraph MART["Data Mart"]
+        XLS[["Consolidated<br/>Fact + Dim Tables"]]
+    end
+
+    subgraph DS["Downstream"]
+        PBI["Power BI<br/>Import + DAX"]
+        EXCEL["Excel Workbook"]
+    end
+
+    SQL --> XLS
+    XLS --> PBI
+    XLS --> EXCEL
+
+    style RAW fill:#e6e0f8,stroke:#5b4b8a,color:#000
+    style SQL fill:#e6e0f8,stroke:#5b4b8a,color:#000
+    style XLS fill:#e6e0f8,stroke:#5b4b8a,color:#000
+    style PBI fill:#e6e0f8,stroke:#5b4b8a,color:#000
+    style EXCEL fill:#e6e0f8,stroke:#5b4b8a,color:#000
+    style WH fill:#fdf9e0,stroke:#a89b3c,color:#000
+    style MART fill:#fdf9e0,stroke:#a89b3c,color:#000
+    style DS fill:#fdf9e0,stroke:#a89b3c,color:#000
+    linkStyle default stroke:#888888,stroke-width:2px
+```
 
 ---
 
